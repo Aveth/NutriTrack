@@ -36,15 +36,15 @@ class NTSearchProvider {
         self.service = service
     }
     
-    internal func fetchFoodItems(query: String, success: ((originalQuery: String, results: [NTFoodItem]) -> Void), failure:((error: ErrorType) -> Void)?) {
+    internal func fetchFoods(query: String, success: ((originalQuery: String, results: [NTFood]) -> Void), failure:((error: ErrorType) -> Void)?) {
         
         self.service.fetchResults(searchQuery: query,
             success: { (result: [String: AnyObject]) -> Void in
                 
                 if let resultsDict = result["data"]?["results"] as? [[String: AnyObject]], originalQuery = result["data"]?["query"] as? String {
                     
-                    let foodItems = self.arrayToFoodItems(resultsDict)
-                    success(originalQuery: originalQuery, results: foodItems)
+                    let foods = self.arrayToFoods(resultsDict)
+                    success(originalQuery: originalQuery, results: foods)
                 
                 } else if let errCode = result["errors"]?["code"] as? String where errCode == "err_no_results" {
                     
@@ -72,19 +72,19 @@ class NTSearchProvider {
         
     }
     
-    internal func fetchFoodDetails(id: String, diet: NTSearchProvider.Diet, success: ((result: NTFoodItem) -> Void), failure:((error: ErrorType) -> Void)?) {
+    internal func fetchFoodDetails(id: String, diet: NTSearchProvider.Diet, success: ((result: NTFood) -> Void), failure:((error: ErrorType) -> Void)?) {
         
         self.service.fetchDetails(itemId: id,
             success: { (result: [String: AnyObject]) -> Void in
                 if let firstResult = result["data"]?[0] as? [String: AnyObject], resultId = firstResult["id"] as? String, resultName = firstResult["name"] as? String where resultId == id {
-                    let foodItem = NTFoodItem(id: resultId, name: resultName)
+                    let food = NTFood(id: resultId, name: resultName)
                     if let measures = firstResult["measures"] as? [[String: AnyObject]] {
-                        foodItem.measures = self.arrayToMeasureItems(measures)
+                        food.measures = self.arrayToMeasureItems(measures)
                     }
                     if let nutrients = firstResult["nutrients"] as? [[String: AnyObject]] {
-                        foodItem.nutrients = self.arrayToNutrientItems(nutrients, nutrientCodes: NTSearchProvider.Diet.Renal.nutrientCodes())
+                        food.nutrients = self.arrayToNutrientItems(nutrients, nutrientCodes: NTSearchProvider.Diet.Renal.nutrientCodes())
                     }
-                    success(result: foodItem)
+                    success(result: food)
                 }
             },
             failure: { (error: ErrorType) -> Void in
@@ -94,11 +94,11 @@ class NTSearchProvider {
         
     }
     
-    private func arrayToFoodItems(array: [[String: AnyObject]]) -> [NTFoodItem] {
-        var result = [NTFoodItem]()
+    private func arrayToFoods(array: [[String: AnyObject]]) -> [NTFood] {
+        var result = [NTFood]()
         for dict: [String: AnyObject] in array {
             if let id = dict["id"] as? String, name = dict["name"] as? String {
-                let item = NTFoodItem(id: id, name: name)
+                let item = NTFood(id: id, name: name)
                 result.append(item)
             }
         }

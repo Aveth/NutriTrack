@@ -10,55 +10,63 @@ import UIKit
 
 extension UIFont {
     
-    internal static func fontOfStyle(style: String, size: CGFloat) -> UIFont {
-        if let font = UIFont(name: "Roboto-" + style, size: size) {
+    static internal func fontOfStyle(style: String, size: Float) -> UIFont {
+        if let font = UIFont(name: "Roboto-" + style, size: CGFloat(size)) {
             return font
         }
-        return UIFont.preferredFontForTextStyle(style)
+        return UIFont.preferredFontForTextStyle(style).fontWithSize(CGFloat(size))
     }
     
-    internal static func regularFontOfSize(size: CGFloat) -> UIFont {
+    static internal func regularFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("Regular", size: size)
     }
     
-    internal static func italicFontOfSize(size: CGFloat) -> UIFont {
+    static internal func italicFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("Italic", size: size)
     }
     
-    internal static func boldItalicFontOfSize(size: CGFloat) -> UIFont {
+    static internal func boldFontOfSize(size: Float) -> UIFont {
+        return self.fontOfStyle("Bold", size: size)
+    }
+    
+    static internal func boldItalicFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("BoldItalic", size: size)
     }
     
-    internal static func lightFontOfSize(size: CGFloat) -> UIFont {
+    static internal func lightFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("Light", size: size)
     }
     
-    internal static func lightItalicFontOfSize(size: CGFloat) -> UIFont {
+    static internal func lightItalicFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("LightItalic", size: size)
     }
     
-    internal static func semiBoldFontOfSize(size: CGFloat) -> UIFont {
+    static internal func semiBoldFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("SemiBold", size: size)
     }
     
-    internal static func semiBoldItalicFontOfSize(size: CGFloat) -> UIFont {
+    static internal func semiBoldItalicFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("SemiBoldItalic", size: size)
     }
     
-    internal static func extraLightFontOfSize(size: CGFloat) -> UIFont {
+    static internal func extraLightFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("ExtraLight", size: size)
     }
     
-    internal static func extraLightItalicFontOfSize(size: CGFloat) -> UIFont {
+    static internal func extraLightItalicFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("ExtraLightItalic", size: size)
     }
     
-    internal static func extraBoldFontOfSize(size: CGFloat) -> UIFont {
+    static internal func extraBoldFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("ExtraBold", size: size)
     }
     
-    internal static func extraBoldItalicFontOfSize(size: CGFloat) -> UIFont {
+    static internal func extraBoldItalicFontOfSize(size: Float) -> UIFont {
         return self.fontOfStyle("ExtraBoldItalic", size: size)
+    }
+    
+    static internal func defaultFont() -> UIFont {
+        return self.regularFontOfSize(16.0)
     }
     
 }

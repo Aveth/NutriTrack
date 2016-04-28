@@ -1,5 +1,5 @@
 //
-//  NTSearchView.swift
+//  NTFoodSearchView.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-04-19.
@@ -9,20 +9,20 @@
 import UIKit
 import PureLayout
 
-protocol NTSearchViewDelegate: class {
-    func searchView(sender: NTSearchView, didChangeSearchQuery query: String)
-    func searchView(sender: NTSearchView, didSelectFoodAtIndex index: Int)
+protocol NTFoodSearchViewDelegate: class {
+    func foodSearchView(sender: NTFoodSearchView, didChangeSearchQuery query: String)
+    func foodSearchView(sender: NTFoodSearchView, didSelectFoodAtIndex index: Int)
 }
 
-protocol NTSearchViewDataSource: class {
-    func searchView(sender: NTSearchView, nameForFoodAtIndex index: Int) -> String
-    func searchViewNumberOfFoods(sender: NTSearchView) -> Int
+protocol NTFoodSearchViewDataSource: class {
+    func foodSearchView(sender: NTFoodSearchView, nameForFoodAtIndex index: Int) -> String
+    func foodSearchViewNumberOfFoods(sender: NTFoodSearchView) -> Int
 }
 
-class NTSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class NTFoodSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    weak internal var delegate: NTSearchViewDelegate?
-    weak internal var dataSource: NTSearchViewDataSource?
+    weak internal var delegate: NTFoodSearchViewDelegate?
+    weak internal var dataSource: NTFoodSearchViewDataSource?
     
     internal var currentQuery: String? {
         get {
@@ -30,20 +30,19 @@ class NTSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableV
         }
     }
     
-    private let reuseIdentifier: String = "cellReuseIdentifier"
     private lazy var tableView: UITableView = {
         let table: UITableView = UITableView()
         table.dataSource = self
         table.delegate = self
         table.estimatedRowHeight = 30.0
         table.rowHeight = UITableViewAutomaticDimension
-        table.registerClass(UITableViewCell.self, forCellReuseIdentifier: self.reuseIdentifier)
+        table.registerClass(UITableViewCell.self, forCellReuseIdentifier: String.defaultCellReuseIdentifier())
         return table
     }()
     lazy private var searchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.delegate = self
-        bar.placeholder = NSLocalizedString("Search for a food item!", comment: "")
+        bar.placeholder = NSLocalizedString("Search for a food item", comment: "")
         return bar
     }()
     
@@ -59,6 +58,7 @@ class NTSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableV
     private func buildView() {
         self.addSubview(self.searchBar)
         self.addSubview(self.tableView)
+        self.setNeedsUpdateConstraints()
     }
     
     override internal func updateConstraints() {
@@ -80,27 +80,28 @@ class NTSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITableV
     // MARK: UISearchBarDelegate methods
     
     internal func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        self.delegate?.searchView(self, didChangeSearchQuery: searchText)
+        self.delegate?.foodSearchView(self, didChangeSearchQuery: searchText)
     }
     
     // MARK: UITableViewDelegate methods
     
     internal func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        self.delegate?.searchView(self, didSelectFoodAtIndex: indexPath.row)
+        self.delegate?.foodSearchView(self, didSelectFoodAtIndex: indexPath.row)
     }
     
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let dataSource = self.dataSource {
-            return dataSource.searchViewNumberOfFoods(self)
+            return dataSource.foodSearchViewNumberOfFoods(self)
         }
         return 0
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.reuseIdentifier)
-        cell?.textLabel?.text = self.dataSource!.searchView(self, nameForFoodAtIndex: indexPath.row)
+        let cell = tableView.dequeueReusableCellWithIdentifier(String.defaultCellReuseIdentifier())
+        cell?.textLabel?.text = self.dataSource!.foodSearchView(self, nameForFoodAtIndex: indexPath.row)
+        cell?.textLabel?.font = UIFont.defaultFont()
         return cell!
     }
 

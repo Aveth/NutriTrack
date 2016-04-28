@@ -12,7 +12,7 @@ class NTEmptyView: UIView {
     
     lazy private var textLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("Tap \"Add Item\" to add a food item to compare", comment: "")
+        label.text = NSLocalizedString("Tap \"Add Meal\" to get started!", comment: "")
         label.font = UIFont.regularFontOfSize(28.0)
         label.textAlignment = .Center
         label.numberOfLines = 0
@@ -31,6 +31,7 @@ class NTEmptyView: UIView {
     
     private func buildView() {
         self.addSubview(self.textLabel)
+        self.setNeedsUpdateConstraints()
     }
     
     override internal func updateConstraints() {

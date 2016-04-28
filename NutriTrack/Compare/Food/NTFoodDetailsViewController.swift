@@ -1,5 +1,5 @@
 //
-//  NTDetailsViewController.swift
+//  NTFoodDetailsViewController.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-04-20.
@@ -8,13 +8,13 @@
 
 import UIKit
 
-class NTDetailsViewController: UIViewController, NTDetailsViewDelegate, NTDetailsViewDataSource {
+class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, NTFoodDetailsViewDataSource {
     
     internal var foodItem: NTFoodItem
 
     private let searchProvider: NTSearchProvider = NTSearchProvider(service: NTSearchService())
-    private lazy var detailsView: NTDetailsView = {
-        let view: NTDetailsView = NTDetailsView()
+    private lazy var foodDetailsView: NTFoodDetailsView = {
+        let view: NTFoodDetailsView = NTFoodDetailsView()
         view.delegate = self
         view.dataSource = self
         return view
@@ -34,7 +34,7 @@ class NTDetailsViewController: UIViewController, NTDetailsViewDelegate, NTDetail
         
         self.edgesForExtendedLayout = UIRectEdge.None
         self.view.backgroundColor = UIColor.whiteColor()
-        self.view.addSubview(self.detailsView)
+        self.view.addSubview(self.foodDetailsView)
 
         self.reloadData()
         self.updateViewConstraints()
@@ -43,7 +43,7 @@ class NTDetailsViewController: UIViewController, NTDetailsViewDelegate, NTDetail
     
     override func updateViewConstraints() {
         super.updateViewConstraints()
-        self.detailsView.autoPinEdgesToSuperviewEdges()
+        self.foodDetailsView.autoPinEdgesToSuperviewEdges()
     }
     
     private func reloadData() {
@@ -51,7 +51,7 @@ class NTDetailsViewController: UIViewController, NTDetailsViewDelegate, NTDetail
             self.searchProvider.fetchFoodDetails(foodId, diet: NTSearchProvider.Diet.Renal,
                 success: { (result: NTFoodItem) -> Void in
                     self.foodItem = result
-                    self.detailsView.reloadData()
+                    self.foodDetailsView.reloadData()
                 },
                 failure: { (error: ErrorType) -> Void in
                     
@@ -60,37 +60,37 @@ class NTDetailsViewController: UIViewController, NTDetailsViewDelegate, NTDetail
         }
     }
     
-    // MARK: NTDetailsViewDataSource methods
+    // MARK: NTFoodDetailsViewDataSource methods
     
-    internal func detailsViewNameForFood(sender: NTDetailsView) -> String {
+    internal func foodDetailsViewNameForFood(sender: NTFoodDetailsView) -> String {
         return self.foodItem.name
     }
     
-    internal func detailsViewNumberOfMeasures(sender: NTDetailsView) -> Int {
+    internal func foodDetailsViewNumberOfMeasures(sender: NTFoodDetailsView) -> Int {
         return self.foodItem.measures.count
     }
     
-    internal func detailsView(sender: NTDetailsView, nameForMeasureAtIndex index: Int) -> String {
+    internal func foodDetailsView(sender: NTFoodDetailsView, nameForMeasureAtIndex index: Int) -> String {
         return self.foodItem.measures[index].name
     }
     
-    internal func detailsView(sender: NTDetailsView, valueForMeasureAtIndex index: Int) -> Float {
+    internal func foodDetailsView(sender: NTFoodDetailsView, valueForMeasureAtIndex index: Int) -> Float {
         return self.foodItem.measures[index].value
     }
     
-    internal func detailsViewNumberOfNutrients(sender: NTDetailsView) -> Int {
+    internal func foodDetailsViewNumberOfNutrients(sender: NTFoodDetailsView) -> Int {
         return self.foodItem.nutrients.count
     }
     
-    internal func detailsView(sender: NTDetailsView, nameForNutrientAtIndex index: Int) -> String {
+    internal func foodDetailsView(sender: NTFoodDetailsView, nameForNutrientAtIndex index: Int) -> String {
         return self.foodItem.nutrients[index].name
     }
     
-    internal func detailsView(sender: NTDetailsView, unitForNutrientAtIndex index: Int) -> String {
+    internal func foodDetailsView(sender: NTFoodDetailsView, unitForNutrientAtIndex index: Int) -> String {
         return self.foodItem.nutrients[index].unit
     }
     
-    internal func detailsView(sender: NTDetailsView, valueForNutrientAtIndex index: Int) -> Float {
+    internal func foodDetailsView(sender: NTFoodDetailsView, valueForNutrientAtIndex index: Int) -> Float {
         return self.foodItem.nutrients[index].value
     }
     

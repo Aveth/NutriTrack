@@ -2,11 +2,11 @@
 //  NTNutrient.swift
 //  NutriTrack
 //
-//  Created by Avais on 2016-04-19.
+//  Created by Avais on 2016-04-27.
 //  Copyright © 2016 Aveth. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class NTNutrient {
 
@@ -21,5 +21,5 @@ class NTNutrient {
         self.unit = unit
         self.value = value
     }
-
+    
 }

@@ -10,12 +10,20 @@ import UIKit
 
 extension UIColor {
     
-    internal static func backgroundColor() -> UIColor {
+    static internal func backgroundColor() -> UIColor {
         return UIColor.whiteColor()
     }
     
-    internal static func navigationBarColor() -> UIColor {
+    static internal func navigationBarColor() -> UIColor {
         return UIColor(red: 217.0 / 255.0, green: 217.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0)
+    }
+    
+    static internal func barButtonItemColor() -> UIColor {
+        return UIColor.blueColor()
+    }
+    
+    static internal func pageControlBackgroundColor() -> UIColor {
+        return UIColor.darkGrayColor()
     }
     
 }

@@ -1,5 +1,5 @@
 //
-//  NTDetailsView.swift
+//  NTFoodDetailsView.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-04-22.
@@ -8,29 +8,29 @@
 
 import UIKit
 
-protocol NTDetailsViewDelegate: class {
+protocol NTFoodDetailsViewDelegate: class {
     
 }
 
-protocol NTDetailsViewDataSource: class {
-    func detailsViewNameForFood(sender: NTDetailsView) -> String
+protocol NTFoodDetailsViewDataSource: class {
+    func foodDetailsViewNameForFood(sender: NTFoodDetailsView) -> String
     
-    func detailsViewNumberOfMeasures(sender: NTDetailsView) -> Int
-    func detailsView(sender: NTDetailsView, nameForMeasureAtIndex index: Int) -> String
-    func detailsView(sender: NTDetailsView, valueForMeasureAtIndex index: Int) -> Float
+    func foodDetailsViewNumberOfMeasures(sender: NTFoodDetailsView) -> Int
+    func foodDetailsView(sender: NTFoodDetailsView, nameForMeasureAtIndex index: Int) -> String
+    func foodDetailsView(sender: NTFoodDetailsView, valueForMeasureAtIndex index: Int) -> Float
     
-    func detailsViewNumberOfNutrients(sender: NTDetailsView) -> Int
-    func detailsView(sender: NTDetailsView, nameForNutrientAtIndex index: Int) -> String
-    func detailsView(sender: NTDetailsView, unitForNutrientAtIndex index: Int) -> String
-    func detailsView(sender: NTDetailsView, valueForNutrientAtIndex index: Int) -> Float
+    func foodDetailsViewNumberOfNutrients(sender: NTFoodDetailsView) -> Int
+    func foodDetailsView(sender: NTFoodDetailsView, nameForNutrientAtIndex index: Int) -> String
+    func foodDetailsView(sender: NTFoodDetailsView, unitForNutrientAtIndex index: Int) -> String
+    func foodDetailsView(sender: NTFoodDetailsView, valueForNutrientAtIndex index: Int) -> Float
 }
 
-class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     private static let BaseMeasuresGrams: Float = 100.0
     
-    weak internal var delegate: NTDetailsViewDelegate?
-    weak internal var dataSource: NTDetailsViewDataSource?
+    weak internal var delegate: NTFoodDetailsViewDelegate?
+    weak internal var dataSource: NTFoodDetailsViewDataSource?
     
     private let reuseIdentifier: String = "cellReuseIdentifier"
     lazy private var measureWrapper: UIView = {
@@ -42,6 +42,7 @@ class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextF
     lazy private var measureTitleLabel: UILabel = {
        let label = UILabel()
         label.text = NSLocalizedString("Measure:", comment: "")
+        label.font = UIFont.defaultFont()
         return label
     }()
     lazy private var dropdownButton: UIButton = {
@@ -54,7 +55,7 @@ class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextF
     }()
     lazy private var measureTextField: UITextField = {
        let field = UITextField()
-        field.text = self.dataSource?.detailsView(self, nameForMeasureAtIndex: 0)
+        field.text = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: 0)
         field.layer.borderWidth = 1.0
         field.layer.cornerRadius = 5.0
         field.leftViewMode = .Always
@@ -64,6 +65,7 @@ class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextF
         field.delegate = self
         field.inputView = self.pickerView
         field.inputAccessoryView = self.pickerToolbar
+        field.font = UIFont.defaultFont()
         return field
     }()
     lazy private var pickerView: UIPickerView = {
@@ -86,14 +88,14 @@ class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextF
         table.delegate = self
         table.estimatedRowHeight = 30.0
         table.rowHeight = UITableViewAutomaticDimension
-        table.registerClass(NTDetailsViewCell.self, forCellReuseIdentifier: self.reuseIdentifier)
+        table.registerClass(NTFoodDetailsViewCell.self, forCellReuseIdentifier: self.reuseIdentifier)
         return table
     }()
     lazy private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = self.dataSource?.detailsViewNameForFood(self)
+        label.text = self.dataSource?.foodDetailsViewNameForFood(self)
         label.textAlignment = .Center
-        label.font = UIFont.boldSystemFontOfSize(24.0)
+        label.font = UIFont.boldFontOfSize(22.0)
         label.numberOfLines = 0
         label.lineBreakMode = .ByWordWrapping
         return label
@@ -144,8 +146,8 @@ class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextF
     internal func reloadData() {
         self.tableView.reloadData()
         self.pickerView.reloadAllComponents()
-        self.measureTextField.text = self.dataSource?.detailsView(self, nameForMeasureAtIndex: 0)
-        self.titleLabel.text = self.dataSource?.detailsViewNameForFood(self)
+        self.measureTextField.text = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: 0)
+        self.titleLabel.text = self.dataSource?.foodDetailsViewNameForFood(self)
         self.setNeedsUpdateConstraints()
     }
     
@@ -160,22 +162,22 @@ class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextF
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let num = self.dataSource?.detailsViewNumberOfNutrients(self) {
+        if let num = self.dataSource?.foodDetailsViewNumberOfNutrients(self) {
             return num
         }
         return 0
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.reuseIdentifier) as! NTDetailsViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(self.reuseIdentifier) as! NTFoodDetailsViewCell
         if let ds = self.dataSource {
             
-            let nutrientValue = ds.detailsView(self, valueForNutrientAtIndex: indexPath.row)
-            let measureValue = ds.detailsView(self, valueForMeasureAtIndex: self.pickerView.selectedRowInComponent(0))
-            let adjustedNutrientValue = (nutrientValue / NTDetailsView.BaseMeasuresGrams) * measureValue
+            let nutrientValue = ds.foodDetailsView(self, valueForNutrientAtIndex: indexPath.row)
+            let measureValue = ds.foodDetailsView(self, valueForMeasureAtIndex: self.pickerView.selectedRowInComponent(0))
+            let adjustedNutrientValue = (nutrientValue / NTFoodDetailsView.BaseMeasuresGrams) * measureValue
             
-            cell.name = ds.detailsView(self, nameForNutrientAtIndex: indexPath.row)
-            cell.unit = ds.detailsView(self, unitForNutrientAtIndex: indexPath.row)
+            cell.name = ds.foodDetailsView(self, nameForNutrientAtIndex: indexPath.row)
+            cell.unit = ds.foodDetailsView(self, unitForNutrientAtIndex: indexPath.row)
             cell.value = adjustedNutrientValue
             
         }
@@ -201,14 +203,14 @@ class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextF
     }
     
     internal func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if let num = self.dataSource?.detailsViewNumberOfMeasures(self) {
+        if let num = self.dataSource?.foodDetailsViewNumberOfMeasures(self) {
             return num
         }
         return 0
     }
     
     internal func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if let title = self.dataSource?.detailsView(self, nameForMeasureAtIndex: row) {
+        if let title = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: row) {
             return title
         }
         return nil
@@ -217,7 +219,7 @@ class NTDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UITextF
     // MARK: UIPickerViewDelegate methods
     
     internal func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if let title = self.dataSource?.detailsView(self, nameForMeasureAtIndex: row) {
+        if let title = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: row) {
             self.measureTextField.text = title
             self.tableView.reloadData()
         }

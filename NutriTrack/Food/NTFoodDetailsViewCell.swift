@@ -1,5 +1,5 @@
 //
-//  NTDetailsViewCell.swift
+//  NTFoodDetailsViewCell.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-04-22.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NTDetailsViewCell: UITableViewCell {
+class NTFoodDetailsViewCell: UITableViewCell {
     
     private var _value: Float?
     
@@ -42,11 +42,20 @@ class NTDetailsViewCell: UITableViewCell {
         }
     }
     
-    private var unitLabel: UILabel = UILabel()
-    private var valueLabel: UILabel = UILabel()
+    private var unitLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.defaultFont()
+        return label
+    }()
+    lazy private var valueLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.defaultFont()
+        return label
+    }()
     
     override internal init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.textLabel?.font = UIFont.defaultFont()
         self.buildView()
     }
 
