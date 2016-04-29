@@ -21,8 +21,8 @@ class NTCompareViewController: UIPageViewController, NTFoodSearchViewControllerD
         
         self.navigationController?.navigationBar.translucent = false
         self.navigationItem.title = NSLocalizedString("Compare Foods", comment: "")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Item", comment: ""), style: .Plain, target: self, action: "addItemButtonDidTap:")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Clear", comment: ""), style: .Plain, target: self, action: "clearButtonDidTap:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Item", comment: ""), style: .Plain, target: self, action: #selector(addItemButtonDidTap(_:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Clear", comment: ""), style: .Plain, target: self, action: #selector(clearButtonDidTap(_:)))
         
         self.edgesForExtendedLayout = UIRectEdge.None
         self.view.backgroundColor = UIColor.whiteColor()
@@ -43,7 +43,7 @@ class NTCompareViewController: UIPageViewController, NTFoodSearchViewControllerD
     
     // MARK: NTFoodSearchViewControllerDelegate methods
     
-    internal func foodSearchViewController(sender: NTFoodSearchViewController, didSelectFood food: NTFood) {
+    internal func foodSearchViewController(sender: NTFoodSearchViewController, didSelectFood food: NTFood, quantity: Int, measureIndex: Int) {
         let controller = NTFoodDetailsViewController(food: food)
         self.foodDetailsViewControllers.append(controller)
         self.selectedIndex = self.foodDetailsViewControllers.count - 1

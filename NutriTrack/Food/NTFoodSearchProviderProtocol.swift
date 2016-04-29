@@ -10,6 +10,6 @@ import Foundation
 
 protocol NTFoodSearchProviderProtocol: class {
 
-    
+    func fetchResultForSearchQuery(query: String)
 
 }

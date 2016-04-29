@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NTFoodSearchViewControllerDelegate: class {
-    func foodSearchViewController(sender: NTFoodSearchViewController, didSelectFood food:NTFood)
+    func foodSearchViewController(sender: NTFoodSearchViewController, didSelectFood food:NTFood, quantity: Int, measureIndex: Int)
 }
 
 class NTFoodSearchViewController: UIViewController, NTFoodSearchViewDelegate, NTFoodSearchViewDataSource, NTFoodDetailsViewControllerDelegate {
@@ -32,7 +32,7 @@ class NTFoodSearchViewController: UIViewController, NTFoodSearchViewDelegate, NT
         
         self.navigationController?.navigationBar.translucent = false
         self.navigationItem.title = NSLocalizedString("Food Search", comment: "")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .Plain, target: self, action: "cancelButtonDidTap:")
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .Plain, target: self, action: #selector(cancelButtonDidTap(_:)))
         
         self.edgesForExtendedLayout = UIRectEdge.None
         self.view.backgroundColor = UIColor.whiteColor()
@@ -102,8 +102,8 @@ class NTFoodSearchViewController: UIViewController, NTFoodSearchViewDelegate, NT
     
     // MARK: NTFoodDetailsViewControllerDelegate methods
     
-    internal func foodDetailsViewController(sender: NTFoodDetailsViewController, didConfirmFood food: NTFood) {
-        self.delegate?.foodSearchViewController(self, didSelectFood: food)
+    internal func foodDetailsViewController(sender: NTFoodDetailsViewController, didConfirmFood food: NTFood, quantity: Int, measureIndex: Int) {
+        self.delegate?.foodSearchViewController(self, didSelectFood: food, quantity: quantity, measureIndex: measureIndex)
     }
     
     

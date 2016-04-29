@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NTPickerField: UIView, UITextFieldDelegate {
+class NTLabeledField: UIView, UITextFieldDelegate {
 
     internal var title: String? {
         get {
@@ -28,11 +28,25 @@ class NTPickerField: UIView, UITextFieldDelegate {
         }
     }
     
+    internal var showsDropdownButton: Bool {
+        get {
+            return !self.dropdownButton.hidden
+        }
+        set {
+            self.dropdownButton.hidden = !newValue
+        }
+    }
+    
     override internal var inputView: UIView? {
         get {
             return self.textField.inputView
         }
         set {
+            if let view = newValue {
+                if view.isKindOfClass(UIPickerView.self) || view.isKindOfClass(UIDatePicker.self) {
+                    self.showsDropdownButton = true
+                }
+            }
             self.textField.inputView = newValue
         }
     }
@@ -62,13 +76,14 @@ class NTPickerField: UIView, UITextFieldDelegate {
         let button = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 35.0, height: 35.0))
         button.imageEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
         button.setImage(image, forState: .Normal)
-        button.addTarget(self, action: "dropdownButtonDidTap:", forControlEvents: .TouchUpInside)
+        button.addTarget(self, action: #selector(dropdownButtonDidTap(_:)), forControlEvents: .TouchUpInside)
+        button.hidden = true
         return button
     }()
     
     lazy private var pickerToolbar: UIToolbar = {
         let toolbar = UIToolbar()
-        let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .Done, target: self, action: "pickerToolbarDidComplete:")
+        let doneButton = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .Done, target: self, action: #selector(pickerToolbarDidComplete(_:)))
         let flexSpace = UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil)
         toolbar.items = [flexSpace, doneButton]
         toolbar.backgroundColor = UIColor.grayColor()
@@ -99,8 +114,8 @@ class NTPickerField: UIView, UITextFieldDelegate {
         self.titleLabel.autoSetDimension(.Width, toSize: 90.0)
         
         self.textField.autoPinEdgeToSuperviewMargin(.Right)
-        self.textField.autoPinEdgeToSuperviewEdge(.Top, withInset: 20.0)
-        self.textField.autoPinEdgeToSuperviewEdge(.Bottom, withInset: 20.0)
+        self.textField.autoPinEdgeToSuperviewEdge(.Top)
+        self.textField.autoPinEdgeToSuperviewEdge(.Bottom)
         self.textField.autoPinEdge(.Left, toEdge: .Right, ofView: self.titleLabel)
         
         self.pickerToolbar.autoSetDimension(.Height, toSize: 35.0)
@@ -118,7 +133,7 @@ class NTPickerField: UIView, UITextFieldDelegate {
     // MARK: UITextFieldDelegate methods
     
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
-        return false
+        return !self.showsDropdownButton
     }
 
 }

@@ -14,7 +14,6 @@ class NTFood {
     internal var name: String
     internal var nutrients: [NTNutrient]
     internal var measures: [NTMeasure]
-    internal var selectedMeasure: NTMeasure?
     
     internal init(id: String, name: String) {
         self.id = id

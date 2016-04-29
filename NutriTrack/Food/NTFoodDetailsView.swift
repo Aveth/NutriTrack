@@ -10,6 +10,7 @@ import UIKit
 
 protocol NTFoodDetailsViewDelegate: class {
     func foodDetailsView(sender: NTFoodDetailsView, didSelectMeasureAtIndex index: Int)
+    func foodDetailsView(sender: NTFoodDetailsView, didSelectQuantityAtIndex index: Int)
 }
 
 protocol NTFoodDetailsViewDataSource: class {
@@ -18,11 +19,16 @@ protocol NTFoodDetailsViewDataSource: class {
     func foodDetailsViewNumberOfMeasures(sender: NTFoodDetailsView) -> Int
     func foodDetailsView(sender: NTFoodDetailsView, nameForMeasureAtIndex index: Int) -> String
     func foodDetailsView(sender: NTFoodDetailsView, valueForMeasureAtIndex index: Int) -> Float
+    func foodDetailsViewIndexForSelectedMeasure(sender: NTFoodDetailsView) -> Int
     
     func foodDetailsViewNumberOfNutrients(sender: NTFoodDetailsView) -> Int
     func foodDetailsView(sender: NTFoodDetailsView, nameForNutrientAtIndex index: Int) -> String
     func foodDetailsView(sender: NTFoodDetailsView, unitForNutrientAtIndex index: Int) -> String
     func foodDetailsView(sender: NTFoodDetailsView, valueForNutrientAtIndex index: Int) -> Float
+    
+    func foodDetailsViewNumberOfQuantities(sender: NTFoodDetailsView) -> Int
+    func foodDetailsView(sender: NTFoodDetailsView, valueForQuantityAtIndex index: Int) -> Int
+    func foodDetailsViewIndexForSelectedQuantity(sender: NTFoodDetailsView) -> Int
 }
 
 class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -34,18 +40,33 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     
     private let reuseIdentifier: String = "cellReuseIdentifier"
     
-    lazy private var measurePickerField: NTPickerField = {
-        let field = NTPickerField()
-        field.text = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: 0)
-        field.title = NSLocalizedString("Measure:", comment: "")
-        field.inputView = self.pickerView
+    lazy private var quantityField: NTLabeledField = {
+        let field = NTLabeledField()
+        field.title = NSLocalizedString("Quantity:", comment: "")
+        field.inputView = self.quantityPickerView
         return field
     }()
     
-    lazy private var pickerView: UIPickerView = {
+    lazy private var quantityPickerView: UIPickerView = {
         let picker = UIPickerView()
         picker.dataSource = self
         picker.delegate = self
+        picker.tag = 0
+        return picker
+    }()
+    
+    lazy private var measurePickerField: NTLabeledField = {
+        let field = NTLabeledField()
+        field.title = NSLocalizedString("Measure:", comment: "")
+        field.inputView = self.measurePickerView
+        return field
+    }()
+    
+    lazy private var measurePickerView: UIPickerView = {
+        let picker = UIPickerView()
+        picker.dataSource = self
+        picker.delegate = self
+        picker.tag = 1
         return picker
     }()
     
@@ -80,6 +101,7 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     
     private func buildView() {
         self.addSubview(self.titleLabel)
+        self.addSubview(self.quantityField)
         self.addSubview(self.measurePickerField)
         self.addSubview(self.tableView)
     }
@@ -91,10 +113,15 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
         
         self.titleLabel.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 20.0, left: 10.0, bottom: 20.0, right: 10.0), excludingEdge: .Bottom)
         
+        self.quantityField.autoPinEdgeToSuperviewEdge(.Left, withInset: 10.0)
+        self.quantityField.autoPinEdgeToSuperviewEdge(.Right, withInset: 10.0)
+        self.quantityField.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.titleLabel, withOffset: 10.0)
+        self.quantityField.autoSetDimension(.Height, toSize: 40.0)
+        
         self.measurePickerField.autoPinEdgeToSuperviewEdge(.Left, withInset: 10.0)
         self.measurePickerField.autoPinEdgeToSuperviewEdge(.Right, withInset: 10.0)
-        self.measurePickerField.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.titleLabel, withOffset: 10.0)
-        self.measurePickerField.autoSetDimension(.Height, toSize: 80.0)
+        self.measurePickerField.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.quantityField, withOffset: 5.0)
+        self.measurePickerField.autoSetDimension(.Height, toSize: 40.0)
         
         self.tableView.autoPinEdgesToSuperviewMarginsExcludingEdge(.Top)
         self.tableView.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.measurePickerField, withOffset: 5.0)
@@ -103,8 +130,22 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     
     internal func reloadData() {
         self.tableView.reloadData()
-        self.pickerView.reloadAllComponents()
-        self.measurePickerField.text = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: 0)
+        self.quantityPickerView.reloadAllComponents()
+        self.measurePickerView.reloadAllComponents()
+        if let index = self.dataSource?.foodDetailsViewIndexForSelectedMeasure(self) {
+            self.measurePickerField.text = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: index)
+        } else {
+            self.measurePickerField.text = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: 0)
+        }
+        if let
+            index = self.dataSource?.foodDetailsViewIndexForSelectedQuantity(self),
+            text = String(self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: index)) as? String {
+            self.quantityField.text = text
+        } else {
+            if let text = String(self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: 0)) as? String {
+                self.quantityField.text = text
+            }
+        }
         self.titleLabel.text = self.dataSource?.foodDetailsViewNameForFood(self)
         self.setNeedsUpdateConstraints()
     }
@@ -123,7 +164,7 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
         if let ds = self.dataSource {
             
             let nutrientValue = ds.foodDetailsView(self, valueForNutrientAtIndex: indexPath.row)
-            let measureValue = ds.foodDetailsView(self, valueForMeasureAtIndex: self.pickerView.selectedRowInComponent(0))
+            let measureValue = ds.foodDetailsView(self, valueForMeasureAtIndex: self.measurePickerView.selectedRowInComponent(0))
             let adjustedNutrientValue = (nutrientValue / NTFoodDetailsView.BaseMeasuresGrams) * measureValue
             
             cell.name = ds.foodDetailsView(self, nameForNutrientAtIndex: indexPath.row)
@@ -147,15 +188,27 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     }
     
     internal func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        if let num = self.dataSource?.foodDetailsViewNumberOfMeasures(self) {
-            return num
+        if pickerView.tag == 0 {
+            if let num = self.dataSource?.foodDetailsViewNumberOfQuantities(self) {
+                return num
+            }
+        } else {
+            if let num = self.dataSource?.foodDetailsViewNumberOfMeasures(self) {
+                return num
+            }
         }
         return 0
     }
     
     internal func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        if let title = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: row) {
-            return title
+        if pickerView.tag == 0 {
+            if let quantity = self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: row) {
+                return String(quantity)
+            }
+        } else {
+            if let title = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: row) {
+                return title
+            }
         }
         return nil
     }
@@ -163,10 +216,18 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     // MARK: UIPickerViewDelegate methods
     
     internal func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        if let title = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: row) {
-            self.measurePickerField.text = title
-            self.delegate?.foodDetailsView(self, didSelectMeasureAtIndex: row)
-            self.tableView.reloadData()
+        if pickerView.tag == 0 {
+            if let quantity = self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: row) {
+                self.quantityField.text = String(quantity)
+                self.delegate?.foodDetailsView(self, didSelectQuantityAtIndex: row)
+                self.tableView.reloadData()
+            }
+        } else {
+            if let title = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: row) {
+                self.measurePickerField.text = title
+                self.delegate?.foodDetailsView(self, didSelectMeasureAtIndex: row)
+                self.tableView.reloadData()
+            }
         }
     }
     

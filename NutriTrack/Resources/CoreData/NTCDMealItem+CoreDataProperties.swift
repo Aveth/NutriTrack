@@ -1,5 +1,5 @@
 //
-//  NTCDMeasure+CoreDataProperties.swift
+//  NTCDMealItem+CoreDataProperties.swift
 //  
 //
 //  Created by Avais on 2016-04-29.
@@ -12,9 +12,10 @@
 import Foundation
 import CoreData
 
-extension NTCDMeasure {
+extension NTCDMealItem {
 
-    @NSManaged var name: String?
-    @NSManaged var value: NSNumber?
+    @NSManaged var foodID: String?
+    @NSManaged var measureIndex: NSNumber?
+    @NSManaged var quantity: NSNumber?
 
 }

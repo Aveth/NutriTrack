@@ -17,7 +17,7 @@ class NTMealsViewController: UIViewController, NTMealDetailsViewControllerDelega
         super.viewDidLoad()
         
         self.navigationItem.title = NSLocalizedString("Your Meals", comment: "")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Meal", comment: ""), style: .Plain, target: self, action: "addMealButtonDidTap:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Meal", comment: ""), style: .Plain, target: self, action: #selector(addMealButtonDidTap(_:)))
         
         self.edgesForExtendedLayout = UIRectEdge.None
         self.view.backgroundColor = UIColor.backgroundColor()
@@ -40,7 +40,7 @@ class NTMealsViewController: UIViewController, NTMealDetailsViewControllerDelega
     // MARK: NTMealDetailsViewControllerDelegate methods
     
     internal func mealDetailsViewController(sender: NTMealDetailsViewController, didSaveMeal meal: NTMeal) {
-        self.dataManager.addMeal(meal)
+        self.dataManager.saveMeal(meal)
     }
 
 }

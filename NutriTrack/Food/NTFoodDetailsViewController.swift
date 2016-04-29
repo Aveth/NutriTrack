@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NTFoodDetailsViewControllerDelegate: class {
-    func foodDetailsViewController(sender: NTFoodDetailsViewController, didConfirmFood food:NTFood)
+    func foodDetailsViewController(sender: NTFoodDetailsViewController, didConfirmFood food:NTFood, quantity: Int, measureIndex: Int)
 }
 
 class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, NTFoodDetailsViewDataSource {
@@ -17,6 +17,10 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
     weak internal var delegate: NTFoodDetailsViewControllerDelegate?
     
     internal var food: NTFood
+    internal var measureIndex: Int
+    internal var quantity: Int
+    
+    private let quantities: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     private let searchProvider: NTSearchProvider = NTSearchProvider(service: NTSearchService())
     private lazy var foodDetailsView: NTFoodDetailsView = {
@@ -26,9 +30,15 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
         return view
     }()
     
-    internal init(food:NTFood) {
+    internal init(food: NTFood, quantity: Int, measureIndex: Int) {
         self.food = food
+        self.quantity = 1
+        self.measureIndex = 0
         super.init(nibName: nil, bundle: nil)
+    }
+    
+    internal convenience init(food: NTFood) {
+        self.init(food: food, quantity: 1, measureIndex: 0)
     }
     
     required internal init?(coder aDecoder: NSCoder) {
@@ -39,7 +49,7 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
         super.viewDidLoad()
         
         self.navigationItem.title = NSLocalizedString("Food Details", comment: "")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .Plain, target: self, action: "doneButtonDidTap:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .Plain, target: self, action: #selector(doneButtonDidTap(_:)))
         
         self.edgesForExtendedLayout = UIRectEdge.None
         self.view.backgroundColor = UIColor.whiteColor()
@@ -72,7 +82,7 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
     }
     
     internal func doneButtonDidTap(sender: UIBarButtonItem) {
-        self.delegate?.foodDetailsViewController(self, didConfirmFood: self.food)
+        self.delegate?.foodDetailsViewController(self, didConfirmFood: self.food, quantity: self.quantity, measureIndex: self.measureIndex)
     }
     
     // MARK: NTFoodDetailsViewDataSource methods
@@ -109,10 +119,33 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
         return self.food.nutrients[index].value
     }
     
+    internal func foodDetailsViewNumberOfQuantities(sender: NTFoodDetailsView) -> Int {
+        return self.quantities.count
+    }
+    
+    internal func foodDetailsView(sender: NTFoodDetailsView, valueForQuantityAtIndex index: Int) -> Int {
+        return self.quantities[index]
+    }
+    
+    internal func foodDetailsViewIndexForSelectedMeasure(sender: NTFoodDetailsView) -> Int {
+        return self.measureIndex
+    }
+    
+    internal func foodDetailsViewIndexForSelectedQuantity(sender: NTFoodDetailsView) -> Int {
+        if let num = self.quantities.indexOf(self.quantity) {
+            return num
+        }
+        return 0
+    }
+    
     // MARK: NTFoodDetailsViewDelegate methods
     
     internal func foodDetailsView(sender: NTFoodDetailsView, didSelectMeasureAtIndex index: Int) {
-        self.food.selectedMeasure = self.food.measures[index]
+        self.measureIndex = index
+    }
+    
+    internal func foodDetailsView(sender: NTFoodDetailsView, didSelectQuantityAtIndex index: Int) {
+        self.quantity = self.quantities[index]
     }
     
     

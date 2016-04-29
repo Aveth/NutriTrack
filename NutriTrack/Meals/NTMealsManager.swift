@@ -22,8 +22,13 @@ class NTMealsManger {
         self.provider = provider
     }
     
-    internal func addMeal(meal: NTMeal) {
-        self.provider.saveMeal(meal)
+    internal func saveMeal(meal: NTMeal) {
+        if meal.id == nil {
+            meal.id = NSUUID().UUIDString
+            self.provider.insertMeal(meal)
+        } else {
+            self.provider.updateMeal(meal)
+        }
     }
     
     internal func removeMeal(meal: NTMeal) {

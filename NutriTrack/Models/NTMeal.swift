@@ -10,12 +10,13 @@ import Foundation
 
 class NTMeal {
     
+    internal var id: String?
     internal var dateTime: NSDate
-    internal var foods: [NTFood]
+    internal var mealItems: [NTMealItem]
     
     internal init(dateTime: NSDate) {
         self.dateTime = dateTime
-        self.foods = [NTFood]()
+        self.mealItems = [NTMealItem]()
     }
 
 }

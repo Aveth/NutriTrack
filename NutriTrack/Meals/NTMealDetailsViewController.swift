@@ -44,8 +44,8 @@ class NTMealDetailsViewController: UIViewController, NTFoodSearchViewControllerD
         super.viewDidLoad()
         
         self.navigationItem.title = NSLocalizedString("New Meal", comment: "")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Item", comment: ""), style: .Plain, target: self, action: "addItemButtonDidTap:")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Save", comment: ""), style: .Plain, target: self, action: "saveButtonDidTap:")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Item", comment: ""), style: .Plain, target: self, action: #selector(addItemButtonDidTap(_:)))
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Save", comment: ""), style: .Plain, target: self, action: #selector(saveButtonDidTap(_:)))
         
         self.edgesForExtendedLayout = UIRectEdge.None
         self.view.backgroundColor = UIColor.backgroundColor()
@@ -57,7 +57,7 @@ class NTMealDetailsViewController: UIViewController, NTFoodSearchViewControllerD
     
     override internal func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.meal.foods.count == 0 {
+        if self.meal.mealItems.count == 0 {
             if self.initialPresentation {
                 self.initialPresentation = false
                 self.presentNTFoodSearchViewController()
@@ -77,7 +77,7 @@ class NTMealDetailsViewController: UIViewController, NTFoodSearchViewControllerD
     }
     
     internal func saveButtonDidTap(sender: UIBarButtonItem) {
-        if self.meal.foods.count > 0 {
+        if self.meal.mealItems.count > 0 {
             self.delegate?.mealDetailsViewController(self, didSaveMeal: self.meal)
         }
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -91,21 +91,21 @@ class NTMealDetailsViewController: UIViewController, NTFoodSearchViewControllerD
     
     // MARK: NTFoodSearchViewControllerDelegate methods
     
-    internal func foodSearchViewController(sender: NTFoodSearchViewController, didSelectFood food: NTFood) {
-        self.meal.foods.append(food)
+    internal func foodSearchViewController(sender: NTFoodSearchViewController, didSelectFood food: NTFood, quantity: Int, measureIndex: Int) {
+        self.meal.mealItems.append(NTMealItem(food: food, quantity: quantity, measureIndex: measureIndex))
         sender.dismissViewControllerAnimated(true, completion: nil)
         self.mealDetailsView.reloadData()
-        self.mealDetailsView.selectFoodAtIndex(self.meal.foods.count - 1)
+        self.mealDetailsView.selectFoodAtIndex(self.meal.mealItems.count - 1)
     }
     
     // MARK: NTMealDetailsViewDataSource methods
     
     internal func mealDetailsViewNumberOfFoods(sender: NTMealDetailsView) -> Int {
-        return self.meal.foods.count
+        return self.meal.mealItems.count
     }
     
     internal func mealDetailsView(sender: NTMealDetailsView, titleForFoodAtIndex index: Int) -> String {
-        return self.meal.foods[index].name
+        return self.meal.mealItems[index].food.name
     }
     
     internal func mealDetailsViewDateForMeal(sender: NTMealDetailsView) -> NSDate {

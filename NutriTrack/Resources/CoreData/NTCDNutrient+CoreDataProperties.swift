@@ -2,7 +2,7 @@
 //  NTCDNutrient+CoreDataProperties.swift
 //  
 //
-//  Created by Avais on 2016-04-27.
+//  Created by Avais on 2016-04-29.
 //
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu

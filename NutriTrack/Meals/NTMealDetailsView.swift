@@ -23,8 +23,8 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     weak internal var dataSource: NTMealDetailsViewDataSource?
     weak internal var delegate: NTMealDetailsViewDelegate?
     
-    private lazy var dateTimePickerField: NTPickerField = {
-        let field = NTPickerField()
+    private lazy var dateTimePickerField: NTLabeledField = {
+        let field = NTLabeledField()
         field.title = NSLocalizedString("Date/Time:", comment: "")
         field.text = self.dateFormatter.stringFromDate(NSDate())
         field.inputView = self.dateTimePicker
@@ -33,7 +33,7 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     
     private lazy var dateTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
-        picker.addTarget(self, action: "dateTimePickerDidChange:", forControlEvents: .ValueChanged)
+        picker.addTarget(self, action: #selector(dateTimePickerDidChange(_:)), forControlEvents: .ValueChanged)
         return picker
     }()
     
@@ -75,7 +75,7 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         self.layoutMargins = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
         
         self.dateTimePickerField.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 10.0, left: 10.0, bottom: 0.0, right: 10.0), excludingEdge: .Bottom)
-        self.dateTimePickerField.autoSetDimension(.Height, toSize: 80.0)
+        self.dateTimePickerField.autoSetDimension(.Height, toSize: 40.0)
         
         self.tableView.autoPinEdgeToSuperviewEdge(.Left)
         self.tableView.autoPinEdgeToSuperviewEdge(.Right)

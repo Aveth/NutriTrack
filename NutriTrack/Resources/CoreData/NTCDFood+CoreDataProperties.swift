@@ -2,7 +2,7 @@
 //  NTCDFood+CoreDataProperties.swift
 //  
 //
-//  Created by Avais on 2016-04-27.
+//  Created by Avais on 2016-04-29.
 //
 //
 //  Choose "Create NSManagedObject Subclass…" from the Core Data editor menu
@@ -18,9 +18,8 @@ extension NTCDFood {
     @NSManaged var name: String?
     @NSManaged var measures: NSSet?
     @NSManaged var nutrients: NSSet?
-    @NSManaged var selectedMeasure: NTCDMeasure?
     
-    @NSManaged func addMeasuresObject(measure: NTCDMeasure)
-    @NSManaged func addNutrientsObject(nutrient: NTCDNutrient)
+    @NSManaged func addNutrientsObject(object: NSManagedObject)
+    @NSManaged func addMeasuresObject(object: NSManagedObject)
 
 }

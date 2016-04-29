@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="14E46" minimumToolsVersion="Automatic">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
     <entity name="NTCDFood" representedClassName=".NTCDFood" syncable="YES">
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="name" attributeType="String" syncable="YES"/>
         <relationship name="measures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="NTCDMeasure" syncable="YES"/>
         <relationship name="nutrients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="NTCDNutrient" syncable="YES"/>
-        <relationship name="selectedMeasure" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="NTCDMeasure" syncable="YES"/>
     </entity>
     <entity name="NTCDMeal" representedClassName=".NTCDMeal" syncable="YES">
         <attribute name="dateTime" attributeType="Date" syncable="YES"/>
-        <relationship name="foods" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="NTCDFood" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <relationship name="mealItems" toMany="YES" deletionRule="Nullify" destinationEntity="NTCDMealItem" syncable="YES"/>
+    </entity>
+    <entity name="NTCDMealItem" representedClassName=".NTCDMealItem" syncable="YES">
+        <attribute name="foodID" attributeType="String" syncable="YES"/>
+        <attribute name="measureIndex" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
     </entity>
     <entity name="NTCDMeasure" representedClassName=".NTCDMeasure" syncable="YES">
         <attribute name="name" attributeType="String" syncable="YES"/>
@@ -22,8 +27,9 @@
         <attribute name="value" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
     </entity>
     <elements>
-        <element name="NTCDFood" positionX="115" positionY="-18" width="128" height="118"/>
-        <element name="NTCDMeal" positionX="-162" positionY="3" width="128" height="73"/>
+        <element name="NTCDFood" positionX="115" positionY="-18" width="128" height="105"/>
+        <element name="NTCDMeal" positionX="-162" positionY="3" width="128" height="90"/>
+        <element name="NTCDMealItem" positionX="18" positionY="-72" width="128" height="90"/>
         <element name="NTCDMeasure" positionX="198" positionY="-189" width="128" height="73"/>
         <element name="NTCDNutrient" positionX="-9" positionY="-189" width="128" height="103"/>
     </elements>
