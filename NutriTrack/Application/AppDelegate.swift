@@ -13,24 +13,38 @@ import CoreData
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     internal var window: UIWindow?
-    internal var navigationController: UINavigationController?
 
     private func prepareAppearances() {
-        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.Default
+        UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         let navBarAttributes = [
-            NSFontAttributeName: UIFont.boldFontOfSize(20.0)
+            NSFontAttributeName: UIFont.regularFontOfSize(16.0),
+            NSForegroundColorAttributeName: UIColor.themeForegroundColor()
         ]
         UINavigationBar.appearance().titleTextAttributes = navBarAttributes
-        UINavigationBar.appearance().barTintColor = UIColor.navigationBarColor()
+        UINavigationBar.appearance().barTintColor = UIColor.themeBackgroundColor()
+        UINavigationBar.appearance().tintColor = UIColor.themeForegroundColor()
+        UINavigationBar.appearance().translucent = false
+        
+        UIToolbar.appearance().translucent = false
+        UIToolbar.appearance().barTintColor = UIColor.themeBackgroundColor()
         
         let barButtonAttributes = [
-            NSFontAttributeName: UIFont.regularFontOfSize(14.0)
+            NSFontAttributeName: UIFont.regularFontOfSize(12.0)
         ]
         UIBarButtonItem.appearance().setTitleTextAttributes(barButtonAttributes, forState: .Normal)
         UIBarButtonItem.appearance().tintColor = UIColor.barButtonItemColor()
         
         UIPageControl.appearance().backgroundColor = UIColor.pageControlBackgroundColor()
+        
+        UITabBar.appearance().translucent = false
+        UITabBar.appearance().barTintColor = UIColor.tabBarBackgroundColor()
+        UITabBar.appearance().tintColor = UIColor.themeBackgroundColor()
+        
+        let tabBarAttributes = [
+            NSFontAttributeName: UIFont.regularFontOfSize(9.0)
+        ]
+        UITabBarItem.appearance().setTitleTextAttributes(tabBarAttributes, forState: .Normal)
         
     }
     
@@ -38,10 +52,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         self.prepareAppearances()
         
-        self.navigationController = UINavigationController(rootViewController: NTMealsViewController())
-        
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.rootViewController = self.navigationController
+        self.window?.rootViewController = NTTabBarController()
         
         self.window?.makeKeyAndVisible()
         

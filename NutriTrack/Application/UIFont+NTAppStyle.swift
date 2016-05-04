@@ -66,7 +66,7 @@ extension UIFont {
     }
     
     static internal func defaultFont() -> UIFont {
-        return self.regularFontOfSize(16.0)
+        return self.regularFontOfSize(14.0)
     }
     
 }

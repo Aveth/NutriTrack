@@ -18,5 +18,10 @@ class NTMeal {
         self.dateTime = dateTime
         self.mealItems = [NTMealItem]()
     }
+    
+    convenience internal init(id: String, dateTime: NSDate) {
+        self.init(dateTime: dateTime)
+        self.id = id
+    }
 
 }

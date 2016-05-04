@@ -43,6 +43,7 @@ class NTFoodSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITa
         let bar = UISearchBar()
         bar.delegate = self
         bar.placeholder = NSLocalizedString("Search for a food item", comment: "")
+        bar.showsCancelButton = true
         return bar
     }()
     
@@ -83,6 +84,10 @@ class NTFoodSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITa
         self.delegate?.foodSearchView(self, didChangeSearchQuery: searchText)
     }
     
+    internal func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+    }
+    
     // MARK: UITableViewDelegate methods
     
     internal func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
@@ -92,16 +97,14 @@ class NTFoodSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITa
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let dataSource = self.dataSource {
-            return dataSource.foodSearchViewNumberOfFoods(self)
-        }
-        return 0
+        return Int.unwrapOrZero(dataSource?.foodSearchViewNumberOfFoods(self))
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String.defaultCellReuseIdentifier())
         cell?.textLabel?.text = self.dataSource!.foodSearchView(self, nameForFoodAtIndex: indexPath.row)
         cell?.textLabel?.font = UIFont.defaultFont()
+        cell?.textLabel?.textColor = UIColor.defaultTextColor()
         return cell!
     }
 

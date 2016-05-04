@@ -56,6 +56,7 @@ class NTFoodDetailsViewCell: UITableViewCell {
     override internal init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.textLabel?.font = UIFont.defaultFont()
+        self.textLabel?.textColor = UIColor.defaultTextColor()
         self.buildView()
     }
 

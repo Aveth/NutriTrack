@@ -18,13 +18,22 @@ class NTMealsManger {
         return meals
     }()
     
+    private(set) lazy var mealsForToday: [NTMeal] = {
+        let calendar = NSCalendar.currentCalendar()
+        let components = calendar.components([.Day, .Month, .Year], fromDate: NSDate())
+        let startDate = calendar.dateFromComponents(components)
+        components.day += 1
+        let endDate = calendar.dateFromComponents(components)
+        let meals = self.provider.fetchMealsForStartDate(startDate!, endDate: endDate!)
+        return meals
+    }()
+    
     internal init(provider: NTMealsProviderProtocol) {
         self.provider = provider
     }
     
     internal func saveMeal(meal: NTMeal) {
         if meal.id == nil {
-            meal.id = NSUUID().UUIDString
             self.provider.insertMeal(meal)
         } else {
             self.provider.updateMeal(meal)

@@ -113,15 +113,15 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
         
         self.titleLabel.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 20.0, left: 10.0, bottom: 20.0, right: 10.0), excludingEdge: .Bottom)
         
-        self.quantityField.autoPinEdgeToSuperviewEdge(.Left, withInset: 10.0)
-        self.quantityField.autoPinEdgeToSuperviewEdge(.Right, withInset: 10.0)
+        self.quantityField.autoPinEdgeToSuperviewEdge(.Left, withInset: 20.0)
+        self.quantityField.autoPinEdgeToSuperviewEdge(.Right, withInset: 20.0)
         self.quantityField.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.titleLabel, withOffset: 10.0)
-        self.quantityField.autoSetDimension(.Height, toSize: 40.0)
+        self.quantityField.autoSetDimension(.Height, toSize: 30.0)
         
-        self.measurePickerField.autoPinEdgeToSuperviewEdge(.Left, withInset: 10.0)
-        self.measurePickerField.autoPinEdgeToSuperviewEdge(.Right, withInset: 10.0)
+        self.measurePickerField.autoPinEdgeToSuperviewEdge(.Left, withInset: 20.0)
+        self.measurePickerField.autoPinEdgeToSuperviewEdge(.Right, withInset: 20.0)
         self.measurePickerField.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.quantityField, withOffset: 5.0)
-        self.measurePickerField.autoSetDimension(.Height, toSize: 40.0)
+        self.measurePickerField.autoSetDimension(.Height, toSize: 30.0)
         
         self.tableView.autoPinEdgesToSuperviewMarginsExcludingEdge(.Top)
         self.tableView.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.measurePickerField, withOffset: 5.0)
@@ -139,12 +139,11 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
         }
         if let
             index = self.dataSource?.foodDetailsViewIndexForSelectedQuantity(self),
-            text = String(self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: index)) as? String {
-            self.quantityField.text = text
-        } else {
-            if let text = String(self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: 0)) as? String {
-                self.quantityField.text = text
-            }
+            value = self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: index)
+        {
+            self.quantityField.text = String(value)
+        } else if let value = self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: 0) {
+            self.quantityField.text = String(value)
         }
         self.titleLabel.text = self.dataSource?.foodDetailsViewNameForFood(self)
         self.setNeedsUpdateConstraints()
@@ -153,10 +152,7 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let num = self.dataSource?.foodDetailsViewNumberOfNutrients(self) {
-            return num
-        }
-        return 0
+        return Int.unwrapOrZero(self.dataSource?.foodDetailsViewNumberOfNutrients(self))
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -165,7 +161,8 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
             
             let nutrientValue = ds.foodDetailsView(self, valueForNutrientAtIndex: indexPath.row)
             let measureValue = ds.foodDetailsView(self, valueForMeasureAtIndex: self.measurePickerView.selectedRowInComponent(0))
-            let adjustedNutrientValue = (nutrientValue / NTFoodDetailsView.BaseMeasuresGrams) * measureValue
+            let quantityValue = ds.foodDetailsView(self, valueForQuantityAtIndex: self.quantityPickerView.selectedRowInComponent(0))
+            let adjustedNutrientValue = (nutrientValue / NTFoodDetailsView.BaseMeasuresGrams) * measureValue * Float(quantityValue)
             
             cell.name = ds.foodDetailsView(self, nameForNutrientAtIndex: indexPath.row)
             cell.unit = ds.foodDetailsView(self, unitForNutrientAtIndex: indexPath.row)
@@ -189,15 +186,9 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     
     internal func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView.tag == 0 {
-            if let num = self.dataSource?.foodDetailsViewNumberOfQuantities(self) {
-                return num
-            }
-        } else {
-            if let num = self.dataSource?.foodDetailsViewNumberOfMeasures(self) {
-                return num
-            }
+            return Int.unwrapOrZero(self.dataSource?.foodDetailsViewNumberOfQuantities(self))
         }
-        return 0
+        return Int.unwrapOrZero(self.dataSource?.foodDetailsViewNumberOfMeasures(self))
     }
     
     internal func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

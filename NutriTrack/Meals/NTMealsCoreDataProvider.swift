@@ -51,18 +51,27 @@ class NTMealsCoreDataProvider: NTMealsProviderProtocol {
     }()
     
     internal func fetchMeals() -> [NTMeal] {
-        
+        return self.fetchMealsWithPredicate(nil)
+    }
+    
+    func fetchMealsForStartDate(startDate: NSDate, endDate: NSDate) -> [NTMeal] {
+        let predicate = NSPredicate(format: "dateTime >= %@ AND dateTime < %@", startDate, endDate)
+        return self.fetchMealsWithPredicate(predicate)
+    }
+    
+    private func fetchMealsWithPredicate(predicate: NSPredicate?) -> [NTMeal] {
         var resultMeals = [NTMeal]()
-        
         do {
             let request = NSFetchRequest(entityName: "NTCDMeal")
+            request.predicate = predicate
             let meals = try self.managedObjectContext.executeFetchRequest(request) as! [NTCDMeal]
             for meal: NTCDMeal in meals {
                 if let
+                    id = meal.id,
                     dateTime = meal.dateTime,
                     mealItems = meal.mealItems?.allObjects as? [NTCDMealItem]
                 {
-                    let resultMeal = NTMeal(dateTime: dateTime)
+                    let resultMeal = NTMeal(id: id, dateTime: dateTime)
                     resultMeals.append(resultMeal)
                     for item: NTCDMealItem in mealItems {
                         if let result = self.mealItemFromCoreData(item) {
@@ -80,9 +89,9 @@ class NTMealsCoreDataProvider: NTMealsProviderProtocol {
     }
     
     internal func insertMeal(meal: NTMeal) {
-        let coreDataMeal = self.insertNewMeal(meal.dateTime)
+        let coreDataMeal = self.insertNewMeal(NSUUID().UUIDString, dateTime: meal.dateTime)
         for item: NTMealItem in meal.mealItems {
-            guard let coreDataFood = self.fetchFoodByID(item.food.id) else {
+            if self.fetchFoodByID(item.food.id) == nil {
                 let coreDataFood = self.insertNewFood(item.food.id, name: item.food.name)
                 for nutrient: NTNutrient in item.food.nutrients {
                     let coreDataNutrient = self.insertNewNutrient(nutrient.id, name: nutrient.name, unit: nutrient.unit, value: nutrient.value)
@@ -92,7 +101,7 @@ class NTMealsCoreDataProvider: NTMealsProviderProtocol {
                     let coreDataMeasure = self.insertNewMeasure(measure.name, value: measure.value)
                     coreDataFood.addMeasuresObject(coreDataMeasure)
                 }
-                break;
+                self.managedObjectContext.insertObject(coreDataFood)
             }
             let coreDataMealItem = self.insertNewMealItem(item.food.id, quantity: item.quantity, measureIndex: item.measureIndex)
             coreDataMeal.addMealItemsObject(coreDataMealItem)
@@ -194,8 +203,9 @@ class NTMealsCoreDataProvider: NTMealsProviderProtocol {
         return nil
     }
     
-    private func insertNewMeal(dateTime: NSDate) -> NTCDMeal {
+    private func insertNewMeal(id: String, dateTime: NSDate) -> NTCDMeal {
         let item: NTCDMeal = NSEntityDescription.insertNewObjectForEntityForName("NTCDMeal", inManagedObjectContext: self.managedObjectContext) as! NTCDMeal
+        item.id = id
         item.dateTime = dateTime
         return item
     }

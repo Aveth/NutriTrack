@@ -19,7 +19,6 @@ class NTCompareViewController: UIPageViewController, NTFoodSearchViewControllerD
         self.dataSource = self
         self.delegate = self
         
-        self.navigationController?.navigationBar.translucent = false
         self.navigationItem.title = NSLocalizedString("Compare Foods", comment: "")
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Item", comment: ""), style: .Plain, target: self, action: #selector(addItemButtonDidTap(_:)))
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Clear", comment: ""), style: .Plain, target: self, action: #selector(clearButtonDidTap(_:)))

@@ -73,8 +73,8 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         super.updateConstraints()
         
         self.layoutMargins = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
-        
-        self.dateTimePickerField.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 10.0, left: 10.0, bottom: 0.0, right: 10.0), excludingEdge: .Bottom)
+                
+        self.dateTimePickerField.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0), excludingEdge: .Bottom)
         self.dateTimePickerField.autoSetDimension(.Height, toSize: 40.0)
         
         self.tableView.autoPinEdgeToSuperviewEdge(.Left)
@@ -110,10 +110,7 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let num = self.dataSource?.mealDetailsViewNumberOfFoods(self) {
-            return num
-        }
-        return 0
+        return Int.unwrapOrZero(self.dataSource?.mealDetailsViewNumberOfFoods(self))
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

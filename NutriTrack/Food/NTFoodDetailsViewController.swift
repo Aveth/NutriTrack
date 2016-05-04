@@ -12,15 +12,27 @@ protocol NTFoodDetailsViewControllerDelegate: class {
     func foodDetailsViewController(sender: NTFoodDetailsViewController, didConfirmFood food:NTFood, quantity: Int, measureIndex: Int)
 }
 
-class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, NTFoodDetailsViewDataSource {
+class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, NTFoodDetailsViewDataSource {
+    
+    internal var completeText: String? {
+        get {
+            return self._completeText
+        }
+        set {
+            if let text = newValue {
+                self._completeText = text
+                self.navigationItem.rightBarButtonItem?.title = text
+            }
+        }
+    }
     
     weak internal var delegate: NTFoodDetailsViewControllerDelegate?
-    
     internal var food: NTFood
     internal var measureIndex: Int
     internal var quantity: Int
     
-    private let quantities: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    private var _completeText: String = NSLocalizedString("Done", comment: "")
+    private let _quantities: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
     private let searchProvider: NTSearchProvider = NTSearchProvider(service: NTSearchService())
     private lazy var foodDetailsView: NTFoodDetailsView = {
@@ -48,11 +60,9 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
     override internal func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = NSLocalizedString("Food Details", comment: "")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Done", comment: ""), style: .Plain, target: self, action: #selector(doneButtonDidTap(_:)))
+        self.navigationTitle = NSLocalizedString("Food Details", comment: "")
+        self.rightBarButtonTitle = self._completeText
         
-        self.edgesForExtendedLayout = UIRectEdge.None
-        self.view.backgroundColor = UIColor.whiteColor()
         self.view.addSubview(self.foodDetailsView)
 
         self.reloadData()
@@ -60,7 +70,11 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
         
     }
     
-    override func updateViewConstraints() {
+    override internal func rightBarButtonDidTap(sender: UIBarButtonItem) {
+         self.delegate?.foodDetailsViewController(self, didConfirmFood: self.food, quantity: self.quantity, measureIndex: self.measureIndex)
+    }
+    
+    override internal func updateViewConstraints() {
         super.updateViewConstraints()
         self.foodDetailsView.autoPinEdgesToSuperviewEdges()
     }
@@ -81,14 +95,10 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
         }
     }
     
-    internal func doneButtonDidTap(sender: UIBarButtonItem) {
-        self.delegate?.foodDetailsViewController(self, didConfirmFood: self.food, quantity: self.quantity, measureIndex: self.measureIndex)
-    }
-    
     // MARK: NTFoodDetailsViewDataSource methods
     
     internal func foodDetailsViewNameForFood(sender: NTFoodDetailsView) -> String {
-        return self.food.name
+        return self.food.name + " (" + self.food.id + ")"
     }
     
     internal func foodDetailsViewNumberOfMeasures(sender: NTFoodDetailsView) -> Int {
@@ -120,11 +130,11 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
     }
     
     internal func foodDetailsViewNumberOfQuantities(sender: NTFoodDetailsView) -> Int {
-        return self.quantities.count
+        return self._quantities.count
     }
     
     internal func foodDetailsView(sender: NTFoodDetailsView, valueForQuantityAtIndex index: Int) -> Int {
-        return self.quantities[index]
+        return self._quantities[index]
     }
     
     internal func foodDetailsViewIndexForSelectedMeasure(sender: NTFoodDetailsView) -> Int {
@@ -132,7 +142,7 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
     }
     
     internal func foodDetailsViewIndexForSelectedQuantity(sender: NTFoodDetailsView) -> Int {
-        if let num = self.quantities.indexOf(self.quantity) {
+        if let num = self._quantities.indexOf(self.quantity) {
             return num
         }
         return 0
@@ -145,7 +155,7 @@ class NTFoodDetailsViewController: UIViewController, NTFoodDetailsViewDelegate, 
     }
     
     internal func foodDetailsView(sender: NTFoodDetailsView, didSelectQuantityAtIndex index: Int) {
-        self.quantity = self.quantities[index]
+        self.quantity = self._quantities[index]
     }
     
     

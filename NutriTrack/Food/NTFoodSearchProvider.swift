@@ -41,8 +41,10 @@ class NTSearchProvider {
         self.service.fetchResults(searchQuery: query,
             success: { (result: [String: AnyObject]) -> Void in
                 
-                if let resultsDict = result["data"]?["results"] as? [[String: AnyObject]], originalQuery = result["data"]?["query"] as? String {
-                    
+                if let
+                    resultsDict = result["data"]?["results"] as? [[String: AnyObject]],
+                    originalQuery = result["data"]?["query"] as? String
+                {
                     let foods = self.arrayToFoods(resultsDict)
                     success(originalQuery: originalQuery, results: foods)
                 
@@ -76,7 +78,13 @@ class NTSearchProvider {
         
         self.service.fetchDetails(itemId: id,
             success: { (result: [String: AnyObject]) -> Void in
-                if let firstResult = result["data"]?[0] as? [String: AnyObject], resultId = firstResult["id"] as? String, resultName = firstResult["name"] as? String where resultId == id {
+                if let
+                    dict = result["data"] as? [AnyObject],
+                    firstResult = dict.first,
+                    resultId = firstResult["id"] as? String,
+                    resultName = firstResult["name"] as? String
+                    where resultId == id
+                {
                     let food = NTFood(id: resultId, name: resultName)
                     if let measures = firstResult["measures"] as? [[String: AnyObject]] {
                         food.measures = self.arrayToMeasureItems(measures)
@@ -97,7 +105,10 @@ class NTSearchProvider {
     private func arrayToFoods(array: [[String: AnyObject]]) -> [NTFood] {
         var result = [NTFood]()
         for dict: [String: AnyObject] in array {
-            if let id = dict["id"] as? String, name = dict["name"] as? String {
+            if let
+                id = dict["id"] as? String,
+                name = dict["name"] as? String
+            {
                 let item = NTFood(id: id, name: name)
                 result.append(item)
             }
@@ -108,7 +119,10 @@ class NTSearchProvider {
     private func arrayToMeasureItems(array: [[String: AnyObject]]) -> [NTMeasure] {
         var result = [NTMeasure]()
         for measure: [String: AnyObject] in array {
-            if let name = measure["name"] as? String, value = measure["value"] as? Float {
+            if let
+                name = measure["name"] as? String,
+                value = measure["value"] as? Float
+            {
                 let item = NTMeasure(name: name, value: value)
                 result.append(item)
             }
@@ -119,7 +133,13 @@ class NTSearchProvider {
     private func arrayToNutrientItems(array: [[String: AnyObject]], nutrientCodes: [String]?) -> [NTNutrient] {
         var result = [NTNutrient]()
         for nutrient: [String: AnyObject] in array {
-            if let id = nutrient["id"] as? String, name = nutrient["name"] as? String, unit = nutrient["unit"] as? String, value = nutrient["value"] as? String, floatVal = Float(value) {
+            if let
+                id = nutrient["id"] as? String,
+                name = nutrient["name"] as? String,
+                unit = nutrient["unit"] as? String,
+                value = nutrient["value"] as? String,
+                floatVal = Float(value)
+            {
                 let item = NTNutrient(id: id, name: name, unit: unit, value: floatVal)
                 if let codes = nutrientCodes {
                     if codes.contains(id) {

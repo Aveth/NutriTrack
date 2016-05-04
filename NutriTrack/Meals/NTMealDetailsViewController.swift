@@ -12,12 +12,25 @@ protocol NTMealDetailsViewControllerDelegate: class {
     func mealDetailsViewController(sender: NTMealDetailsViewController, didSaveMeal meal: NTMeal)
 }
 
-class NTMealDetailsViewController: UIViewController, NTFoodSearchViewControllerDelegate, NTMealDetailsViewDataSource, NTMealDetailsViewDelegate {
+class NTMealDetailsViewController: NTViewController, NTFoodSearchViewControllerDelegate, NTMealDetailsViewDataSource, NTMealDetailsViewDelegate {
     
     weak internal var delegate: NTMealDetailsViewControllerDelegate?
     
+    private let searchController = UISearchController(searchResultsController: NTFoodSearchViewController())
     private var meal: NTMeal
-    private var initialPresentation: Bool = true
+    
+    lazy private var mealDetailsView: NTMealDetailsView = {
+        let view = NTMealDetailsView()
+        view.dataSource = self
+        view.delegate = self
+        return view
+    }()
+    
+    lazy private var saveButton: UIBarButtonItem = {
+        let button = UIBarButtonItem(image: UIImage(named: "check"), style: .Plain, target: self, action: #selector(rightBarButtonDidTap(_:)))
+        button.enabled = false
+        return button
+    }()
     
     init() {
         self.meal = NTMeal(dateTime: NSDate())
@@ -33,22 +46,16 @@ class NTMealDetailsViewController: UIViewController, NTFoodSearchViewControllerD
         fatalError("This class doesn't support NSCoding.")
     }
     
-    lazy private var mealDetailsView: NTMealDetailsView = {
-        let view = NTMealDetailsView()
-        view.dataSource = self
-        view.delegate = self
-        return view
-    }()
-
     override internal func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = NSLocalizedString("New Meal", comment: "")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Item", comment: ""), style: .Plain, target: self, action: #selector(addItemButtonDidTap(_:)))
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Save", comment: ""), style: .Plain, target: self, action: #selector(saveButtonDidTap(_:)))
+        let isNew: Bool = self.meal.mealItems.count > 0
+        self.navigationTitle = NSLocalizedString(isNew ? "New Meal" : "Meal", comment: "")
+        self.navigationItem.rightBarButtonItems = [
+            self.saveButton,
+            UIBarButtonItem(image: UIImage(named: "plus"), style: .Plain, target: self, action: #selector(addItemButtonDidTap(_:))),
+        ]
         
-        self.edgesForExtendedLayout = UIRectEdge.None
-        self.view.backgroundColor = UIColor.backgroundColor()
         self.view.addSubview(self.mealDetailsView)
         
         self.updateViewConstraints()
@@ -57,14 +64,7 @@ class NTMealDetailsViewController: UIViewController, NTFoodSearchViewControllerD
     
     override internal func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        if self.meal.mealItems.count == 0 {
-            if self.initialPresentation {
-                self.initialPresentation = false
-                self.presentNTFoodSearchViewController()
-            } else {
-                self.dismissViewControllerAnimated(true, completion: nil)
-            }
-        }
+        self.saveButton.enabled = self.meal.mealItems.count > 0
     }
     
     override internal func updateViewConstraints() {
@@ -73,19 +73,22 @@ class NTMealDetailsViewController: UIViewController, NTFoodSearchViewControllerD
     }
     
     internal func addItemButtonDidTap(sender: UIBarButtonItem) {
-        self.presentNTFoodSearchViewController()
+        self.presentFoodSearchViewController()
     }
     
-    internal func saveButtonDidTap(sender: UIBarButtonItem) {
-        if self.meal.mealItems.count > 0 {
-            self.delegate?.mealDetailsViewController(self, didSaveMeal: self.meal)
-        }
+    override internal func rightBarButtonDidTap(sender: UIBarButtonItem) {
+        self.delegate?.mealDetailsViewController(self, didSaveMeal: self.meal)
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    private func presentNTFoodSearchViewController() {
+    override internal func leftBarButtonDidTap(sender: UIBarButtonItem) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    private func presentFoodSearchViewController() {
         let controller = NTFoodSearchViewController()
         controller.delegate = self
+        controller.isModal = true
         self.navigationController?.presentViewController(controller)
     }
     

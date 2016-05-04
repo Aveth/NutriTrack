@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NTMealsViewController: UIViewController, NTMealDetailsViewControllerDelegate {
+class NTMealsViewController: NTViewController, NTMealDetailsViewControllerDelegate {
     
     internal var dataManager: NTMealsManger = NTMealsManger(provider: NTMealsCoreDataProvider())
     lazy private var emptyView: NTEmptyView = NTEmptyView()
@@ -16,20 +16,28 @@ class NTMealsViewController: UIViewController, NTMealDetailsViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationItem.title = NSLocalizedString("Your Meals", comment: "")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Add Meal", comment: ""), style: .Plain, target: self, action: #selector(addMealButtonDidTap(_:)))
+        self.navigationTitle = NSLocalizedString("Log Book", comment: "")
+        self.rightBarButtonImage = UIImage(named: "plus")
         
-        self.edgesForExtendedLayout = UIRectEdge.None
-        self.view.backgroundColor = UIColor.backgroundColor()
         self.view.addSubview(self.emptyView)
-        
+      
         self.updateViewConstraints()
     }
     
-    internal func addMealButtonDidTap(sender: UIBarButtonItem) {
+    override internal func rightBarButtonDidTap(sender: UIBarButtonItem) {
         let controller = NTMealDetailsViewController()
         controller.delegate = self
-        self.navigationController?.presentViewController(controller)
+        //controller.isModal = true
+        self.navigationController?.pushViewController(controller, animated: true)
+    }
+    
+    internal func presentMealDetailsWithFood(food: NTFood, quantity: Int, measureIndex: Int) {
+        let meal = NTMeal(dateTime: NSDate())
+        meal.mealItems.append(NTMealItem(food: food, quantity: quantity, measureIndex: measureIndex))
+        let controller = NTMealDetailsViewController(meal: meal)
+        controller.delegate = self
+        controller.isModal = true
+        self.navigationController?.presentViewController(controller, animated: true)
     }
     
     override internal func updateViewConstraints() {

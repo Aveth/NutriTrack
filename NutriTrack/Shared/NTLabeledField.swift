@@ -60,6 +60,7 @@ class NTLabeledField: UIView, UITextFieldDelegate {
     lazy private var textField: UITextField = {
         let field = UITextField()
         field.layer.borderWidth = 1.0
+        field.layer.borderColor = UIColor.lightGrayColor().CGColor
         field.layer.cornerRadius = 5.0
         field.leftViewMode = .Always
         field.leftView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 10.0, height: 0.0))
@@ -72,12 +73,12 @@ class NTLabeledField: UIView, UITextFieldDelegate {
     }()
     
     lazy private var dropdownButton: UIButton = {
-        let image = UIImage(named: "dropdown_arrow")
-        let button = UIButton(frame: CGRect(x: 0.0, y: 0.0, width: 35.0, height: 35.0))
-        button.imageEdgeInsets = UIEdgeInsets(top: 10.0, left: 10.0, bottom: 10.0, right: 10.0)
+        let image = UIImage(named: "down_arrow")
+        let button = UIButton()
         button.setImage(image, forState: .Normal)
         button.addTarget(self, action: #selector(dropdownButtonDidTap(_:)), forControlEvents: .TouchUpInside)
         button.hidden = true
+        button.backgroundColor = UIColor.themeBackgroundColor()
         return button
     }()
     
@@ -120,6 +121,14 @@ class NTLabeledField: UIView, UITextFieldDelegate {
         
         self.pickerToolbar.autoSetDimension(.Height, toSize: 35.0)
         
+    }
+    
+    override internal func layoutSubviews() {
+        super.layoutSubviews()
+        let height = self.frame.height
+        let inset = height / 3
+        self.dropdownButton.frame = CGRect(x: 0.0, y: 0.0, width: height, height: height)
+        self.dropdownButton.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
     
     internal func pickerToolbarDidComplete(sender: UIBarButtonItem) {

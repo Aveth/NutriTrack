@@ -56,10 +56,7 @@ class NTMealsView: UIView, UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let num = self.dataSource?.mealsViewNumberOfMeals(self) {
-            return num
-        }
-        return 0
+        return Int.unwrapOrZero(self.dataSource?.mealsViewNumberOfMeals(self))
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

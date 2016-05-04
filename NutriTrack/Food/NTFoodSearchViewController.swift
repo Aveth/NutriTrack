@@ -12,9 +12,10 @@ protocol NTFoodSearchViewControllerDelegate: class {
     func foodSearchViewController(sender: NTFoodSearchViewController, didSelectFood food:NTFood, quantity: Int, measureIndex: Int)
 }
 
-class NTFoodSearchViewController: UIViewController, NTFoodSearchViewDelegate, NTFoodSearchViewDataSource, NTFoodDetailsViewControllerDelegate {
+class NTFoodSearchViewController: NTViewController, NTFoodSearchViewDelegate, NTFoodSearchViewDataSource, NTFoodDetailsViewControllerDelegate {
     
     weak internal var delegate: NTFoodSearchViewControllerDelegate?
+    internal var completeText: String = NSLocalizedString("Done", comment: "")
     
     private var foods: [NTFood]?
     private var noResults: Bool = false
@@ -30,16 +31,10 @@ class NTFoodSearchViewController: UIViewController, NTFoodSearchViewDelegate, NT
     override internal func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBar.translucent = false
-        self.navigationItem.title = NSLocalizedString("Food Search", comment: "")
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: NSLocalizedString("Cancel", comment: ""), style: .Plain, target: self, action: #selector(cancelButtonDidTap(_:)))
-        
-        self.edgesForExtendedLayout = UIRectEdge.None
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.navigationTitle = NSLocalizedString("Food Search", comment: "")
         self.view.addSubview(self.foodSearchView)
-        
+    
         self.updateViewConstraints()
-
     }
     
     override internal func updateViewConstraints() {
@@ -47,7 +42,7 @@ class NTFoodSearchViewController: UIViewController, NTFoodSearchViewDelegate, NT
         self.foodSearchView.autoPinEdgesToSuperviewEdges()
     }
     
-    internal func cancelButtonDidTap(sender: UIBarButtonItem) {
+    override internal func leftBarButtonDidTap(sender: UIBarButtonItem) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -67,7 +62,7 @@ class NTFoodSearchViewController: UIViewController, NTFoodSearchViewDelegate, NT
     internal func foodSearchView(sender: NTFoodSearchView, nameForFoodAtIndex index: Int) -> String {
         
         if self.noResults {
-            return "No results found"
+            return NSLocalizedString("No results found", comment: "")
         } else if let items: [NTFood] = self.foods, name: String = items[index].name {
             return name
         }
@@ -82,21 +77,31 @@ class NTFoodSearchViewController: UIViewController, NTFoodSearchViewDelegate, NT
             self.searchProvider.fetchFoods(query,
                 success: { (originalQuery: String, results: [NTFood]) -> Void in
                     if self.foodSearchView.currentQuery == originalQuery {
+                        self.noResults = false
                         self.foods = results
                         self.foodSearchView.reloadData()
                     }
                 },
                 failure: { (error: ErrorType) -> Void in
-                    
+                    self.noResults = true
+                    self.foodSearchView.reloadData()
                 }
             )
+        } else {
+            self.noResults = false
+            self.foods = [NTFood]()
+            self.foodSearchView.reloadData()
         }
     }
     
     internal func foodSearchView(sender: NTFoodSearchView, didSelectFoodAtIndex index: Int) {
+        if ( self.noResults ) {
+            return
+        }
         let food: NTFood = self.foods![index]
         let controller = NTFoodDetailsViewController(food: food)
         controller.delegate = self
+        controller.completeText = self.completeText
         self.navigationController?.pushViewController(controller, animated: true)
     }
     
