@@ -34,9 +34,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ]
         UIBarButtonItem.appearance().setTitleTextAttributes(barButtonAttributes, forState: .Normal)
         UIBarButtonItem.appearance().tintColor = UIColor.barButtonItemColor()
-        
-        UIPageControl.appearance().backgroundColor = UIColor.pageControlBackgroundColor()
-        
+                
         UITabBar.appearance().translucent = false
         UITabBar.appearance().barTintColor = UIColor.tabBarBackgroundColor()
         UITabBar.appearance().tintColor = UIColor.themeBackgroundColor()

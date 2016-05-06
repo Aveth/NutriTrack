@@ -14,6 +14,7 @@ protocol NTFoodDetailsViewControllerDelegate: class {
 
 class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, NTFoodDetailsViewDataSource {
     
+    private var _completeText: String = NSLocalizedString("Done", comment: "")
     internal var completeText: String? {
         get {
             return self._completeText
@@ -31,15 +32,19 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
     internal var measureIndex: Int
     internal var quantity: Int
     
-    private var _completeText: String = NSLocalizedString("Done", comment: "")
-    private let _quantities: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-
+    private let quantities: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     private let searchProvider: NTSearchProvider = NTSearchProvider(service: NTSearchService())
+    
     private lazy var foodDetailsView: NTFoodDetailsView = {
         let view: NTFoodDetailsView = NTFoodDetailsView()
         view.delegate = self
         view.dataSource = self
         return view
+    }()
+    
+    private lazy var spinner: NTLoadingIndicator = {
+        let spinner = NTLoadingIndicator()
+        return spinner
     }()
     
     internal init(food: NTFood, quantity: Int, measureIndex: Int) {
@@ -64,6 +69,7 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
         self.rightBarButtonTitle = self._completeText
         
         self.view.addSubview(self.foodDetailsView)
+        self.view.addSubview(self.spinner)
 
         self.reloadData()
         self.updateViewConstraints()
@@ -76,20 +82,24 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
     
     override internal func updateViewConstraints() {
         super.updateViewConstraints()
+        self.spinner.autoPinEdgesToSuperviewEdges()
         self.foodDetailsView.autoPinEdgesToSuperviewEdges()
     }
     
     private func reloadData() {
         if let foodId: String = food.id {
             self.navigationItem.rightBarButtonItem?.enabled = false
+            self.spinner.activate()
             self.searchProvider.fetchFoodDetails(foodId, diet: NTSearchProvider.Diet.Renal,
                 success: { (result: NTFood) -> Void in
                     self.food = result
                     self.foodDetailsView.reloadData()
                     self.navigationItem.rightBarButtonItem?.enabled = true
+                    self.spinner.deactivte()
                 },
                 failure: { (error: ErrorType) -> Void in
                     self.navigationItem.rightBarButtonItem?.enabled = true
+                    self.spinner.deactivte()
                 }
             )
         }
@@ -97,7 +107,7 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
     
     // MARK: NTFoodDetailsViewDataSource methods
     
-    internal func foodDetailsViewNameForFood(sender: NTFoodDetailsView) -> String {
+    internal func foodDetailsViewTitleForFood(sender: NTFoodDetailsView) -> String {
         return self.food.name + " (" + self.food.id + ")"
     }
     
@@ -105,7 +115,7 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
         return self.food.measures.count
     }
     
-    internal func foodDetailsView(sender: NTFoodDetailsView, nameForMeasureAtIndex index: Int) -> String {
+    internal func foodDetailsView(sender: NTFoodDetailsView, titleForMeasureAtIndex index: Int) -> String {
         return self.food.measures[index].name
     }
     
@@ -117,7 +127,7 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
         return self.food.nutrients.count
     }
     
-    internal func foodDetailsView(sender: NTFoodDetailsView, nameForNutrientAtIndex index: Int) -> String {
+    internal func foodDetailsView(sender: NTFoodDetailsView, titleForNutrientAtIndex index: Int) -> String {
         return self.food.nutrients[index].name
     }
     
@@ -126,15 +136,19 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
     }
     
     internal func foodDetailsView(sender: NTFoodDetailsView, valueForNutrientAtIndex index: Int) -> Float {
-        return self.food.nutrients[index].value
+        let nutrientValue = self.food.nutrients[index].value
+        let measureValue = self.food.measures[self.measureIndex].value
+        let quantityValue = self.quantity
+        let adjustedNutrientValue = (nutrientValue / NTNutrient.BaseMeasuresGrams) * measureValue * Float(quantityValue)
+        return adjustedNutrientValue
     }
     
     internal func foodDetailsViewNumberOfQuantities(sender: NTFoodDetailsView) -> Int {
-        return self._quantities.count
+        return self.quantities.count
     }
     
     internal func foodDetailsView(sender: NTFoodDetailsView, valueForQuantityAtIndex index: Int) -> Int {
-        return self._quantities[index]
+        return self.quantities[index]
     }
     
     internal func foodDetailsViewIndexForSelectedMeasure(sender: NTFoodDetailsView) -> Int {
@@ -142,7 +156,7 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
     }
     
     internal func foodDetailsViewIndexForSelectedQuantity(sender: NTFoodDetailsView) -> Int {
-        if let num = self._quantities.indexOf(self.quantity) {
+        if let num = self.quantities.indexOf(self.quantity) {
             return num
         }
         return 0
@@ -155,7 +169,7 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
     }
     
     internal func foodDetailsView(sender: NTFoodDetailsView, didSelectQuantityAtIndex index: Int) {
-        self.quantity = self._quantities[index]
+        self.quantity = self.quantities[index]
     }
     
     

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class NTSearchProvider {
     
@@ -31,6 +32,10 @@ class NTSearchProvider {
     internal var service: NTSearchService
     
     private let errorDomain: String = "com.aveth.NutriTrack.NTSearchProvider"
+    
+    lazy private var managedObjectContext: NSManagedObjectContext = {
+        return NTCoreDataContextProvider.sharedProvider.managedObjectContext
+    }()
     
     init(service: NTSearchService) {
         self.service = service

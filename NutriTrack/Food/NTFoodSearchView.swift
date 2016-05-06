@@ -15,7 +15,7 @@ protocol NTFoodSearchViewDelegate: class {
 }
 
 protocol NTFoodSearchViewDataSource: class {
-    func foodSearchView(sender: NTFoodSearchView, nameForFoodAtIndex index: Int) -> String
+    func foodSearchView(sender: NTFoodSearchView, titleForFoodAtIndex index: Int) -> String
     func foodSearchViewNumberOfFoods(sender: NTFoodSearchView) -> Int
 }
 
@@ -65,7 +65,7 @@ class NTFoodSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITa
     override internal func updateConstraints() {
         super.updateConstraints()
         
-        self.layoutMargins = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        self.layoutMargins = UIEdgeInsetsZero
         
         self.searchBar.autoPinEdgesToSuperviewMarginsExcludingEdge(.Bottom)
         
@@ -102,7 +102,7 @@ class NTFoodSearchView: UIView, UISearchBarDelegate, UITableViewDataSource, UITa
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String.defaultCellReuseIdentifier())
-        cell?.textLabel?.text = self.dataSource!.foodSearchView(self, nameForFoodAtIndex: indexPath.row)
+        cell?.textLabel?.text = self.dataSource!.foodSearchView(self, titleForFoodAtIndex: indexPath.row)
         cell?.textLabel?.font = UIFont.defaultFont()
         cell?.textLabel?.textColor = UIColor.defaultTextColor()
         return cell!

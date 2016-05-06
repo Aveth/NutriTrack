@@ -9,6 +9,8 @@
 import Foundation
 
 class NTNutrient {
+    
+    static internal let BaseMeasuresGrams: Float = 100.0
 
     internal var id: String
     internal var name: String

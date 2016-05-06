@@ -69,4 +69,8 @@ extension UIFont {
         return self.regularFontOfSize(14.0)
     }
     
+    static internal func defaultHeaderFont() -> UIFont {
+        return UIFont.boldFontOfSize(22.0)
+    }
+    
 }

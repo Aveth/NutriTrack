@@ -14,15 +14,15 @@ protocol NTFoodDetailsViewDelegate: class {
 }
 
 protocol NTFoodDetailsViewDataSource: class {
-    func foodDetailsViewNameForFood(sender: NTFoodDetailsView) -> String
+    func foodDetailsViewTitleForFood(sender: NTFoodDetailsView) -> String
     
     func foodDetailsViewNumberOfMeasures(sender: NTFoodDetailsView) -> Int
-    func foodDetailsView(sender: NTFoodDetailsView, nameForMeasureAtIndex index: Int) -> String
+    func foodDetailsView(sender: NTFoodDetailsView, titleForMeasureAtIndex index: Int) -> String
     func foodDetailsView(sender: NTFoodDetailsView, valueForMeasureAtIndex index: Int) -> Float
     func foodDetailsViewIndexForSelectedMeasure(sender: NTFoodDetailsView) -> Int
     
     func foodDetailsViewNumberOfNutrients(sender: NTFoodDetailsView) -> Int
-    func foodDetailsView(sender: NTFoodDetailsView, nameForNutrientAtIndex index: Int) -> String
+    func foodDetailsView(sender: NTFoodDetailsView, titleForNutrientAtIndex index: Int) -> String
     func foodDetailsView(sender: NTFoodDetailsView, unitForNutrientAtIndex index: Int) -> String
     func foodDetailsView(sender: NTFoodDetailsView, valueForNutrientAtIndex index: Int) -> Float
     
@@ -32,8 +32,6 @@ protocol NTFoodDetailsViewDataSource: class {
 }
 
 class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
-    
-    static private let BaseMeasuresGrams: Float = 100.0
     
     weak internal var delegate: NTFoodDetailsViewDelegate?
     weak internal var dataSource: NTFoodDetailsViewDataSource?
@@ -82,9 +80,9 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     
     lazy private var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = self.dataSource?.foodDetailsViewNameForFood(self)
+        label.text = self.dataSource?.foodDetailsViewTitleForFood(self)
         label.textAlignment = .Center
-        label.font = UIFont.boldFontOfSize(22.0)
+        label.font = UIFont.defaultHeaderFont()
         label.numberOfLines = 0
         label.lineBreakMode = .ByWordWrapping
         return label
@@ -109,22 +107,22 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     override internal func updateConstraints() {
         super.updateConstraints()
         
-        self.layoutMargins = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        self.layoutMargins = UIEdgeInsetsZero
         
-        self.titleLabel.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 20.0, left: 10.0, bottom: 20.0, right: 10.0), excludingEdge: .Bottom)
+        self.titleLabel.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 20.0, left: 10.0, bottom: 30.0, right: 10.0), excludingEdge: .Bottom)
         
-        self.quantityField.autoPinEdgeToSuperviewEdge(.Left, withInset: 20.0)
-        self.quantityField.autoPinEdgeToSuperviewEdge(.Right, withInset: 20.0)
+        self.quantityField.autoPinEdgeToSuperviewEdge(.Left, withInset: 10.0)
+        self.quantityField.autoPinEdgeToSuperviewEdge(.Right, withInset: 10.0)
         self.quantityField.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.titleLabel, withOffset: 10.0)
-        self.quantityField.autoSetDimension(.Height, toSize: 30.0)
+        self.quantityField.autoSetDimension(.Height, toSize: 35.0)
         
-        self.measurePickerField.autoPinEdgeToSuperviewEdge(.Left, withInset: 20.0)
-        self.measurePickerField.autoPinEdgeToSuperviewEdge(.Right, withInset: 20.0)
+        self.measurePickerField.autoPinEdgeToSuperviewEdge(.Left, withInset: 10.0)
+        self.measurePickerField.autoPinEdgeToSuperviewEdge(.Right, withInset: 10.0)
         self.measurePickerField.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.quantityField, withOffset: 5.0)
-        self.measurePickerField.autoSetDimension(.Height, toSize: 30.0)
+        self.measurePickerField.autoSetDimension(.Height, toSize: 35.0)
         
         self.tableView.autoPinEdgesToSuperviewMarginsExcludingEdge(.Top)
-        self.tableView.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.measurePickerField, withOffset: 5.0)
+        self.tableView.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.measurePickerField, withOffset: 20.0)
         
     }
     
@@ -133,9 +131,9 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
         self.quantityPickerView.reloadAllComponents()
         self.measurePickerView.reloadAllComponents()
         if let index = self.dataSource?.foodDetailsViewIndexForSelectedMeasure(self) {
-            self.measurePickerField.text = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: index)
+            self.measurePickerField.text = self.dataSource?.foodDetailsView(self, titleForMeasureAtIndex: index)
         } else {
-            self.measurePickerField.text = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: 0)
+            self.measurePickerField.text = self.dataSource?.foodDetailsView(self, titleForMeasureAtIndex: 0)
         }
         if let
             index = self.dataSource?.foodDetailsViewIndexForSelectedQuantity(self),
@@ -145,7 +143,7 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
         } else if let value = self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: 0) {
             self.quantityField.text = String(value)
         }
-        self.titleLabel.text = self.dataSource?.foodDetailsViewNameForFood(self)
+        self.titleLabel.text = self.dataSource?.foodDetailsViewTitleForFood(self)
         self.setNeedsUpdateConstraints()
     }
     
@@ -158,16 +156,9 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(self.reuseIdentifier) as! NTFoodDetailsViewCell
         if let ds = self.dataSource {
-            
-            let nutrientValue = ds.foodDetailsView(self, valueForNutrientAtIndex: indexPath.row)
-            let measureValue = ds.foodDetailsView(self, valueForMeasureAtIndex: self.measurePickerView.selectedRowInComponent(0))
-            let quantityValue = ds.foodDetailsView(self, valueForQuantityAtIndex: self.quantityPickerView.selectedRowInComponent(0))
-            let adjustedNutrientValue = (nutrientValue / NTFoodDetailsView.BaseMeasuresGrams) * measureValue * Float(quantityValue)
-            
-            cell.name = ds.foodDetailsView(self, nameForNutrientAtIndex: indexPath.row)
+            cell.name = ds.foodDetailsView(self, titleForNutrientAtIndex: indexPath.row)
             cell.unit = ds.foodDetailsView(self, unitForNutrientAtIndex: indexPath.row)
-            cell.value = adjustedNutrientValue
-            
+            cell.value = ds.foodDetailsView(self, valueForNutrientAtIndex: indexPath.row)
         }
         return cell
     }
@@ -197,7 +188,7 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
                 return String(quantity)
             }
         } else {
-            if let title = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: row) {
+            if let title = self.dataSource?.foodDetailsView(self, titleForMeasureAtIndex: row) {
                 return title
             }
         }
@@ -214,7 +205,7 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
                 self.tableView.reloadData()
             }
         } else {
-            if let title = self.dataSource?.foodDetailsView(self, nameForMeasureAtIndex: row) {
+            if let title = self.dataSource?.foodDetailsView(self, titleForMeasureAtIndex: row) {
                 self.measurePickerField.text = title
                 self.delegate?.foodDetailsView(self, didSelectMeasureAtIndex: row)
                 self.tableView.reloadData()

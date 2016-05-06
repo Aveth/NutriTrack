@@ -59,7 +59,7 @@ class NTFoodSearchViewController: NTViewController, NTFoodSearchViewDelegate, NT
         return 0
     }
     
-    internal func foodSearchView(sender: NTFoodSearchView, nameForFoodAtIndex index: Int) -> String {
+    internal func foodSearchView(sender: NTFoodSearchView, titleForFoodAtIndex index: Int) -> String {
         
         if self.noResults {
             return NSLocalizedString("No results found", comment: "")

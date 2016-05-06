@@ -69,6 +69,7 @@ class NTLabeledField: UIView, UITextFieldDelegate {
         field.delegate = self
         field.inputAccessoryView = self.pickerToolbar
         field.font = UIFont.defaultFont()
+        field.backgroundColor = UIColor.tabBarBackgroundColor()
         return field
     }()
     
@@ -109,10 +110,10 @@ class NTLabeledField: UIView, UITextFieldDelegate {
     override internal func updateConstraints() {
         super.updateConstraints()
         
-        self.layoutMargins = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        self.layoutMargins = UIEdgeInsetsZero
         
         self.titleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Right)
-        self.titleLabel.autoSetDimension(.Width, toSize: 90.0)
+        self.titleLabel.autoSetDimension(.Width, toSize: 80.0)
         
         self.textField.autoPinEdgeToSuperviewMargin(.Right)
         self.textField.autoPinEdgeToSuperviewEdge(.Top)
@@ -127,7 +128,7 @@ class NTLabeledField: UIView, UITextFieldDelegate {
         super.layoutSubviews()
         let height = self.frame.height
         let inset = height / 3
-        self.dropdownButton.frame = CGRect(x: 0.0, y: 0.0, width: height, height: height)
+        self.dropdownButton.frame = CGRect(x: self.textField.frame.width - height, y: 0.0, width: height, height: height)
         self.dropdownButton.imageEdgeInsets = UIEdgeInsets(top: inset, left: inset, bottom: inset, right: inset)
     }
     

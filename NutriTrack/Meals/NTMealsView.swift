@@ -39,9 +39,9 @@ class NTMealsView: UIView, UITableViewDataSource, UITableViewDelegate {
     override internal func updateConstraints() {
         super.updateConstraints()
         
-        self.layoutMargins = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        self.layoutMargins = UIEdgeInsetsZero
         
-        self.tableView.autoPinEdgesToSuperviewMarginsExcludingEdge(.Bottom)
+        self.tableView.autoPinEdgesToSuperviewEdges()
     }
     
     internal func reloadData() {

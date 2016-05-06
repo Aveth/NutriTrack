@@ -23,7 +23,7 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     weak internal var dataSource: NTMealDetailsViewDataSource?
     weak internal var delegate: NTMealDetailsViewDelegate?
     
-    private lazy var dateTimePickerField: NTLabeledField = {
+    lazy private var dateTimePickerField: NTLabeledField = {
         let field = NTLabeledField()
         field.title = NSLocalizedString("Date/Time:", comment: "")
         field.text = self.dateFormatter.stringFromDate(NSDate())
@@ -31,13 +31,13 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return field
     }()
     
-    private lazy var dateTimePicker: UIDatePicker = {
+    lazy private var dateTimePicker: UIDatePicker = {
         let picker = UIDatePicker()
         picker.addTarget(self, action: #selector(dateTimePickerDidChange(_:)), forControlEvents: .ValueChanged)
         return picker
     }()
     
-    private lazy var tableView: UITableView = {
+    lazy private var tableView: UITableView = {
         let table: UITableView = UITableView()
         table.dataSource = self
         table.delegate = self
@@ -47,10 +47,9 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return table
     }()
     
-    private lazy var dateFormatter: NSDateFormatter = {
+    lazy private var dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
-        formatter.dateStyle = NSDateFormatterStyle.MediumStyle
-        formatter.timeStyle = NSDateFormatterStyle.MediumStyle
+        formatter.dateFormat = "EEE, MMM d @ hh:mm a"
         return formatter
     }()
 
@@ -72,14 +71,14 @@ class NTMealDetailsView: UIView, UITableViewDataSource, UITableViewDelegate {
     override internal func updateConstraints() {
         super.updateConstraints()
         
-        self.layoutMargins = UIEdgeInsets(top: 0.0, left: 0.0, bottom: 0.0, right: 0.0)
+        self.layoutMargins = UIEdgeInsetsZero
                 
-        self.dateTimePickerField.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 20.0, left: 20.0, bottom: 20.0, right: 20.0), excludingEdge: .Bottom)
+        self.dateTimePickerField.autoPinEdgesToSuperviewEdgesWithInsets(UIEdgeInsets(top: 20.0, left: 10.0, bottom: 20.0, right: 10.0), excludingEdge: .Bottom)
         self.dateTimePickerField.autoSetDimension(.Height, toSize: 40.0)
         
         self.tableView.autoPinEdgeToSuperviewEdge(.Left)
         self.tableView.autoPinEdgeToSuperviewEdge(.Right)
-        self.tableView.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.dateTimePickerField)
+        self.tableView.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.dateTimePickerField, withOffset: 20.0)
         self.tableView.autoSetDimension(.Height, toSize: 300.0)
     }
     

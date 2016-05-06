@@ -11,7 +11,7 @@ import UIKit
 extension UIColor {
     
     static internal func themeBackgroundColor() -> UIColor {
-        return UIColor(colorLiteralRed: 0.0, green: 164.0 / 255.0, blue: 171.0 / 255.0, alpha: 1.0)
+        return UIColor(red: 0.0 / 255.0, green: 205.0 / 255.0, blue: 214.0 / 255.0, alpha: 1.0)
     }
     
     static internal func themeForegroundColor() -> UIColor {
@@ -19,23 +19,15 @@ extension UIColor {
     }
     
     static internal func tabBarBackgroundColor() -> UIColor {
-        return UIColor(colorLiteralRed: 220.0 / 255.0, green: 220.0 / 255.0, blue: 220.0 / 255.0, alpha: 1.0)
+        return UIColor(red: 240.0 / 255.0, green: 240.0 / 255.0, blue: 240.0 / 255.0, alpha: 1.0)
     }
     
     static internal func backgroundColor() -> UIColor {
         return UIColor.whiteColor()
     }
-    
-    static internal func navigationBarColor() -> UIColor {
-        return UIColor(red: 217.0 / 255.0, green: 217.0 / 255.0, blue: 217.0 / 255.0, alpha: 1.0)
-    }
-    
+
     static internal func barButtonItemColor() -> UIColor {
         return UIColor.whiteColor()
-    }
-    
-    static internal func pageControlBackgroundColor() -> UIColor {
-        return UIColor.darkGrayColor()
     }
     
     static internal func defaultTextColor() -> UIColor {

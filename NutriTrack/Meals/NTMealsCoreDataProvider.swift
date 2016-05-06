@@ -11,48 +11,13 @@ import CoreData
 
 class NTMealsCoreDataProvider: NTMealsProviderProtocol {
     
-    static private let errorDomain: String = "com.aveth.NutriTrack.NTCoreDataContextProvider"
-    
-    lazy private var applicationDocumentsDirectory: NSURL = {
-        let urls = NSFileManager.defaultManager().URLsForDirectory(.DocumentDirectory, inDomains: .UserDomainMask)
-        return urls.last!
-    }()
-    
-    lazy private var persistentStoreCoordinator: NSPersistentStoreCoordinator = {
-        let coordinator = NSPersistentStoreCoordinator(managedObjectModel: self.managedObjectModel)
-        let url = self.applicationDocumentsDirectory.URLByAppendingPathComponent("NutriTrack.sqlite")
-        var failureReason = "There was an error creating or loading the application's saved data."
-        do {
-            try coordinator.addPersistentStoreWithType(NSSQLiteStoreType, configuration: nil, URL: url, options: nil)
-        } catch {
-            var dict = [String: AnyObject]()
-            dict[NSLocalizedDescriptionKey] = "Failed to initialize the application's saved data"
-            dict[NSLocalizedFailureReasonErrorKey] = failureReason
-            
-            dict[NSUnderlyingErrorKey] = error as NSError
-            let wrappedError = NSError(domain: NTMealsCoreDataProvider.errorDomain, code: 9999, userInfo: dict)
-            NSLog("Unresolved error \(wrappedError), \(wrappedError.userInfo)")
-            abort()
-        }
-        
-        return coordinator
-    }()
-    
-    lazy private var managedObjectModel: NSManagedObjectModel = {
-        let modelURL = NSBundle.mainBundle().URLForResource("NutriTrack", withExtension: "momd")!
-        return NSManagedObjectModel(contentsOfURL: modelURL)!
-    }()
-    
-    lazy internal var managedObjectContext: NSManagedObjectContext = {
-        let coordinator = self.persistentStoreCoordinator
-        var managedObjectContext = NSManagedObjectContext(concurrencyType: .MainQueueConcurrencyType)
-        managedObjectContext.persistentStoreCoordinator = coordinator
-        return managedObjectContext
-    }()
-    
     internal func fetchMeals() -> [NTMeal] {
         return self.fetchMealsWithPredicate(nil)
     }
+    
+    lazy private var managedObjectContext: NSManagedObjectContext = {
+        return NTCoreDataContextProvider.sharedProvider.managedObjectContext
+    }()
     
     func fetchMealsForStartDate(startDate: NSDate, endDate: NSDate) -> [NTMeal] {
         let predicate = NSPredicate(format: "dateTime >= %@ AND dateTime < %@", startDate, endDate)
@@ -64,6 +29,7 @@ class NTMealsCoreDataProvider: NTMealsProviderProtocol {
         do {
             let request = NSFetchRequest(entityName: "NTCDMeal")
             request.predicate = predicate
+            request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: true)]
             let meals = try self.managedObjectContext.executeFetchRequest(request) as! [NTCDMeal]
             for meal: NTCDMeal in meals {
                 if let
