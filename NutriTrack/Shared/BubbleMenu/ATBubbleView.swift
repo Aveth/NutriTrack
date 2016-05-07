@@ -72,11 +72,11 @@ class ATBubbleView: UIView, UICollectionViewDataSource, UICollectionViewDelegate
     }
     
     internal func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
-        if let numCells = self.dataSource?.bubbleViewNumberOfItems(self) {
-            let edgeInsets: CGFloat = ((self.frame.width - (CGFloat(numCells) * 50)) / (CGFloat(numCells) + 1)) + (50.0 / 2)
-            return UIEdgeInsets(top: 0.0, left: edgeInsets, bottom: 0.0, right: edgeInsets)
+        guard let numCells = self.dataSource?.bubbleViewNumberOfItems(self) else {
+            return UIEdgeInsetsZero;
         }
-        return UIEdgeInsetsZero;
+        let edgeInsets: CGFloat = ((self.frame.width - (CGFloat(numCells) * 50)) / (CGFloat(numCells) + 1)) + (50.0 / 2)
+        return UIEdgeInsets(top: 0.0, left: edgeInsets, bottom: 0.0, right: edgeInsets)
     }
     
 }

@@ -25,7 +25,7 @@ class NTTabBarController: UITabBarController, UITabBarControllerDelegate, NTFood
     
     lazy private var mealsViewController: NTMealsViewController = {
         let controller = NTMealsViewController()
-        controller.tabBarItem = UITabBarItem(title: NSLocalizedString("Log Book", comment: ""), image: UIImage(named: "log_book")?.imageWithRenderingMode(.AlwaysTemplate), selectedImage: nil)
+        controller.tabBarItem = UITabBarItem(title: NSLocalizedString("Diary", comment: ""), image: UIImage(named: "log_book")?.imageWithRenderingMode(.AlwaysTemplate), selectedImage: nil)
         return controller
     }()
     

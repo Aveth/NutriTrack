@@ -12,7 +12,7 @@ class NTEmptyView: UIView {
     
     lazy private var textLabel: UILabel = {
         let label = UILabel()
-        label.text = NSLocalizedString("Tap \"Add Meal\" to get started!", comment: "")
+        label.text = NSLocalizedString("Add a meal to get started!", comment: "")
         label.font = UIFont.regularFontOfSize(24.0)
         label.textColor = UIColor.defaultTextColor()
         label.textAlignment = .Center

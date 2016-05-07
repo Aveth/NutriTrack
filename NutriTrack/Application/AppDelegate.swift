@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         
         let navBarAttributes = [
-            NSFontAttributeName: UIFont.regularFontOfSize(16.0),
+            NSFontAttributeName: UIFont.regularFontOfSize(18.0),
             NSForegroundColorAttributeName: UIColor.themeForegroundColor()
         ]
         UINavigationBar.appearance().titleTextAttributes = navBarAttributes
@@ -40,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().tintColor = UIColor.themeBackgroundColor()
         
         let tabBarAttributes = [
-            NSFontAttributeName: UIFont.regularFontOfSize(9.0)
+            NSFontAttributeName: UIFont.regularFontOfSize(11.0)
         ]
         UITabBarItem.appearance().setTitleTextAttributes(tabBarAttributes, forState: .Normal)
         

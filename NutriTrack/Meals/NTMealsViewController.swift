@@ -22,7 +22,7 @@ class NTMealsViewController: NTViewController, NTMealDetailsViewControllerDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationTitle = NSLocalizedString("Log Book", comment: "")
+        self.navigationTitle = NSLocalizedString("My Food Diary", comment: "")
         self.rightBarButtonImage = UIImage(named: "plus")
         
         self.view.addSubview(self.emptyView)

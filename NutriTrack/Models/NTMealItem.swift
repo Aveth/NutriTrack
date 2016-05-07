@@ -19,5 +19,6 @@ class NTMealItem {
         self.measureIndex = measureIndex
         self.quantity = quantity
     }
+
     
 }

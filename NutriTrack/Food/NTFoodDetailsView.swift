@@ -184,15 +184,18 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     
     internal func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView.tag == 0 {
-            if let quantity = self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: row) {
-                return String(quantity)
+            guard let quantity = self.dataSource?.foodDetailsView(self, valueForQuantityAtIndex: row)
+            else {
+                return nil
             }
+            return String(quantity)
         } else {
-            if let title = self.dataSource?.foodDetailsView(self, titleForMeasureAtIndex: row) {
-                return title
+            guard let title = self.dataSource?.foodDetailsView(self, titleForMeasureAtIndex: row)
+            else {
+               return nil
             }
+            return title
         }
-        return nil
     }
     
     // MARK: UIPickerViewDelegate methods

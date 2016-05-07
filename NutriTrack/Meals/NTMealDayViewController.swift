@@ -63,9 +63,10 @@ class NTMealDayViewController: UIViewController, NTMealDayViewDataSource {
     }
     
     internal func mealDayView(sender: NTMealDayView, titleForNutrientAtIndex index: Int) -> String {
-        guard let name = self.meals.first?.mealItems.first?.food.nutrients[index].name else {
+        guard let name = self.meals.first?.mealItems.first?.food.sortedNutrients[index].name else {
             return ""
         }
+        
         return name
     }
     
@@ -74,7 +75,7 @@ class NTMealDayViewController: UIViewController, NTMealDayViewDataSource {
             return meal.mealItems.reduce(total) { (itemTotal: Float, item: NTMealItem) in
                 let measureValue = item.food.measures[item.measureIndex].value
                 let quantityValue = item.quantity
-                let nutrientValue = item.food.nutrients[index].value
+                let nutrientValue = item.food.sortedNutrients[index].value
                 let adjustedValue = (nutrientValue / NTNutrient.BaseMeasuresGrams) * measureValue * Float(quantityValue)
                 return adjustedValue
             }
@@ -82,7 +83,7 @@ class NTMealDayViewController: UIViewController, NTMealDayViewDataSource {
     }
     
     internal func mealDayView(sender: NTMealDayView, unitForNutrientAtIndex index: Int) -> String {
-        guard let unit = self.meals.first?.mealItems.first?.food.nutrients[index].unit else {
+        guard let unit = self.meals.first?.mealItems.first?.food.sortedNutrients[index].unit else {
             return ""
         }
         return unit

@@ -54,21 +54,33 @@ class NTCompareViewController: UIPageViewController, NTFoodSearchViewControllerD
     // MARK: UIPageViewControllerDataSource methods
     
     internal func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        if let controller = viewController as? NTFoodDetailsViewController, index = self.foodDetailsViewControllers.indexOf(controller) {
-            if index < self.foodDetailsViewControllers.count - 1 {
-                return self.foodDetailsViewControllers[index + 1]
-            }
+        guard let
+            controller = viewController as? NTFoodDetailsViewController,
+            index = self.foodDetailsViewControllers.indexOf(controller)
+        else {
+            return nil
         }
-        return nil
+        
+        if index >= self.foodDetailsViewControllers.count - 1 {
+            return nil
+        }
+        
+        return self.foodDetailsViewControllers[index + 1]
     }
     
     internal func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        if let controller = viewController as? NTFoodDetailsViewController, index = self.foodDetailsViewControllers.indexOf(controller) {
-            if index > 0 {
-                return self.foodDetailsViewControllers[index - 1]
-            }
+        guard let
+            controller = viewController as? NTFoodDetailsViewController,
+            index = self.foodDetailsViewControllers.indexOf(controller)
+        else {
+            return nil
         }
-        return nil
+        
+        if index <= 0 {
+            return nil
+        }
+        
+        return self.foodDetailsViewControllers[index - 1]
     }
     
     internal func presentationCountForPageViewController(pageViewController: UIPageViewController) -> Int {

@@ -12,7 +12,7 @@ class NTProfileViewController: NTViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.navigationTitle = "Profile"
+        self.navigationTitle = "My Profile"
     }
 
 }
