@@ -36,8 +36,12 @@ class NTMealsManger {
         self.provider.deleteMeal(meal)
     }
     
-    internal func mealsForToday() -> [NTMeal] {
-        return self.mealsForDate(NSDate())
+    internal func mealsForToday() -> [NTMeal]? {
+        let meals = self.mealsForDate(NSDate())
+        guard meals.count > 0 else {
+            return nil
+        }
+        return meals
     }
     
     internal func mealsForDate(date: NSDate) -> [NTMeal] {
@@ -46,19 +50,19 @@ class NTMealsManger {
     
     internal func mealsForFirstDateBeforeDate(date: NSDate) -> [NTMeal]? {
         let meals = self.provider.fetchMealsForStartDate(NSDate.distantPast(), endDate: date)
-        if let meal = meals.last {
-            return self.mealsForDate(meal.dateTime.dateOnly()!)
+        guard let meal = meals.last else {
+            return nil
         }
-        return nil
+        return self.mealsForDate(meal.dateTime.dateOnly()!)
     }
     
     internal func mealsForFirstDateAfterDate(date: NSDate) -> [NTMeal]? {
         let date = date.dateByAddingTimeInterval(60 * 60 * 24)
         let meals = self.provider.fetchMealsForStartDate(date, endDate: NSDate.distantFuture())
-        if let meal = meals.last {
-            return self.mealsForDate(meal.dateTime.dateOnly()!)
+        guard let meal = meals.last else {
+            return nil
         }
-        return nil
+        return self.mealsForDate(meal.dateTime.dateOnly()!)
     }
     
     internal func mealsForDate(date: NSDate, withOffset offset: Int) -> [NTMeal] {

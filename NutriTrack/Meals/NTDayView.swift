@@ -33,7 +33,8 @@ class NTDayView: UIView, UITableViewDelegate, UITableViewDataSource {
         table.delegate = self
         table.estimatedRowHeight = 30.0
         table.rowHeight = UITableViewAutomaticDimension
-        table.registerClass(NTFoodDetailsViewCell.self, forCellReuseIdentifier: String.defaultCellReuseIdentifier())
+        table.registerClass(NTNutrientCell.self, forCellReuseIdentifier: NTNutrientCell.reuseIdentifier)
+        table.registerClass(NTActionCell.self, forCellReuseIdentifier: NTActionCell.reuseIdentifier)
         return table
     }()
     
@@ -70,19 +71,51 @@ class NTDayView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: UITableViewDataSource methods
     
+    internal func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let num = self.dataSource?.dayViewNumberOfNutrients(self) {
-            return num
+        guard section == 0 else {
+            return 2
         }
-        return 0
+        
+        guard let num = self.dataSource?.dayViewNumberOfNutrients(self) else {
+            return 0
+        }
+        
+        return num
+    }
+    
+    internal func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        guard section > 0 else {
+            return nil
+        }
+        
+        return UIView(frame: CGRect(x: 0.0, y: 0.0, width: 200.0, height: 40.0))
+        
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(String.defaultCellReuseIdentifier()) as! NTFoodDetailsViewCell
-        cell.name = self.dataSource?.dayView(self, titleForNutrientAtIndex: indexPath.row)
-        cell.value = self.dataSource?.dayView(self, valueForNutrientAtIndex: indexPath.row)
-        cell.unit = self.dataSource?.dayView(self, unitForNutrientAtIndex: indexPath.row)
-        return cell
+        
+        if indexPath.section > 0 {
+            let cell = tableView.dequeueReusableCellWithIdentifier(NTActionCell.reuseIdentifier) as! NTActionCell
+            if indexPath.row == 0 {
+                cell.title = "View Day Details"
+                cell.type = .View
+            } else {
+                cell.title = "Delete Day"
+                cell.type = .Delete
+            }
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCellWithIdentifier(NTNutrientCell.reuseIdentifier) as! NTNutrientCell
+            cell.name = self.dataSource?.dayView(self, titleForNutrientAtIndex: indexPath.row)
+            cell.value = self.dataSource?.dayView(self, valueForNutrientAtIndex: indexPath.row)
+            cell.unit = self.dataSource?.dayView(self, unitForNutrientAtIndex: indexPath.row)
+            return cell
+        }
+        
     }
 
 }

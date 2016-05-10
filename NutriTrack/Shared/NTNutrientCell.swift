@@ -8,7 +8,9 @@
 
 import UIKit
 
-class NTFoodDetailsViewCell: UITableViewCell {
+class NTNutrientCell: UITableViewCell {
+    
+    static internal let reuseIdentifier: String = "NTNutrientCell_ReuseIdentifier"
     
     private var _value: Float?
     
@@ -42,11 +44,12 @@ class NTFoodDetailsViewCell: UITableViewCell {
         }
     }
     
-    private var unitLabel: UILabel = {
+    lazy private var unitLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.defaultFont()
         return label
     }()
+    
     lazy private var valueLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont.defaultFont()
@@ -55,8 +58,6 @@ class NTFoodDetailsViewCell: UITableViewCell {
     
     override internal init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.textLabel?.font = UIFont.defaultFont()
-        self.textLabel?.textColor = UIColor.defaultTextColor()
         self.buildView()
     }
 
@@ -65,6 +66,8 @@ class NTFoodDetailsViewCell: UITableViewCell {
     }
     
     private func buildView() {
+        self.textLabel?.font = UIFont.defaultFont()
+        self.textLabel?.textColor = UIColor.defaultTextColor()
         self.contentView.addSubview(self.valueLabel)
         self.contentView.addSubview(self.unitLabel)
         self.setNeedsUpdateConstraints()
@@ -83,6 +86,5 @@ class NTFoodDetailsViewCell: UITableViewCell {
         
     }
     
-    
-
 }
+

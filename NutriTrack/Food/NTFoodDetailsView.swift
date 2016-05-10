@@ -36,8 +36,6 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     weak internal var delegate: NTFoodDetailsViewDelegate?
     weak internal var dataSource: NTFoodDetailsViewDataSource?
     
-    private let reuseIdentifier: String = "cellReuseIdentifier"
-    
     lazy private var quantityField: NTLabeledField = {
         let field = NTLabeledField()
         field.title = NSLocalizedString("Quantity:", comment: "")
@@ -74,7 +72,7 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
         table.delegate = self
         table.estimatedRowHeight = 30.0
         table.rowHeight = UITableViewAutomaticDimension
-        table.registerClass(NTFoodDetailsViewCell.self, forCellReuseIdentifier: self.reuseIdentifier)
+        table.registerClass(NTNutrientCell.self, forCellReuseIdentifier: NTNutrientCell.reuseIdentifier)
         return table
     }()
     
@@ -154,7 +152,7 @@ class NTFoodDetailsView: UIView, UITableViewDataSource, UITableViewDelegate, UIP
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(self.reuseIdentifier) as! NTFoodDetailsViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(NTNutrientCell.reuseIdentifier) as! NTNutrientCell
         if let ds = self.dataSource {
             cell.name = ds.foodDetailsView(self, titleForNutrientAtIndex: indexPath.row)
             cell.unit = ds.foodDetailsView(self, unitForNutrientAtIndex: indexPath.row)

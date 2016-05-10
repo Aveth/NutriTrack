@@ -15,8 +15,8 @@ class NTNutrient {
         case Diabetic
         func nutrientCodes() -> [String] {
             switch self {
-            case Diabetic: return ["205", "269"]
-            case Renal: return ["305", "306", "307"]
+                case Diabetic: return ["205", "269"]
+                case Renal: return ["305", "306", "307"]
             }
         }
     }

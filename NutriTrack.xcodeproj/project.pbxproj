@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0CA5B2C303B2651CD9D596DB /* Pods_NutriTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C9F68E5ED1D7FD7701B844 /* Pods_NutriTrack.framework */; };
+		8712BAEC1CE2579C00C38600 /* NTNutrientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8712BAEB1CE2579C00C38600 /* NTNutrientCell.swift */; };
+		8712BAEE1CE2582D00C38600 /* NTActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8712BAED1CE2582D00C38600 /* NTActionCell.swift */; };
 		87279B4A1CDA76B8000E8D4A /* NTCoreDataContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B491CDA76B8000E8D4A /* NTCoreDataContextProvider.swift */; };
 		87279B4C1CDA82C9000E8D4A /* NSDate+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */; };
 		87279B501CDA86DC000E8D4A /* NTDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4F1CDA86DC000E8D4A /* NTDayViewController.swift */; };
@@ -17,9 +19,6 @@
 		874389791CD53927003DFE01 /* NTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389781CD53927003DFE01 /* NTTabBarController.swift */; };
 		8743897D1CD6E9AE003DFE01 /* NTRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897C1CD6E9AE003DFE01 /* NTRecipesViewController.swift */; };
 		8743897F1CD6F25A003DFE01 /* NTProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897E1CD6F25A003DFE01 /* NTProfileViewController.swift */; };
-		874389911CD7B531003DFE01 /* ATBubbleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389901CD7B531003DFE01 /* ATBubbleView.swift */; };
-		874389931CD7C95E003DFE01 /* ATBubbleViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389921CD7C95E003DFE01 /* ATBubbleViewFlowLayout.swift */; };
-		874389951CD7CF66003DFE01 /* ATBubbleViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389941CD7CF66003DFE01 /* ATBubbleViewCell.swift */; };
 		878906511CD1ACD30049576C /* NTMealsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906501CD1ACD30049576C /* NTMealsProviderProtocol.swift */; };
 		878906551CD1AEE00049576C /* NTMealsCoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906541CD1AEE00049576C /* NTMealsCoreDataProvider.swift */; };
 		878906571CD1B3460049576C /* NTMealsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906561CD1B3460049576C /* NTMealsManager.swift */; };
@@ -53,7 +52,6 @@
 		87C6C92A1CD0235F008E9980 /* NTMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9291CD0235F008E9980 /* NTMealsViewController.swift */; };
 		87C6C92E1CD02888008E9980 /* NTMealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C92D1CD02888008E9980 /* NTMealDetailsViewController.swift */; };
 		87C6C93A1CD0298B008E9980 /* NTFoodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9371CD0298B008E9980 /* NTFoodDetailsView.swift */; };
-		87C6C93B1CD0298B008E9980 /* NTFoodDetailsViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9381CD0298B008E9980 /* NTFoodDetailsViewCell.swift */; };
 		87C6C93C1CD0298B008E9980 /* NTFoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9391CD0298B008E9980 /* NTFoodDetailsViewController.swift */; };
 		87C6C93F1CD02BF5008E9980 /* NTEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C93D1CD02BF5008E9980 /* NTEmptyView.swift */; };
 		87C6C9421CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9411CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift */; };
@@ -100,6 +98,8 @@
 		04C9F68E5ED1D7FD7701B844 /* Pods_NutriTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NutriTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B360B4E2BBC9136E543273A /* Pods-NutriTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutriTrack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NutriTrack/Pods-NutriTrack.debug.xcconfig"; sourceTree = "<group>"; };
 		8171519F7A85A7E5574D59FE /* Pods-NutriTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutriTrack.release.xcconfig"; path = "Pods/Target Support Files/Pods-NutriTrack/Pods-NutriTrack.release.xcconfig"; sourceTree = "<group>"; };
+		8712BAEB1CE2579C00C38600 /* NTNutrientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTNutrientCell.swift; sourceTree = "<group>"; };
+		8712BAED1CE2582D00C38600 /* NTActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTActionCell.swift; sourceTree = "<group>"; };
 		87279B491CDA76B8000E8D4A /* NTCoreDataContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCoreDataContextProvider.swift; sourceTree = "<group>"; };
 		87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Convenience.swift"; sourceTree = "<group>"; };
 		87279B4F1CDA86DC000E8D4A /* NTDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTDayViewController.swift; sourceTree = "<group>"; };
@@ -109,9 +109,6 @@
 		874389781CD53927003DFE01 /* NTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTabBarController.swift; sourceTree = "<group>"; };
 		8743897C1CD6E9AE003DFE01 /* NTRecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTRecipesViewController.swift; sourceTree = "<group>"; };
 		8743897E1CD6F25A003DFE01 /* NTProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTProfileViewController.swift; sourceTree = "<group>"; };
-		874389901CD7B531003DFE01 /* ATBubbleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATBubbleView.swift; sourceTree = "<group>"; };
-		874389921CD7C95E003DFE01 /* ATBubbleViewFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATBubbleViewFlowLayout.swift; sourceTree = "<group>"; };
-		874389941CD7CF66003DFE01 /* ATBubbleViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ATBubbleViewCell.swift; sourceTree = "<group>"; };
 		878906501CD1ACD30049576C /* NTMealsProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsProviderProtocol.swift; sourceTree = "<group>"; };
 		878906541CD1AEE00049576C /* NTMealsCoreDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsCoreDataProvider.swift; sourceTree = "<group>"; };
 		878906561CD1B3460049576C /* NTMealsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsManager.swift; sourceTree = "<group>"; };
@@ -150,7 +147,6 @@
 		87C6C9291CD0235F008E9980 /* NTMealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsViewController.swift; sourceTree = "<group>"; };
 		87C6C92D1CD02888008E9980 /* NTMealDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealDetailsViewController.swift; sourceTree = "<group>"; };
 		87C6C9371CD0298B008E9980 /* NTFoodDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodDetailsView.swift; sourceTree = "<group>"; };
-		87C6C9381CD0298B008E9980 /* NTFoodDetailsViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodDetailsViewCell.swift; sourceTree = "<group>"; };
 		87C6C9391CD0298B008E9980 /* NTFoodDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodDetailsViewController.swift; sourceTree = "<group>"; };
 		87C6C93D1CD02BF5008E9980 /* NTEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTEmptyView.swift; sourceTree = "<group>"; };
 		87C6C9411CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+NTModalPresentation.swift"; sourceTree = "<group>"; };
@@ -237,16 +233,6 @@
 				8743897E1CD6F25A003DFE01 /* NTProfileViewController.swift */,
 			);
 			path = Profile;
-			sourceTree = "<group>";
-		};
-		8743898F1CD7B4D8003DFE01 /* BubbleMenu */ = {
-			isa = PBXGroup;
-			children = (
-				874389901CD7B531003DFE01 /* ATBubbleView.swift */,
-				874389921CD7C95E003DFE01 /* ATBubbleViewFlowLayout.swift */,
-				874389941CD7CF66003DFE01 /* ATBubbleViewCell.swift */,
-			);
-			path = BubbleMenu;
 			sourceTree = "<group>";
 		};
 		879AEC981CC5B8840073BFB8 = {
@@ -407,7 +393,6 @@
 			isa = PBXGroup;
 			children = (
 				87C6C9371CD0298B008E9980 /* NTFoodDetailsView.swift */,
-				87C6C9381CD0298B008E9980 /* NTFoodDetailsViewCell.swift */,
 				87C6C9391CD0298B008E9980 /* NTFoodDetailsViewController.swift */,
 				8789065A1CD1B7680049576C /* NTFoodSearchView.swift */,
 				8789065B1CD1B7680049576C /* NTFoodSearchViewController.swift */,
@@ -421,10 +406,11 @@
 		87C6C94B1CD10758008E9980 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				8743898F1CD7B4D8003DFE01 /* BubbleMenu */,
+				8712BAEB1CE2579C00C38600 /* NTNutrientCell.swift */,
 				87C6C94C1CD107CB008E9980 /* NTLabeledField.swift */,
 				8732B9D41CDA4D680031E476 /* NTLoadingIndicator.swift */,
 				87279B491CDA76B8000E8D4A /* NTCoreDataContextProvider.swift */,
+				8712BAED1CE2582D00C38600 /* NTActionCell.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -639,19 +625,18 @@
 				8789065E1CD1B7680049576C /* NTFoodSearchView.swift in Sources */,
 				87D175DB1CD3EA72007EC26F /* NTCDNutrient+CoreDataProperties.swift in Sources */,
 				87C6C9951CD135CA008E9980 /* NTMeasure.swift in Sources */,
-				87C6C93B1CD0298B008E9980 /* NTFoodDetailsViewCell.swift in Sources */,
 				87C6C94D1CD107CB008E9980 /* NTLabeledField.swift in Sources */,
 				8743897F1CD6F25A003DFE01 /* NTProfileViewController.swift in Sources */,
 				8732B9D31CD980C50031E476 /* NTViewController.swift in Sources */,
 				87C6C98F1CD135A7008E9980 /* NTMeal.swift in Sources */,
 				87D175DA1CD3EA72007EC26F /* NTCDMeasure.swift in Sources */,
 				878906571CD1B3460049576C /* NTMealsManager.swift in Sources */,
+				8712BAEC1CE2579C00C38600 /* NTNutrientCell.swift in Sources */,
 				87D175DF1CD3EA72007EC26F /* NTCDMealItem+CoreDataProperties.swift in Sources */,
 				8789065C1CD1B7680049576C /* NTFoodSearchProvider.swift in Sources */,
 				87C6C93A1CD0298B008E9980 /* NTFoodDetailsView.swift in Sources */,
 				87C6C9931CD135BE008E9980 /* NTNutrient.swift in Sources */,
 				879AECD71CC5B9BA0073BFB8 /* AppDelegate.swift in Sources */,
-				874389931CD7C95E003DFE01 /* ATBubbleViewFlowLayout.swift in Sources */,
 				87C6C93C1CD0298B008E9980 /* NTFoodDetailsViewController.swift in Sources */,
 				87C6C9911CD135B2008E9980 /* NTFood.swift in Sources */,
 				8789065F1CD1B7680049576C /* NTFoodSearchViewController.swift in Sources */,
@@ -660,6 +645,7 @@
 				87D175DC1CD3EA72007EC26F /* NTCDNutrient.swift in Sources */,
 				87D175D91CD3EA72007EC26F /* NTCDMeasure+CoreDataProperties.swift in Sources */,
 				87D175CE1CD3E324007EC26F /* NTMealItem.swift in Sources */,
+				8712BAEE1CE2582D00C38600 /* NTActionCell.swift in Sources */,
 				87279B501CDA86DC000E8D4A /* NTDayViewController.swift in Sources */,
 				87C6C9461CD03286008E9980 /* String+NTDefaults.swift in Sources */,
 				878906551CD1AEE00049576C /* NTMealsCoreDataProvider.swift in Sources */,
@@ -667,7 +653,6 @@
 				87C6C97D1CD13086008E9980 /* Various+Unwrapping.swift in Sources */,
 				87D175E21CD3EA72007EC26F /* NTCDFood.swift in Sources */,
 				87C6C9481CD039EB008E9980 /* NTMealsView.swift in Sources */,
-				874389911CD7B531003DFE01 /* ATBubbleView.swift in Sources */,
 				87D175E01CD3EA72007EC26F /* NTCDMealItem.swift in Sources */,
 				87C6C9421CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift in Sources */,
 				87A4F24D1CCFF97A005BA380 /* UIFont+NTAppStyle.swift in Sources */,
@@ -675,7 +660,6 @@
 				87C6C92A1CD0235F008E9980 /* NTMealsViewController.swift in Sources */,
 				87A4F2291CCFD035005BA380 /* NTCompareViewController.swift in Sources */,
 				87C6C9441CD031C1008E9980 /* NTMealDetailsView.swift in Sources */,
-				874389951CD7CF66003DFE01 /* ATBubbleViewCell.swift in Sources */,
 				8789065D1CD1B7680049576C /* NTFoodSearchService.swift in Sources */,
 				878906611CD1B7A70049576C /* NTFoodSearchProviderProtocol.swift in Sources */,
 				87D175DE1CD3EA72007EC26F /* NTCDMeal.swift in Sources */,

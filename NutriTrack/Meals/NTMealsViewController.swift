@@ -40,7 +40,17 @@ class NTMealsViewController: NTViewController, NTMealDetailsViewControllerDelega
     
     override internal func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.mealsPageViewController.setViewControllers([NTDayViewController(date: NSDate().dateOnly()!, meals: self.dataManager.mealsForToday())], direction: .Forward, animated: false, completion: nil)
+        
+        guard self.dataManager.meals.count > 0 else {
+            return
+        }
+        
+        if let meals = self.dataManager.mealsForToday() {
+             self.mealsPageViewController.setViewControllers([NTDayViewController(date: NSDate().dateOnly()!, meals: meals)], direction: .Forward, animated: false, completion: nil)
+        } else if let meals = self.dataManager.mealsForFirstDateBeforeDate(NSDate().dateOnly()!) {
+            self.mealsPageViewController.setViewControllers([NTDayViewController(date: (meals.first?.dateTime.dateOnly()!)!, meals: meals)], direction: .Forward, animated: false, completion: nil)
+        }
+       
     }
     
     override internal func rightBarButtonDidTap(sender: UIBarButtonItem) {
