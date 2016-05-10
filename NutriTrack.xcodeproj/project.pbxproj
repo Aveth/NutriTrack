@@ -10,8 +10,8 @@
 		0CA5B2C303B2651CD9D596DB /* Pods_NutriTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C9F68E5ED1D7FD7701B844 /* Pods_NutriTrack.framework */; };
 		87279B4A1CDA76B8000E8D4A /* NTCoreDataContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B491CDA76B8000E8D4A /* NTCoreDataContextProvider.swift */; };
 		87279B4C1CDA82C9000E8D4A /* NSDate+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */; };
-		87279B501CDA86DC000E8D4A /* NTMealDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4F1CDA86DC000E8D4A /* NTMealDayViewController.swift */; };
-		87279B521CDA86FD000E8D4A /* NTMealDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B511CDA86FD000E8D4A /* NTMealDayView.swift */; };
+		87279B501CDA86DC000E8D4A /* NTDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4F1CDA86DC000E8D4A /* NTDayViewController.swift */; };
+		87279B521CDA86FD000E8D4A /* NTDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B511CDA86FD000E8D4A /* NTDayView.swift */; };
 		8732B9D31CD980C50031E476 /* NTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732B9D21CD980C50031E476 /* NTViewController.swift */; };
 		8732B9D51CDA4D680031E476 /* NTLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732B9D41CDA4D680031E476 /* NTLoadingIndicator.swift */; };
 		874389791CD53927003DFE01 /* NTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389781CD53927003DFE01 /* NTTabBarController.swift */; };
@@ -102,8 +102,8 @@
 		8171519F7A85A7E5574D59FE /* Pods-NutriTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutriTrack.release.xcconfig"; path = "Pods/Target Support Files/Pods-NutriTrack/Pods-NutriTrack.release.xcconfig"; sourceTree = "<group>"; };
 		87279B491CDA76B8000E8D4A /* NTCoreDataContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCoreDataContextProvider.swift; sourceTree = "<group>"; };
 		87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Convenience.swift"; sourceTree = "<group>"; };
-		87279B4F1CDA86DC000E8D4A /* NTMealDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealDayViewController.swift; sourceTree = "<group>"; };
-		87279B511CDA86FD000E8D4A /* NTMealDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealDayView.swift; sourceTree = "<group>"; };
+		87279B4F1CDA86DC000E8D4A /* NTDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTDayViewController.swift; sourceTree = "<group>"; };
+		87279B511CDA86FD000E8D4A /* NTDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTDayView.swift; sourceTree = "<group>"; };
 		8732B9D21CD980C50031E476 /* NTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTViewController.swift; sourceTree = "<group>"; };
 		8732B9D41CDA4D680031E476 /* NTLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTLoadingIndicator.swift; sourceTree = "<group>"; };
 		874389781CD53927003DFE01 /* NTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTabBarController.swift; sourceTree = "<group>"; };
@@ -397,8 +397,8 @@
 				878906501CD1ACD30049576C /* NTMealsProviderProtocol.swift */,
 				878906541CD1AEE00049576C /* NTMealsCoreDataProvider.swift */,
 				878906561CD1B3460049576C /* NTMealsManager.swift */,
-				87279B4F1CDA86DC000E8D4A /* NTMealDayViewController.swift */,
-				87279B511CDA86FD000E8D4A /* NTMealDayView.swift */,
+				87279B4F1CDA86DC000E8D4A /* NTDayViewController.swift */,
+				87279B511CDA86FD000E8D4A /* NTDayView.swift */,
 			);
 			path = Meals;
 			sourceTree = "<group>";
@@ -633,7 +633,7 @@
 				8732B9D51CDA4D680031E476 /* NTLoadingIndicator.swift in Sources */,
 				87D175DD1CD3EA72007EC26F /* NTCDMeal+CoreDataProperties.swift in Sources */,
 				87D175E11CD3EA72007EC26F /* NTCDFood+CoreDataProperties.swift in Sources */,
-				87279B521CDA86FD000E8D4A /* NTMealDayView.swift in Sources */,
+				87279B521CDA86FD000E8D4A /* NTDayView.swift in Sources */,
 				87C6C93F1CD02BF5008E9980 /* NTEmptyView.swift in Sources */,
 				87A4F22B1CCFEC6B005BA380 /* UIColor+NTAppStyle.swift in Sources */,
 				8789065E1CD1B7680049576C /* NTFoodSearchView.swift in Sources */,
@@ -660,7 +660,7 @@
 				87D175DC1CD3EA72007EC26F /* NTCDNutrient.swift in Sources */,
 				87D175D91CD3EA72007EC26F /* NTCDMeasure+CoreDataProperties.swift in Sources */,
 				87D175CE1CD3E324007EC26F /* NTMealItem.swift in Sources */,
-				87279B501CDA86DC000E8D4A /* NTMealDayViewController.swift in Sources */,
+				87279B501CDA86DC000E8D4A /* NTDayViewController.swift in Sources */,
 				87C6C9461CD03286008E9980 /* String+NTDefaults.swift in Sources */,
 				878906551CD1AEE00049576C /* NTMealsCoreDataProvider.swift in Sources */,
 				87279B4A1CDA76B8000E8D4A /* NTCoreDataContextProvider.swift in Sources */,

@@ -40,7 +40,7 @@ class NTMealsViewController: NTViewController, NTMealDetailsViewControllerDelega
     
     override internal func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.mealsPageViewController.setViewControllers([NTMealDayViewController(date: NSDate().dateOnly()!, meals: self.dataManager.mealsForToday())], direction: .Forward, animated: false, completion: nil)
+        self.mealsPageViewController.setViewControllers([NTDayViewController(date: NSDate().dateOnly()!, meals: self.dataManager.mealsForToday())], direction: .Forward, animated: false, completion: nil)
     }
     
     override internal func rightBarButtonDidTap(sender: UIBarButtonItem) {
@@ -81,7 +81,7 @@ class NTMealsViewController: NTViewController, NTMealDetailsViewControllerDelega
     // MARK: UIPageViewControllerDataSource methods
     
     internal func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let date = (viewController as! NTMealDayViewController).date
+        let date = (viewController as! NTDayViewController).date
         
         if date.isEqualToDate(NSDate().dateOnly()!) {
             return nil
@@ -94,18 +94,18 @@ class NTMealsViewController: NTViewController, NTMealDetailsViewControllerDelega
             return nil
         }
         
-        return NTMealDayViewController(date: dayDate, meals: meals)
+        return NTDayViewController(date: dayDate, meals: meals)
     }
     
     internal func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let date = (viewController as! NTMealDayViewController).date
+        let date = (viewController as! NTDayViewController).date
         guard let
             meals = self.dataManager.mealsForFirstDateBeforeDate(date),
             dayDate = meals.first?.dateTime.dateOnly()
         else {
            return nil
         }
-        return NTMealDayViewController(date: dayDate, meals: meals)
+        return NTDayViewController(date: dayDate, meals: meals)
     }
 
 }

@@ -17,17 +17,6 @@ class NTSearchProvider {
         case ParsingError
         case ServerError
     }
-    
-    internal enum Diet: Int {
-        case Renal
-        case Diabetic
-        func nutrientCodes() -> [String] {
-            switch self {
-                case Diabetic: return ["205", "269"]
-                case Renal: return ["305", "306", "307"]
-            }
-        }
-    }
 
     internal var service: NTSearchService
     
@@ -79,7 +68,7 @@ class NTSearchProvider {
         
     }
     
-    internal func fetchFoodDetails(id: String, diet: NTSearchProvider.Diet, success: ((result: NTFood) -> Void), failure:((error: ErrorType) -> Void)?) {
+    internal func fetchFoodDetails(id: String, diet: NTNutrient.Diet, success: ((result: NTFood) -> Void), failure:((error: ErrorType) -> Void)?) {
         
         self.service.fetchDetails(itemId: id,
             success: { (result: [String: AnyObject]) -> Void in
@@ -95,7 +84,7 @@ class NTSearchProvider {
                         food.measures = self.arrayToMeasureItems(measures)
                     }
                     if let nutrients = firstResult["nutrients"] as? [[String: AnyObject]] {
-                        food.nutrients = self.arrayToNutrientItems(nutrients, nutrientCodes: NTSearchProvider.Diet.Renal.nutrientCodes())
+                        food.nutrients = self.arrayToNutrientItems(nutrients, nutrientCodes: NTNutrient.Diet.Renal.nutrientCodes())
                     }
                     success(result: food)
                 }

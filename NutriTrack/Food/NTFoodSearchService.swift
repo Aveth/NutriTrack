@@ -30,24 +30,22 @@ class NTSearchService {
     private func fetch(endpoint: NTSearchService.Endpoints, urlParam: String, success: ((results: [String: AnyObject]) -> Void), failure: ((error: ErrorType) -> Void)?) -> Request {
         
         let encodedParam = urlParam.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet())!
-        return Alamofire.request(Method.GET, NTSearchService.APIBaseURL + endpoint.rawValue + encodedParam).responseJSON(
-            completionHandler: { (request: NSURLRequest?, response: NSHTTPURLResponse?, result: Result<AnyObject>) -> Void in
+        return Alamofire.request(Method.GET, NTSearchService.APIBaseURL + endpoint.rawValue + encodedParam).responseJSON() { (request: NSURLRequest?, response: NSHTTPURLResponse?, result: Result<AnyObject>) -> Void in
                 
-                switch result {
-                    case .Success(let data):
-                        if let dataDict = data as? [String: AnyObject] {
-                            success(results: dataDict)
-                        }
-                    break
-                    case .Failure(_, let error):
-                        if let fail = failure {
-                            fail(error: error)
-                        }
-                    break
-                }
-                
+            switch result {
+                case .Success(let data):
+                    if let dataDict = data as? [String: AnyObject] {
+                        success(results: dataDict)
+                    }
+                break
+                case .Failure(_, let error):
+                    if let fail = failure {
+                        fail(error: error)
+                    }
+                break
             }
-        )
+            
+        }
     
     }
     

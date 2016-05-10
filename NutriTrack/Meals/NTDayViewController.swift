@@ -1,5 +1,5 @@
 //
-//  NTMealDayViewController.swift
+//  NTDayViewController.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-05-04.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NTMealDayViewController: UIViewController, NTMealDayViewDataSource {
+class NTDayViewController: UIViewController, NTDayViewDataSource {
     
     internal var date: NSDate
     internal var meals: [NTMeal]
@@ -19,8 +19,8 @@ class NTMealDayViewController: UIViewController, NTMealDayViewDataSource {
         return formatter
     }()
     
-    lazy private var mealDayView: NTMealDayView = {
-        let view = NTMealDayView()
+    lazy private var dayView: NTDayView = {
+        let view = NTDayView()
         view.dataSource = self
         return view
     }()
@@ -38,31 +38,31 @@ class NTMealDayViewController: UIViewController, NTMealDayViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addSubview(self.mealDayView)
-        self.mealDayView.reloadData()
+        self.view.addSubview(self.dayView)
+        self.dayView.reloadData()
         
         self.updateViewConstraints()
     }
     
     override internal func updateViewConstraints() {
         super.updateViewConstraints()
-        self.mealDayView.autoPinEdgesToSuperviewEdges()
+        self.dayView.autoPinEdgesToSuperviewEdges()
     }
     
-    // MARK: NTMealDayViewDataSource methods
+    // MARK: NTDayViewDataSource methods
     
-    internal func mealDayViewTitleForDay(sender: NTMealDayView) -> String {
-        return NTMealDayViewController.dateFormatter.stringFromDate(self.date)
+    internal func dayViewTitleForDay(sender: NTDayView) -> String {
+        return NTDayViewController.dateFormatter.stringFromDate(self.date)
     }
     
-    internal func mealDayViewNumberOfNutrients(sender: NTMealDayView) -> Int {
+    internal func dayViewNumberOfNutrients(sender: NTDayView) -> Int {
         guard let count = self.meals.first?.mealItems.first?.food.nutrients.count else {
             return 0
         }
         return count
     }
     
-    internal func mealDayView(sender: NTMealDayView, titleForNutrientAtIndex index: Int) -> String {
+    internal func dayView(sender: NTDayView, titleForNutrientAtIndex index: Int) -> String {
         guard let name = self.meals.first?.mealItems.first?.food.sortedNutrients[index].name else {
             return ""
         }
@@ -70,7 +70,7 @@ class NTMealDayViewController: UIViewController, NTMealDayViewDataSource {
         return name
     }
     
-    internal func mealDayView(sender: NTMealDayView, valueForNutrientAtIndex index: Int) -> Float {
+    internal func dayView(sender: NTDayView, valueForNutrientAtIndex index: Int) -> Float {
         return self.meals.reduce(0.0) { (total: Float, meal: NTMeal) in
             return meal.mealItems.reduce(total) { (itemTotal: Float, item: NTMealItem) in
                 let measureValue = item.food.measures[item.measureIndex].value
@@ -82,7 +82,7 @@ class NTMealDayViewController: UIViewController, NTMealDayViewDataSource {
         }
     }
     
-    internal func mealDayView(sender: NTMealDayView, unitForNutrientAtIndex index: Int) -> String {
+    internal func dayView(sender: NTDayView, unitForNutrientAtIndex index: Int) -> String {
         guard let unit = self.meals.first?.mealItems.first?.food.sortedNutrients[index].unit else {
             return ""
         }

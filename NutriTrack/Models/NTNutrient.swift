@@ -10,6 +10,17 @@ import Foundation
 
 class NTNutrient {
     
+    internal enum Diet: Int {
+        case Renal
+        case Diabetic
+        func nutrientCodes() -> [String] {
+            switch self {
+            case Diabetic: return ["205", "269"]
+            case Renal: return ["305", "306", "307"]
+            }
+        }
+    }
+    
     static internal let BaseMeasuresGrams: Float = 100.0
 
     internal var id: String

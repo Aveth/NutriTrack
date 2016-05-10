@@ -90,7 +90,7 @@ class NTFoodDetailsViewController: NTViewController, NTFoodDetailsViewDelegate, 
         if let foodId: String = food.id {
             self.navigationItem.rightBarButtonItem?.enabled = false
             self.spinner.activate()
-            self.searchProvider.fetchFoodDetails(foodId, diet: NTSearchProvider.Diet.Renal,
+            self.searchProvider.fetchFoodDetails(foodId, diet: NTNutrient.Diet.Renal,
                 success: { (result: NTFood) -> Void in
                     self.food = result
                     self.foodDetailsView.reloadData()

@@ -1,5 +1,5 @@
 //
-//  NTMealDayView.swift
+//  NTDayView.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-05-04.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-protocol NTMealDayViewDataSource: class {
-    func mealDayViewTitleForDay(sender: NTMealDayView) -> String
-    func mealDayViewNumberOfNutrients(sender: NTMealDayView) -> Int
-    func mealDayView(sender: NTMealDayView, titleForNutrientAtIndex index: Int) -> String
-    func mealDayView(sender: NTMealDayView, valueForNutrientAtIndex index: Int) -> Float
-    func mealDayView(sender: NTMealDayView, unitForNutrientAtIndex index: Int) -> String
+protocol NTDayViewDataSource: class {
+    func dayViewTitleForDay(sender: NTDayView) -> String
+    func dayViewNumberOfNutrients(sender: NTDayView) -> Int
+    func dayView(sender: NTDayView, titleForNutrientAtIndex index: Int) -> String
+    func dayView(sender: NTDayView, valueForNutrientAtIndex index: Int) -> Float
+    func dayView(sender: NTDayView, unitForNutrientAtIndex index: Int) -> String
 }
 
-class NTMealDayView: UIView, UITableViewDelegate, UITableViewDataSource {
+class NTDayView: UIView, UITableViewDelegate, UITableViewDataSource {
     
-    weak internal var dataSource: NTMealDayViewDataSource?
+    weak internal var dataSource: NTDayViewDataSource?
     
     lazy private var titleLabel: UILabel = {
         let label = UILabel()
@@ -43,7 +43,7 @@ class NTMealDayView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     internal func reloadData() {
-        self.titleLabel.text = self.dataSource?.mealDayViewTitleForDay(self)
+        self.titleLabel.text = self.dataSource?.dayViewTitleForDay(self)
         self.tableView.reloadData()
     }
     
@@ -71,7 +71,7 @@ class NTMealDayView: UIView, UITableViewDelegate, UITableViewDataSource {
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let num = self.dataSource?.mealDayViewNumberOfNutrients(self) {
+        if let num = self.dataSource?.dayViewNumberOfNutrients(self) {
             return num
         }
         return 0
@@ -79,9 +79,9 @@ class NTMealDayView: UIView, UITableViewDelegate, UITableViewDataSource {
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String.defaultCellReuseIdentifier()) as! NTFoodDetailsViewCell
-        cell.name = self.dataSource?.mealDayView(self, titleForNutrientAtIndex: indexPath.row)
-        cell.value = self.dataSource?.mealDayView(self, valueForNutrientAtIndex: indexPath.row)
-        cell.unit = self.dataSource?.mealDayView(self, unitForNutrientAtIndex: indexPath.row)
+        cell.name = self.dataSource?.dayView(self, titleForNutrientAtIndex: indexPath.row)
+        cell.value = self.dataSource?.dayView(self, valueForNutrientAtIndex: indexPath.row)
+        cell.unit = self.dataSource?.dayView(self, unitForNutrientAtIndex: indexPath.row)
         return cell
     }
 
