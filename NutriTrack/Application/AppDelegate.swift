@@ -51,7 +51,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.prepareAppearances()
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        self.window?.rootViewController = NTTabBarController()
+        self.window?.rootViewController = TabBarController()
         
         self.window?.makeKeyAndVisible()
         

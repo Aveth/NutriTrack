@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="10171" systemVersion="15E65" minimumToolsVersion="Automatic">
+    <entity name="CDFood" representedClassName=".CDFood" syncable="YES">
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <relationship name="measures" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDMeasure" syncable="YES"/>
+        <relationship name="nutrients" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDNutrient" syncable="YES"/>
+    </entity>
+    <entity name="CDMeal" representedClassName=".CDMeal" syncable="YES">
+        <attribute name="dateTime" attributeType="Date" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <relationship name="mealItems" toMany="YES" deletionRule="Nullify" destinationEntity="CDMealItem" syncable="YES"/>
+    </entity>
+    <entity name="CDMealItem" representedClassName=".CDMealItem" syncable="YES">
+        <attribute name="foodID" attributeType="String" syncable="YES"/>
+        <attribute name="measureIndex" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="quantity" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+    </entity>
+    <entity name="CDMeasure" representedClassName=".CDMeasure" syncable="YES">
+        <attribute name="index" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="value" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <entity name="CDNutrient" representedClassName=".CDNutrient" syncable="YES">
+        <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="name" attributeType="String" syncable="YES"/>
+        <attribute name="unit" attributeType="String" syncable="YES"/>
+        <attribute name="value" attributeType="Float" defaultValueString="0.0" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CDFood" positionX="0" positionY="0" width="128" height="105"/>
+        <element name="CDMeal" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="CDMealItem" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="CDMeasure" positionX="0" positionY="0" width="128" height="90"/>
+        <element name="CDNutrient" positionX="0" positionY="0" width="128" height="105"/>
+    </elements>
+</model>

@@ -8,35 +8,45 @@
 
 /* Begin PBXBuildFile section */
 		0CA5B2C303B2651CD9D596DB /* Pods_NutriTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C9F68E5ED1D7FD7701B844 /* Pods_NutriTrack.framework */; };
-		8712BAEC1CE2579C00C38600 /* NTNutrientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8712BAEB1CE2579C00C38600 /* NTNutrientCell.swift */; };
-		8712BAEE1CE2582D00C38600 /* NTActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8712BAED1CE2582D00C38600 /* NTActionCell.swift */; };
-		87279B4A1CDA76B8000E8D4A /* NTCoreDataContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B491CDA76B8000E8D4A /* NTCoreDataContextProvider.swift */; };
 		87279B4C1CDA82C9000E8D4A /* NSDate+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */; };
-		87279B501CDA86DC000E8D4A /* NTDayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4F1CDA86DC000E8D4A /* NTDayViewController.swift */; };
-		87279B521CDA86FD000E8D4A /* NTDayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B511CDA86FD000E8D4A /* NTDayView.swift */; };
-		8732B9D31CD980C50031E476 /* NTViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732B9D21CD980C50031E476 /* NTViewController.swift */; };
-		8732B9D51CDA4D680031E476 /* NTLoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732B9D41CDA4D680031E476 /* NTLoadingIndicator.swift */; };
-		874389791CD53927003DFE01 /* NTTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389781CD53927003DFE01 /* NTTabBarController.swift */; };
-		8743897D1CD6E9AE003DFE01 /* NTRecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897C1CD6E9AE003DFE01 /* NTRecipesViewController.swift */; };
-		8743897F1CD6F25A003DFE01 /* NTProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897E1CD6F25A003DFE01 /* NTProfileViewController.swift */; };
-		878906511CD1ACD30049576C /* NTMealsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906501CD1ACD30049576C /* NTMealsProviderProtocol.swift */; };
-		878906551CD1AEE00049576C /* NTMealsCoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906541CD1AEE00049576C /* NTMealsCoreDataProvider.swift */; };
-		878906571CD1B3460049576C /* NTMealsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906561CD1B3460049576C /* NTMealsManager.swift */; };
-		8789065C1CD1B7680049576C /* NTFoodSearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906581CD1B7680049576C /* NTFoodSearchProvider.swift */; };
-		8789065D1CD1B7680049576C /* NTFoodSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906591CD1B7680049576C /* NTFoodSearchService.swift */; };
-		8789065E1CD1B7680049576C /* NTFoodSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789065A1CD1B7680049576C /* NTFoodSearchView.swift */; };
-		8789065F1CD1B7680049576C /* NTFoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789065B1CD1B7680049576C /* NTFoodSearchViewController.swift */; };
-		878906611CD1B7A70049576C /* NTFoodSearchProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906601CD1B7A70049576C /* NTFoodSearchProviderProtocol.swift */; };
+		87279B501CDA86DC000E8D4A /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4F1CDA86DC000E8D4A /* DayViewController.swift */; };
+		87279B521CDA86FD000E8D4A /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B511CDA86FD000E8D4A /* DayView.swift */; };
+		8732B9D31CD980C50031E476 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732B9D21CD980C50031E476 /* BaseViewController.swift */; };
+		874389791CD53927003DFE01 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389781CD53927003DFE01 /* TabBarController.swift */; };
+		8743897D1CD6E9AE003DFE01 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */; };
+		8743897F1CD6F25A003DFE01 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */; };
+		8783667A1CE4CE4F002AF43A /* NutriTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8783666E1CE4CE4F002AF43A /* NutriTrack.xcdatamodeld */; };
+		878366861CE4CF31002AF43A /* CDMealItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8783667C1CE4CF31002AF43A /* CDMealItem+CoreDataProperties.swift */; };
+		878366871CE4CF31002AF43A /* CDMealItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8783667D1CE4CF31002AF43A /* CDMealItem.swift */; };
+		878366881CE4CF31002AF43A /* CDMeasure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8783667E1CE4CF31002AF43A /* CDMeasure+CoreDataProperties.swift */; };
+		878366891CE4CF31002AF43A /* CDMeasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8783667F1CE4CF31002AF43A /* CDMeasure.swift */; };
+		8783668A1CE4CF31002AF43A /* CDNutrient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366801CE4CF31002AF43A /* CDNutrient+CoreDataProperties.swift */; };
+		8783668B1CE4CF31002AF43A /* CDNutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366811CE4CF31002AF43A /* CDNutrient.swift */; };
+		8783668C1CE4CF31002AF43A /* CDFood+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366821CE4CF31002AF43A /* CDFood+CoreDataProperties.swift */; };
+		8783668D1CE4CF31002AF43A /* CDFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366831CE4CF31002AF43A /* CDFood.swift */; };
+		8783668E1CE4CF31002AF43A /* CDMeal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366841CE4CF31002AF43A /* CDMeal+CoreDataProperties.swift */; };
+		8783668F1CE4CF31002AF43A /* CDMeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366851CE4CF31002AF43A /* CDMeal.swift */; };
+		878366A41CE4D083002AF43A /* ActionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8783669F1CE4D083002AF43A /* ActionCell.swift */; };
+		878366A51CE4D083002AF43A /* NutrientCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366A01CE4D083002AF43A /* NutrientCell.swift */; };
+		878366A71CE4D083002AF43A /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366A21CE4D083002AF43A /* LoadingIndicator.swift */; };
+		878366A81CE4D083002AF43A /* LabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366A31CE4D083002AF43A /* LabeledField.swift */; };
+		878366AA1CE4D169002AF43A /* CDContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366A91CE4D169002AF43A /* CDContextProvider.swift */; };
+		878906511CD1ACD30049576C /* MealsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906501CD1ACD30049576C /* MealsProviderProtocol.swift */; };
+		878906551CD1AEE00049576C /* MealsCoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */; };
+		878906571CD1B3460049576C /* MealsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906561CD1B3460049576C /* MealsManager.swift */; };
+		8789065C1CD1B7680049576C /* FoodSearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906581CD1B7680049576C /* FoodSearchProvider.swift */; };
+		8789065D1CD1B7680049576C /* FoodSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906591CD1B7680049576C /* FoodSearchService.swift */; };
+		8789065E1CD1B7680049576C /* FoodSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789065A1CD1B7680049576C /* FoodSearchView.swift */; };
+		8789065F1CD1B7680049576C /* FoodSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8789065B1CD1B7680049576C /* FoodSearchViewController.swift */; };
+		878906611CD1B7A70049576C /* FoodSearchProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906601CD1B7A70049576C /* FoodSearchProviderProtocol.swift */; };
 		879AECBD1CC5B8840073BFB8 /* NutriTrackTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879AECBC1CC5B8840073BFB8 /* NutriTrackTests.swift */; };
 		879AECC81CC5B8840073BFB8 /* NutriTrackUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879AECC71CC5B8840073BFB8 /* NutriTrackUITests.swift */; };
 		879AECD71CC5B9BA0073BFB8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 879AECD61CC5B9BA0073BFB8 /* AppDelegate.swift */; };
 		879AECDA1CC5BA7C0073BFB8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 879AECD91CC5BA7C0073BFB8 /* Assets.xcassets */; };
 		879AECDC1CC5BA820073BFB8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 879AECDB1CC5BA820073BFB8 /* Info.plist */; };
-		879AECE01CC5BB060073BFB8 /* NutriTrack.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 879AECDE1CC5BB060073BFB8 /* NutriTrack.xcdatamodeld */; };
 		879AECE51CC674BA0073BFB8 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 879AECE41CC674BA0073BFB8 /* Launch Screen.storyboard */; };
-		87A4F2291CCFD035005BA380 /* NTCompareViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4F2281CCFD035005BA380 /* NTCompareViewController.swift */; };
-		87A4F22B1CCFEC6B005BA380 /* UIColor+NTAppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4F22A1CCFEC6B005BA380 /* UIColor+NTAppStyle.swift */; };
-		87A4F24D1CCFF97A005BA380 /* UIFont+NTAppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4F24C1CCFF97A005BA380 /* UIFont+NTAppStyle.swift */; };
+		87A4F22B1CCFEC6B005BA380 /* UIColor+AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4F22A1CCFEC6B005BA380 /* UIColor+AppStyle.swift */; };
+		87A4F24D1CCFF97A005BA380 /* UIFont+AppStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4F24C1CCFF97A005BA380 /* UIFont+AppStyle.swift */; };
 		87C6C91A1CD00637008E9980 /* Roboto-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C9151CCFFD9D008E9980 /* Roboto-Regular.ttf */; };
 		87C6C91B1CD00637008E9980 /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C90E1CCFFD9D008E9980 /* Roboto-Bold.ttf */; };
 		87C6C91C1CD00637008E9980 /* Roboto-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C9131CCFFD9D008E9980 /* Roboto-SemiBold.ttf */; };
@@ -49,32 +59,21 @@
 		87C6C9231CD00637008E9980 /* Roboto-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C90D1CCFFD9D008E9980 /* Roboto-ExtraBoldItalic.ttf */; };
 		87C6C9241CD00637008E9980 /* Roboto-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C9141CCFFD9D008E9980 /* Roboto-SemiBoldItalic.ttf */; };
 		87C6C9251CD00637008E9980 /* Roboto-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C9171CCFFD9D008E9980 /* Roboto-ExtraLightItalic.ttf */; };
-		87C6C92A1CD0235F008E9980 /* NTMealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9291CD0235F008E9980 /* NTMealsViewController.swift */; };
-		87C6C92E1CD02888008E9980 /* NTMealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C92D1CD02888008E9980 /* NTMealDetailsViewController.swift */; };
-		87C6C93A1CD0298B008E9980 /* NTFoodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9371CD0298B008E9980 /* NTFoodDetailsView.swift */; };
-		87C6C93C1CD0298B008E9980 /* NTFoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9391CD0298B008E9980 /* NTFoodDetailsViewController.swift */; };
-		87C6C93F1CD02BF5008E9980 /* NTEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C93D1CD02BF5008E9980 /* NTEmptyView.swift */; };
-		87C6C9421CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9411CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift */; };
-		87C6C9441CD031C1008E9980 /* NTMealDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9431CD031C1008E9980 /* NTMealDetailsView.swift */; };
-		87C6C9461CD03286008E9980 /* String+NTDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9451CD03286008E9980 /* String+NTDefaults.swift */; };
-		87C6C9481CD039EB008E9980 /* NTMealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9471CD039EB008E9980 /* NTMealsView.swift */; };
-		87C6C94D1CD107CB008E9980 /* NTLabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C94C1CD107CB008E9980 /* NTLabeledField.swift */; };
+		87C6C92A1CD0235F008E9980 /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9291CD0235F008E9980 /* MealsViewController.swift */; };
+		87C6C92E1CD02888008E9980 /* MealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C92D1CD02888008E9980 /* MealDetailsViewController.swift */; };
+		87C6C93A1CD0298B008E9980 /* FoodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9371CD0298B008E9980 /* FoodDetailsView.swift */; };
+		87C6C93C1CD0298B008E9980 /* FoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9391CD0298B008E9980 /* FoodDetailsViewController.swift */; };
+		87C6C93F1CD02BF5008E9980 /* EmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C93D1CD02BF5008E9980 /* EmptyView.swift */; };
+		87C6C9421CD02F60008E9980 /* UINavigationController+ModalPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9411CD02F60008E9980 /* UINavigationController+ModalPresentation.swift */; };
+		87C6C9441CD031C1008E9980 /* MealDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9431CD031C1008E9980 /* MealDetailsView.swift */; };
+		87C6C9461CD03286008E9980 /* String+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9451CD03286008E9980 /* String+Defaults.swift */; };
+		87C6C9481CD039EB008E9980 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9471CD039EB008E9980 /* MealsView.swift */; };
 		87C6C97D1CD13086008E9980 /* Various+Unwrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C97C1CD13086008E9980 /* Various+Unwrapping.swift */; };
-		87C6C98F1CD135A7008E9980 /* NTMeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C98E1CD135A7008E9980 /* NTMeal.swift */; };
-		87C6C9911CD135B2008E9980 /* NTFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9901CD135B2008E9980 /* NTFood.swift */; };
-		87C6C9931CD135BE008E9980 /* NTNutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9921CD135BE008E9980 /* NTNutrient.swift */; };
-		87C6C9951CD135CA008E9980 /* NTMeasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9941CD135CA008E9980 /* NTMeasure.swift */; };
-		87D175CE1CD3E324007EC26F /* NTMealItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175CD1CD3E324007EC26F /* NTMealItem.swift */; };
-		87D175D91CD3EA72007EC26F /* NTCDMeasure+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175CF1CD3EA72007EC26F /* NTCDMeasure+CoreDataProperties.swift */; };
-		87D175DA1CD3EA72007EC26F /* NTCDMeasure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D01CD3EA72007EC26F /* NTCDMeasure.swift */; };
-		87D175DB1CD3EA72007EC26F /* NTCDNutrient+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D11CD3EA72007EC26F /* NTCDNutrient+CoreDataProperties.swift */; };
-		87D175DC1CD3EA72007EC26F /* NTCDNutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D21CD3EA72007EC26F /* NTCDNutrient.swift */; };
-		87D175DD1CD3EA72007EC26F /* NTCDMeal+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D31CD3EA72007EC26F /* NTCDMeal+CoreDataProperties.swift */; };
-		87D175DE1CD3EA72007EC26F /* NTCDMeal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D41CD3EA72007EC26F /* NTCDMeal.swift */; };
-		87D175DF1CD3EA72007EC26F /* NTCDMealItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D51CD3EA72007EC26F /* NTCDMealItem+CoreDataProperties.swift */; };
-		87D175E01CD3EA72007EC26F /* NTCDMealItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D61CD3EA72007EC26F /* NTCDMealItem.swift */; };
-		87D175E11CD3EA72007EC26F /* NTCDFood+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D71CD3EA72007EC26F /* NTCDFood+CoreDataProperties.swift */; };
-		87D175E21CD3EA72007EC26F /* NTCDFood.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175D81CD3EA72007EC26F /* NTCDFood.swift */; };
+		87C6C98F1CD135A7008E9980 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C98E1CD135A7008E9980 /* Meal.swift */; };
+		87C6C9911CD135B2008E9980 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9901CD135B2008E9980 /* Food.swift */; };
+		87C6C9931CD135BE008E9980 /* Nutrient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9921CD135BE008E9980 /* Nutrient.swift */; };
+		87C6C9951CD135CA008E9980 /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9941CD135CA008E9980 /* Measure.swift */; };
+		87D175CE1CD3E324007EC26F /* MealItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87D175CD1CD3E324007EC26F /* MealItem.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,25 +97,37 @@
 		04C9F68E5ED1D7FD7701B844 /* Pods_NutriTrack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_NutriTrack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		5B360B4E2BBC9136E543273A /* Pods-NutriTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutriTrack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NutriTrack/Pods-NutriTrack.debug.xcconfig"; sourceTree = "<group>"; };
 		8171519F7A85A7E5574D59FE /* Pods-NutriTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutriTrack.release.xcconfig"; path = "Pods/Target Support Files/Pods-NutriTrack/Pods-NutriTrack.release.xcconfig"; sourceTree = "<group>"; };
-		8712BAEB1CE2579C00C38600 /* NTNutrientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTNutrientCell.swift; sourceTree = "<group>"; };
-		8712BAED1CE2582D00C38600 /* NTActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTActionCell.swift; sourceTree = "<group>"; };
-		87279B491CDA76B8000E8D4A /* NTCoreDataContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCoreDataContextProvider.swift; sourceTree = "<group>"; };
 		87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Convenience.swift"; sourceTree = "<group>"; };
-		87279B4F1CDA86DC000E8D4A /* NTDayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTDayViewController.swift; sourceTree = "<group>"; };
-		87279B511CDA86FD000E8D4A /* NTDayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTDayView.swift; sourceTree = "<group>"; };
-		8732B9D21CD980C50031E476 /* NTViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTViewController.swift; sourceTree = "<group>"; };
-		8732B9D41CDA4D680031E476 /* NTLoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTLoadingIndicator.swift; sourceTree = "<group>"; };
-		874389781CD53927003DFE01 /* NTTabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTTabBarController.swift; sourceTree = "<group>"; };
-		8743897C1CD6E9AE003DFE01 /* NTRecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTRecipesViewController.swift; sourceTree = "<group>"; };
-		8743897E1CD6F25A003DFE01 /* NTProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTProfileViewController.swift; sourceTree = "<group>"; };
-		878906501CD1ACD30049576C /* NTMealsProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsProviderProtocol.swift; sourceTree = "<group>"; };
-		878906541CD1AEE00049576C /* NTMealsCoreDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsCoreDataProvider.swift; sourceTree = "<group>"; };
-		878906561CD1B3460049576C /* NTMealsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsManager.swift; sourceTree = "<group>"; };
-		878906581CD1B7680049576C /* NTFoodSearchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodSearchProvider.swift; sourceTree = "<group>"; };
-		878906591CD1B7680049576C /* NTFoodSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodSearchService.swift; sourceTree = "<group>"; };
-		8789065A1CD1B7680049576C /* NTFoodSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodSearchView.swift; sourceTree = "<group>"; };
-		8789065B1CD1B7680049576C /* NTFoodSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodSearchViewController.swift; sourceTree = "<group>"; };
-		878906601CD1B7A70049576C /* NTFoodSearchProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodSearchProviderProtocol.swift; sourceTree = "<group>"; };
+		87279B4F1CDA86DC000E8D4A /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
+		87279B511CDA86FD000E8D4A /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
+		8732B9D21CD980C50031E476 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		874389781CD53927003DFE01 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
+		8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		8783666F1CE4CE4F002AF43A /* NutriTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NutriTrack.xcdatamodel; sourceTree = "<group>"; };
+		8783667C1CE4CF31002AF43A /* CDMealItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDMealItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8783667D1CE4CF31002AF43A /* CDMealItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDMealItem.swift; sourceTree = "<group>"; };
+		8783667E1CE4CF31002AF43A /* CDMeasure+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDMeasure+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		8783667F1CE4CF31002AF43A /* CDMeasure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDMeasure.swift; sourceTree = "<group>"; };
+		878366801CE4CF31002AF43A /* CDNutrient+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDNutrient+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		878366811CE4CF31002AF43A /* CDNutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDNutrient.swift; sourceTree = "<group>"; };
+		878366821CE4CF31002AF43A /* CDFood+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDFood+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		878366831CE4CF31002AF43A /* CDFood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDFood.swift; sourceTree = "<group>"; };
+		878366841CE4CF31002AF43A /* CDMeal+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CDMeal+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		878366851CE4CF31002AF43A /* CDMeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDMeal.swift; sourceTree = "<group>"; };
+		8783669F1CE4D083002AF43A /* ActionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionCell.swift; sourceTree = "<group>"; };
+		878366A01CE4D083002AF43A /* NutrientCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NutrientCell.swift; sourceTree = "<group>"; };
+		878366A21CE4D083002AF43A /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
+		878366A31CE4D083002AF43A /* LabeledField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledField.swift; sourceTree = "<group>"; };
+		878366A91CE4D169002AF43A /* CDContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDContextProvider.swift; sourceTree = "<group>"; };
+		878906501CD1ACD30049576C /* MealsProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsProviderProtocol.swift; sourceTree = "<group>"; };
+		878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsCoreDataProvider.swift; sourceTree = "<group>"; };
+		878906561CD1B3460049576C /* MealsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsManager.swift; sourceTree = "<group>"; };
+		878906581CD1B7680049576C /* FoodSearchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSearchProvider.swift; sourceTree = "<group>"; };
+		878906591CD1B7680049576C /* FoodSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSearchService.swift; sourceTree = "<group>"; };
+		8789065A1CD1B7680049576C /* FoodSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSearchView.swift; sourceTree = "<group>"; };
+		8789065B1CD1B7680049576C /* FoodSearchViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSearchViewController.swift; sourceTree = "<group>"; };
+		878906601CD1B7A70049576C /* FoodSearchProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSearchProviderProtocol.swift; sourceTree = "<group>"; };
 		879AECA11CC5B8840073BFB8 /* NutriTrack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NutriTrack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		879AECB81CC5B8840073BFB8 /* NutriTrackTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NutriTrackTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		879AECBC1CC5B8840073BFB8 /* NutriTrackTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NutriTrackTests.swift; sourceTree = "<group>"; };
@@ -127,11 +138,9 @@
 		879AECD61CC5B9BA0073BFB8 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		879AECD91CC5BA7C0073BFB8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		879AECDB1CC5BA820073BFB8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		879AECDF1CC5BB060073BFB8 /* NutriTrack.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NutriTrack.xcdatamodel; sourceTree = "<group>"; };
 		879AECE41CC674BA0073BFB8 /* Launch Screen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
-		87A4F2281CCFD035005BA380 /* NTCompareViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCompareViewController.swift; sourceTree = "<group>"; };
-		87A4F22A1CCFEC6B005BA380 /* UIColor+NTAppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+NTAppStyle.swift"; sourceTree = "<group>"; };
-		87A4F24C1CCFF97A005BA380 /* UIFont+NTAppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+NTAppStyle.swift"; sourceTree = "<group>"; };
+		87A4F22A1CCFEC6B005BA380 /* UIColor+AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+AppStyle.swift"; sourceTree = "<group>"; };
+		87A4F24C1CCFF97A005BA380 /* UIFont+AppStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIFont+AppStyle.swift"; sourceTree = "<group>"; };
 		87C6C90C1CCFFD9D008E9980 /* Roboto-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ExtraBold.ttf"; sourceTree = "<group>"; };
 		87C6C90D1CCFFD9D008E9980 /* Roboto-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
 		87C6C90E1CCFFD9D008E9980 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Bold.ttf"; sourceTree = "<group>"; };
@@ -144,32 +153,21 @@
 		87C6C9151CCFFD9D008E9980 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		87C6C9161CCFFD9D008E9980 /* Roboto-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ExtraLight.ttf"; sourceTree = "<group>"; };
 		87C6C9171CCFFD9D008E9980 /* Roboto-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		87C6C9291CD0235F008E9980 /* NTMealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsViewController.swift; sourceTree = "<group>"; };
-		87C6C92D1CD02888008E9980 /* NTMealDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealDetailsViewController.swift; sourceTree = "<group>"; };
-		87C6C9371CD0298B008E9980 /* NTFoodDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodDetailsView.swift; sourceTree = "<group>"; };
-		87C6C9391CD0298B008E9980 /* NTFoodDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFoodDetailsViewController.swift; sourceTree = "<group>"; };
-		87C6C93D1CD02BF5008E9980 /* NTEmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTEmptyView.swift; sourceTree = "<group>"; };
-		87C6C9411CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+NTModalPresentation.swift"; sourceTree = "<group>"; };
-		87C6C9431CD031C1008E9980 /* NTMealDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealDetailsView.swift; sourceTree = "<group>"; };
-		87C6C9451CD03286008E9980 /* String+NTDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+NTDefaults.swift"; sourceTree = "<group>"; };
-		87C6C9471CD039EB008E9980 /* NTMealsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealsView.swift; sourceTree = "<group>"; };
-		87C6C94C1CD107CB008E9980 /* NTLabeledField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTLabeledField.swift; sourceTree = "<group>"; };
+		87C6C9291CD0235F008E9980 /* MealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
+		87C6C92D1CD02888008E9980 /* MealDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealDetailsViewController.swift; sourceTree = "<group>"; };
+		87C6C9371CD0298B008E9980 /* FoodDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDetailsView.swift; sourceTree = "<group>"; };
+		87C6C9391CD0298B008E9980 /* FoodDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDetailsViewController.swift; sourceTree = "<group>"; };
+		87C6C93D1CD02BF5008E9980 /* EmptyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyView.swift; sourceTree = "<group>"; };
+		87C6C9411CD02F60008E9980 /* UINavigationController+ModalPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+ModalPresentation.swift"; sourceTree = "<group>"; };
+		87C6C9431CD031C1008E9980 /* MealDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealDetailsView.swift; sourceTree = "<group>"; };
+		87C6C9451CD03286008E9980 /* String+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Defaults.swift"; sourceTree = "<group>"; };
+		87C6C9471CD039EB008E9980 /* MealsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		87C6C97C1CD13086008E9980 /* Various+Unwrapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Various+Unwrapping.swift"; sourceTree = "<group>"; };
-		87C6C98E1CD135A7008E9980 /* NTMeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMeal.swift; sourceTree = "<group>"; };
-		87C6C9901CD135B2008E9980 /* NTFood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTFood.swift; sourceTree = "<group>"; };
-		87C6C9921CD135BE008E9980 /* NTNutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTNutrient.swift; sourceTree = "<group>"; };
-		87C6C9941CD135CA008E9980 /* NTMeasure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMeasure.swift; sourceTree = "<group>"; };
-		87D175CD1CD3E324007EC26F /* NTMealItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTMealItem.swift; sourceTree = "<group>"; };
-		87D175CF1CD3EA72007EC26F /* NTCDMeasure+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NTCDMeasure+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		87D175D01CD3EA72007EC26F /* NTCDMeasure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCDMeasure.swift; sourceTree = "<group>"; };
-		87D175D11CD3EA72007EC26F /* NTCDNutrient+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NTCDNutrient+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		87D175D21CD3EA72007EC26F /* NTCDNutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCDNutrient.swift; sourceTree = "<group>"; };
-		87D175D31CD3EA72007EC26F /* NTCDMeal+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NTCDMeal+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		87D175D41CD3EA72007EC26F /* NTCDMeal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCDMeal.swift; sourceTree = "<group>"; };
-		87D175D51CD3EA72007EC26F /* NTCDMealItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NTCDMealItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		87D175D61CD3EA72007EC26F /* NTCDMealItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCDMealItem.swift; sourceTree = "<group>"; };
-		87D175D71CD3EA72007EC26F /* NTCDFood+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NTCDFood+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		87D175D81CD3EA72007EC26F /* NTCDFood.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NTCDFood.swift; sourceTree = "<group>"; };
+		87C6C98E1CD135A7008E9980 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
+		87C6C9901CD135B2008E9980 /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
+		87C6C9921CD135BE008E9980 /* Nutrient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Nutrient.swift; sourceTree = "<group>"; };
+		87C6C9941CD135CA008E9980 /* Measure.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Measure.swift; sourceTree = "<group>"; };
+		87D175CD1CD3E324007EC26F /* MealItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealItem.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,11 +208,11 @@
 		870AA2931CC6FFC80088E168 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				87C6C98E1CD135A7008E9980 /* NTMeal.swift */,
-				87C6C9901CD135B2008E9980 /* NTFood.swift */,
-				87C6C9921CD135BE008E9980 /* NTNutrient.swift */,
-				87C6C9941CD135CA008E9980 /* NTMeasure.swift */,
-				87D175CD1CD3E324007EC26F /* NTMealItem.swift */,
+				87C6C98E1CD135A7008E9980 /* Meal.swift */,
+				87C6C9901CD135B2008E9980 /* Food.swift */,
+				87C6C9921CD135BE008E9980 /* Nutrient.swift */,
+				87C6C9941CD135CA008E9980 /* Measure.swift */,
+				87D175CD1CD3E324007EC26F /* MealItem.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -222,7 +220,7 @@
 		8743897A1CD6E7EE003DFE01 /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
-				8743897C1CD6E9AE003DFE01 /* NTRecipesViewController.swift */,
+				8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */,
 			);
 			path = Recipes;
 			sourceTree = "<group>";
@@ -230,9 +228,55 @@
 		8743897B1CD6E83C003DFE01 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				8743897E1CD6F25A003DFE01 /* NTProfileViewController.swift */,
+				8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */,
 			);
 			path = Profile;
+			sourceTree = "<group>";
+		};
+		878366631CE4CE4F002AF43A /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				8783667B1CE4CF05002AF43A /* Models */,
+				8783666E1CE4CE4F002AF43A /* NutriTrack.xcdatamodeld */,
+				878366A91CE4D169002AF43A /* CDContextProvider.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
+		8783667B1CE4CF05002AF43A /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				8783667C1CE4CF31002AF43A /* CDMealItem+CoreDataProperties.swift */,
+				8783667D1CE4CF31002AF43A /* CDMealItem.swift */,
+				8783667E1CE4CF31002AF43A /* CDMeasure+CoreDataProperties.swift */,
+				8783667F1CE4CF31002AF43A /* CDMeasure.swift */,
+				878366801CE4CF31002AF43A /* CDNutrient+CoreDataProperties.swift */,
+				878366811CE4CF31002AF43A /* CDNutrient.swift */,
+				878366821CE4CF31002AF43A /* CDFood+CoreDataProperties.swift */,
+				878366831CE4CF31002AF43A /* CDFood.swift */,
+				878366841CE4CF31002AF43A /* CDMeal+CoreDataProperties.swift */,
+				878366851CE4CF31002AF43A /* CDMeal.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		8783669D1CE4D083002AF43A /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				8783669E1CE4D083002AF43A /* Cells */,
+				878366A21CE4D083002AF43A /* LoadingIndicator.swift */,
+				878366A31CE4D083002AF43A /* LabeledField.swift */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		8783669E1CE4D083002AF43A /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				8783669F1CE4D083002AF43A /* ActionCell.swift */,
+				878366A01CE4D083002AF43A /* NutrientCell.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 		879AEC981CC5B8840073BFB8 = {
@@ -261,14 +305,14 @@
 			isa = PBXGroup;
 			children = (
 				879AECD51CC5B98A0073BFB8 /* Application */,
-				87A4F2271CCFCFF7005BA380 /* Compare */,
+				878366631CE4CE4F002AF43A /* CoreData */,
 				87C6C9361CD0298B008E9980 /* Food */,
 				87C6C9281CD02326008E9980 /* Meals */,
 				870AA2931CC6FFC80088E168 /* Models */,
 				8743897A1CD6E7EE003DFE01 /* Recipes */,
 				879AECD81CC5BA1C0073BFB8 /* Resources */,
 				8743897B1CD6E83C003DFE01 /* Profile */,
-				87C6C94B1CD10758008E9980 /* Shared */,
+				8783669D1CE4D083002AF43A /* Shared */,
 			);
 			path = NutriTrack;
 			sourceTree = "<group>";
@@ -295,13 +339,13 @@
 			isa = PBXGroup;
 			children = (
 				879AECD61CC5B9BA0073BFB8 /* AppDelegate.swift */,
-				87A4F22A1CCFEC6B005BA380 /* UIColor+NTAppStyle.swift */,
-				87A4F24C1CCFF97A005BA380 /* UIFont+NTAppStyle.swift */,
-				87C6C9411CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift */,
-				87C6C9451CD03286008E9980 /* String+NTDefaults.swift */,
+				87A4F22A1CCFEC6B005BA380 /* UIColor+AppStyle.swift */,
+				87A4F24C1CCFF97A005BA380 /* UIFont+AppStyle.swift */,
+				87C6C9411CD02F60008E9980 /* UINavigationController+ModalPresentation.swift */,
+				87C6C9451CD03286008E9980 /* String+Defaults.swift */,
 				87C6C97C1CD13086008E9980 /* Various+Unwrapping.swift */,
-				874389781CD53927003DFE01 /* NTTabBarController.swift */,
-				8732B9D21CD980C50031E476 /* NTViewController.swift */,
+				874389781CD53927003DFE01 /* TabBarController.swift */,
+				8732B9D21CD980C50031E476 /* BaseViewController.swift */,
 				87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */,
 			);
 			path = Application;
@@ -311,38 +355,11 @@
 			isa = PBXGroup;
 			children = (
 				87A4F2301CCFF8EF005BA380 /* Fonts */,
-				879AECDD1CC5BA9C0073BFB8 /* CoreData */,
 				879AECD91CC5BA7C0073BFB8 /* Assets.xcassets */,
 				879AECDB1CC5BA820073BFB8 /* Info.plist */,
 				879AECE41CC674BA0073BFB8 /* Launch Screen.storyboard */,
 			);
 			path = Resources;
-			sourceTree = "<group>";
-		};
-		879AECDD1CC5BA9C0073BFB8 /* CoreData */ = {
-			isa = PBXGroup;
-			children = (
-				87D175CF1CD3EA72007EC26F /* NTCDMeasure+CoreDataProperties.swift */,
-				87D175D01CD3EA72007EC26F /* NTCDMeasure.swift */,
-				87D175D11CD3EA72007EC26F /* NTCDNutrient+CoreDataProperties.swift */,
-				87D175D21CD3EA72007EC26F /* NTCDNutrient.swift */,
-				87D175D31CD3EA72007EC26F /* NTCDMeal+CoreDataProperties.swift */,
-				87D175D41CD3EA72007EC26F /* NTCDMeal.swift */,
-				87D175D51CD3EA72007EC26F /* NTCDMealItem+CoreDataProperties.swift */,
-				87D175D61CD3EA72007EC26F /* NTCDMealItem.swift */,
-				87D175D71CD3EA72007EC26F /* NTCDFood+CoreDataProperties.swift */,
-				87D175D81CD3EA72007EC26F /* NTCDFood.swift */,
-				879AECDE1CC5BB060073BFB8 /* NutriTrack.xcdatamodeld */,
-			);
-			path = CoreData;
-			sourceTree = "<group>";
-		};
-		87A4F2271CCFCFF7005BA380 /* Compare */ = {
-			isa = PBXGroup;
-			children = (
-				87A4F2281CCFD035005BA380 /* NTCompareViewController.swift */,
-			);
-			path = Compare;
 			sourceTree = "<group>";
 		};
 		87A4F2301CCFF8EF005BA380 /* Fonts */ = {
@@ -375,16 +392,16 @@
 		87C6C9281CD02326008E9980 /* Meals */ = {
 			isa = PBXGroup;
 			children = (
-				87C6C93D1CD02BF5008E9980 /* NTEmptyView.swift */,
-				87C6C9291CD0235F008E9980 /* NTMealsViewController.swift */,
-				87C6C92D1CD02888008E9980 /* NTMealDetailsViewController.swift */,
-				87C6C9431CD031C1008E9980 /* NTMealDetailsView.swift */,
-				87C6C9471CD039EB008E9980 /* NTMealsView.swift */,
-				878906501CD1ACD30049576C /* NTMealsProviderProtocol.swift */,
-				878906541CD1AEE00049576C /* NTMealsCoreDataProvider.swift */,
-				878906561CD1B3460049576C /* NTMealsManager.swift */,
-				87279B4F1CDA86DC000E8D4A /* NTDayViewController.swift */,
-				87279B511CDA86FD000E8D4A /* NTDayView.swift */,
+				87C6C93D1CD02BF5008E9980 /* EmptyView.swift */,
+				87C6C9291CD0235F008E9980 /* MealsViewController.swift */,
+				87C6C92D1CD02888008E9980 /* MealDetailsViewController.swift */,
+				87C6C9431CD031C1008E9980 /* MealDetailsView.swift */,
+				87C6C9471CD039EB008E9980 /* MealsView.swift */,
+				878906501CD1ACD30049576C /* MealsProviderProtocol.swift */,
+				878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */,
+				878906561CD1B3460049576C /* MealsManager.swift */,
+				87279B4F1CDA86DC000E8D4A /* DayViewController.swift */,
+				87279B511CDA86FD000E8D4A /* DayView.swift */,
 			);
 			path = Meals;
 			sourceTree = "<group>";
@@ -392,27 +409,15 @@
 		87C6C9361CD0298B008E9980 /* Food */ = {
 			isa = PBXGroup;
 			children = (
-				87C6C9371CD0298B008E9980 /* NTFoodDetailsView.swift */,
-				87C6C9391CD0298B008E9980 /* NTFoodDetailsViewController.swift */,
-				8789065A1CD1B7680049576C /* NTFoodSearchView.swift */,
-				8789065B1CD1B7680049576C /* NTFoodSearchViewController.swift */,
-				878906581CD1B7680049576C /* NTFoodSearchProvider.swift */,
-				878906591CD1B7680049576C /* NTFoodSearchService.swift */,
-				878906601CD1B7A70049576C /* NTFoodSearchProviderProtocol.swift */,
+				87C6C9371CD0298B008E9980 /* FoodDetailsView.swift */,
+				87C6C9391CD0298B008E9980 /* FoodDetailsViewController.swift */,
+				8789065A1CD1B7680049576C /* FoodSearchView.swift */,
+				8789065B1CD1B7680049576C /* FoodSearchViewController.swift */,
+				878906581CD1B7680049576C /* FoodSearchProvider.swift */,
+				878906591CD1B7680049576C /* FoodSearchService.swift */,
+				878906601CD1B7A70049576C /* FoodSearchProviderProtocol.swift */,
 			);
 			path = Food;
-			sourceTree = "<group>";
-		};
-		87C6C94B1CD10758008E9980 /* Shared */ = {
-			isa = PBXGroup;
-			children = (
-				8712BAEB1CE2579C00C38600 /* NTNutrientCell.swift */,
-				87C6C94C1CD107CB008E9980 /* NTLabeledField.swift */,
-				8732B9D41CDA4D680031E476 /* NTLoadingIndicator.swift */,
-				87279B491CDA76B8000E8D4A /* NTCoreDataContextProvider.swift */,
-				8712BAED1CE2582D00C38600 /* NTActionCell.swift */,
-			);
-			path = Shared;
 			sourceTree = "<group>";
 		};
 		D305CA68055038277EB649F9 /* Frameworks */ = {
@@ -616,56 +621,55 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8732B9D51CDA4D680031E476 /* NTLoadingIndicator.swift in Sources */,
-				87D175DD1CD3EA72007EC26F /* NTCDMeal+CoreDataProperties.swift in Sources */,
-				87D175E11CD3EA72007EC26F /* NTCDFood+CoreDataProperties.swift in Sources */,
-				87279B521CDA86FD000E8D4A /* NTDayView.swift in Sources */,
-				87C6C93F1CD02BF5008E9980 /* NTEmptyView.swift in Sources */,
-				87A4F22B1CCFEC6B005BA380 /* UIColor+NTAppStyle.swift in Sources */,
-				8789065E1CD1B7680049576C /* NTFoodSearchView.swift in Sources */,
-				87D175DB1CD3EA72007EC26F /* NTCDNutrient+CoreDataProperties.swift in Sources */,
-				87C6C9951CD135CA008E9980 /* NTMeasure.swift in Sources */,
-				87C6C94D1CD107CB008E9980 /* NTLabeledField.swift in Sources */,
-				8743897F1CD6F25A003DFE01 /* NTProfileViewController.swift in Sources */,
-				8732B9D31CD980C50031E476 /* NTViewController.swift in Sources */,
-				87C6C98F1CD135A7008E9980 /* NTMeal.swift in Sources */,
-				87D175DA1CD3EA72007EC26F /* NTCDMeasure.swift in Sources */,
-				878906571CD1B3460049576C /* NTMealsManager.swift in Sources */,
-				8712BAEC1CE2579C00C38600 /* NTNutrientCell.swift in Sources */,
-				87D175DF1CD3EA72007EC26F /* NTCDMealItem+CoreDataProperties.swift in Sources */,
-				8789065C1CD1B7680049576C /* NTFoodSearchProvider.swift in Sources */,
-				87C6C93A1CD0298B008E9980 /* NTFoodDetailsView.swift in Sources */,
-				87C6C9931CD135BE008E9980 /* NTNutrient.swift in Sources */,
+				878366861CE4CF31002AF43A /* CDMealItem+CoreDataProperties.swift in Sources */,
+				87279B521CDA86FD000E8D4A /* DayView.swift in Sources */,
+				8783667A1CE4CE4F002AF43A /* NutriTrack.xcdatamodeld in Sources */,
+				87C6C93F1CD02BF5008E9980 /* EmptyView.swift in Sources */,
+				878366A81CE4D083002AF43A /* LabeledField.swift in Sources */,
+				87A4F22B1CCFEC6B005BA380 /* UIColor+AppStyle.swift in Sources */,
+				8783668D1CE4CF31002AF43A /* CDFood.swift in Sources */,
+				8789065E1CD1B7680049576C /* FoodSearchView.swift in Sources */,
+				87C6C9951CD135CA008E9980 /* Measure.swift in Sources */,
+				878366AA1CE4D169002AF43A /* CDContextProvider.swift in Sources */,
+				8783668B1CE4CF31002AF43A /* CDNutrient.swift in Sources */,
+				8743897F1CD6F25A003DFE01 /* ProfileViewController.swift in Sources */,
+				878366A71CE4D083002AF43A /* LoadingIndicator.swift in Sources */,
+				8732B9D31CD980C50031E476 /* BaseViewController.swift in Sources */,
+				87C6C98F1CD135A7008E9980 /* Meal.swift in Sources */,
+				878906571CD1B3460049576C /* MealsManager.swift in Sources */,
+				8783668E1CE4CF31002AF43A /* CDMeal+CoreDataProperties.swift in Sources */,
+				8789065C1CD1B7680049576C /* FoodSearchProvider.swift in Sources */,
+				878366891CE4CF31002AF43A /* CDMeasure.swift in Sources */,
+				878366A51CE4D083002AF43A /* NutrientCell.swift in Sources */,
+				87C6C93A1CD0298B008E9980 /* FoodDetailsView.swift in Sources */,
+				87C6C9931CD135BE008E9980 /* Nutrient.swift in Sources */,
 				879AECD71CC5B9BA0073BFB8 /* AppDelegate.swift in Sources */,
-				87C6C93C1CD0298B008E9980 /* NTFoodDetailsViewController.swift in Sources */,
-				87C6C9911CD135B2008E9980 /* NTFood.swift in Sources */,
-				8789065F1CD1B7680049576C /* NTFoodSearchViewController.swift in Sources */,
-				8743897D1CD6E9AE003DFE01 /* NTRecipesViewController.swift in Sources */,
+				878366A41CE4D083002AF43A /* ActionCell.swift in Sources */,
+				87C6C93C1CD0298B008E9980 /* FoodDetailsViewController.swift in Sources */,
+				87C6C9911CD135B2008E9980 /* Food.swift in Sources */,
+				8789065F1CD1B7680049576C /* FoodSearchViewController.swift in Sources */,
+				8743897D1CD6E9AE003DFE01 /* RecipesViewController.swift in Sources */,
 				87279B4C1CDA82C9000E8D4A /* NSDate+Convenience.swift in Sources */,
-				87D175DC1CD3EA72007EC26F /* NTCDNutrient.swift in Sources */,
-				87D175D91CD3EA72007EC26F /* NTCDMeasure+CoreDataProperties.swift in Sources */,
-				87D175CE1CD3E324007EC26F /* NTMealItem.swift in Sources */,
-				8712BAEE1CE2582D00C38600 /* NTActionCell.swift in Sources */,
-				87279B501CDA86DC000E8D4A /* NTDayViewController.swift in Sources */,
-				87C6C9461CD03286008E9980 /* String+NTDefaults.swift in Sources */,
-				878906551CD1AEE00049576C /* NTMealsCoreDataProvider.swift in Sources */,
-				87279B4A1CDA76B8000E8D4A /* NTCoreDataContextProvider.swift in Sources */,
+				87D175CE1CD3E324007EC26F /* MealItem.swift in Sources */,
+				87279B501CDA86DC000E8D4A /* DayViewController.swift in Sources */,
+				878366871CE4CF31002AF43A /* CDMealItem.swift in Sources */,
+				87C6C9461CD03286008E9980 /* String+Defaults.swift in Sources */,
+				878906551CD1AEE00049576C /* MealsCoreDataProvider.swift in Sources */,
+				8783668C1CE4CF31002AF43A /* CDFood+CoreDataProperties.swift in Sources */,
 				87C6C97D1CD13086008E9980 /* Various+Unwrapping.swift in Sources */,
-				87D175E21CD3EA72007EC26F /* NTCDFood.swift in Sources */,
-				87C6C9481CD039EB008E9980 /* NTMealsView.swift in Sources */,
-				87D175E01CD3EA72007EC26F /* NTCDMealItem.swift in Sources */,
-				87C6C9421CD02F60008E9980 /* UINavigationController+NTModalPresentation.swift in Sources */,
-				87A4F24D1CCFF97A005BA380 /* UIFont+NTAppStyle.swift in Sources */,
-				878906511CD1ACD30049576C /* NTMealsProviderProtocol.swift in Sources */,
-				87C6C92A1CD0235F008E9980 /* NTMealsViewController.swift in Sources */,
-				87A4F2291CCFD035005BA380 /* NTCompareViewController.swift in Sources */,
-				87C6C9441CD031C1008E9980 /* NTMealDetailsView.swift in Sources */,
-				8789065D1CD1B7680049576C /* NTFoodSearchService.swift in Sources */,
-				878906611CD1B7A70049576C /* NTFoodSearchProviderProtocol.swift in Sources */,
-				87D175DE1CD3EA72007EC26F /* NTCDMeal.swift in Sources */,
-				879AECE01CC5BB060073BFB8 /* NutriTrack.xcdatamodeld in Sources */,
-				87C6C92E1CD02888008E9980 /* NTMealDetailsViewController.swift in Sources */,
-				874389791CD53927003DFE01 /* NTTabBarController.swift in Sources */,
+				87C6C9481CD039EB008E9980 /* MealsView.swift in Sources */,
+				87C6C9421CD02F60008E9980 /* UINavigationController+ModalPresentation.swift in Sources */,
+				87A4F24D1CCFF97A005BA380 /* UIFont+AppStyle.swift in Sources */,
+				8783668F1CE4CF31002AF43A /* CDMeal.swift in Sources */,
+				878906511CD1ACD30049576C /* MealsProviderProtocol.swift in Sources */,
+				8783668A1CE4CF31002AF43A /* CDNutrient+CoreDataProperties.swift in Sources */,
+				87C6C92A1CD0235F008E9980 /* MealsViewController.swift in Sources */,
+				87C6C9441CD031C1008E9980 /* MealDetailsView.swift in Sources */,
+				8789065D1CD1B7680049576C /* FoodSearchService.swift in Sources */,
+				878906611CD1B7A70049576C /* FoodSearchProviderProtocol.swift in Sources */,
+				87C6C92E1CD02888008E9980 /* MealDetailsViewController.swift in Sources */,
+				878366881CE4CF31002AF43A /* CDMeasure+CoreDataProperties.swift in Sources */,
+				874389791CD53927003DFE01 /* TabBarController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,12 +904,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		879AECDE1CC5BB060073BFB8 /* NutriTrack.xcdatamodeld */ = {
+		8783666E1CE4CE4F002AF43A /* NutriTrack.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				879AECDF1CC5BB060073BFB8 /* NutriTrack.xcdatamodel */,
+				8783666F1CE4CE4F002AF43A /* NutriTrack.xcdatamodel */,
 			);
-			currentVersion = 879AECDF1CC5BB060073BFB8 /* NutriTrack.xcdatamodel */;
+			currentVersion = 8783666F1CE4CE4F002AF43A /* NutriTrack.xcdatamodel */;
 			path = NutriTrack.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
