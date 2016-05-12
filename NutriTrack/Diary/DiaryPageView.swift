@@ -1,5 +1,5 @@
 //
-//  DayView.swift
+//  DiaryPageView.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-05-04.
@@ -8,17 +8,17 @@
 
 import UIKit
 
-protocol DayViewDataSource: class {
-    func dayViewTitleForDay(sender: DayView) -> String
-    func dayViewNumberOfNutrients(sender: DayView) -> Int
-    func dayView(sender: DayView, titleForNutrientAtIndex index: Int) -> String
-    func dayView(sender: DayView, valueForNutrientAtIndex index: Int) -> Float
-    func dayView(sender: DayView, unitForNutrientAtIndex index: Int) -> String
+protocol DiaryPageViewDataSource: class {
+    func diaryPageViewTitleForDay(sender: DiaryPageView) -> String
+    func diaryPageViewNumberOfNutrients(sender: DiaryPageView) -> Int
+    func diaryPageView(sender: DiaryPageView, titleForNutrientAtIndex index: Int) -> String
+    func diaryPageView(sender: DiaryPageView, valueForNutrientAtIndex index: Int) -> Float
+    func diaryPageView(sender: DiaryPageView, unitForNutrientAtIndex index: Int) -> String
 }
 
-class DayView: UIView, UITableViewDelegate, UITableViewDataSource {
+class DiaryPageView: UIView, UITableViewDelegate, UITableViewDataSource {
     
-    weak internal var dataSource: DayViewDataSource?
+    weak internal var dataSource: DiaryPageViewDataSource?
     
     lazy private var titleLabel: UILabel = {
         let label = UILabel()
@@ -44,7 +44,7 @@ class DayView: UIView, UITableViewDelegate, UITableViewDataSource {
     }
     
     internal func reloadData() {
-        self.titleLabel.text = self.dataSource?.dayViewTitleForDay(self)
+        self.titleLabel.text = self.dataSource?.diaryPageViewTitleForDay(self)
         self.tableView.reloadData()
     }
     
@@ -80,7 +80,7 @@ class DayView: UIView, UITableViewDelegate, UITableViewDataSource {
             return 2
         }
         
-        guard let num = self.dataSource?.dayViewNumberOfNutrients(self) else {
+        guard let num = self.dataSource?.diaryPageViewNumberOfNutrients(self) else {
             return 0
         }
         
@@ -110,9 +110,9 @@ class DayView: UIView, UITableViewDelegate, UITableViewDataSource {
             return cell
         } else {
             let cell = tableView.dequeueReusableCellWithIdentifier(NutrientCell.reuseIdentifier) as! NutrientCell
-            cell.name = self.dataSource?.dayView(self, titleForNutrientAtIndex: indexPath.row)
-            cell.value = self.dataSource?.dayView(self, valueForNutrientAtIndex: indexPath.row)
-            cell.unit = self.dataSource?.dayView(self, unitForNutrientAtIndex: indexPath.row)
+            cell.name = self.dataSource?.diaryPageView(self, titleForNutrientAtIndex: indexPath.row)
+            cell.value = self.dataSource?.diaryPageView(self, valueForNutrientAtIndex: indexPath.row)
+            cell.unit = self.dataSource?.diaryPageView(self, unitForNutrientAtIndex: indexPath.row)
             return cell
         }
         

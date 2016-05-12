@@ -1,5 +1,5 @@
 //
-//  DayViewController.swift
+//  DiaryPageViewController.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-05-04.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DayViewController: UIViewController, DayViewDataSource {
+class DiaryPageViewController: UIViewController, DiaryPageViewDataSource {
     
     internal var date: NSDate
     internal var meals: [Meal]
@@ -19,8 +19,8 @@ class DayViewController: UIViewController, DayViewDataSource {
         return formatter
     }()
     
-    lazy private var dayView: DayView = {
-        let view = DayView()
+    lazy private var diaryPageView: DiaryPageView = {
+        let view = DiaryPageView()
         view.dataSource = self
         return view
     }()
@@ -38,31 +38,31 @@ class DayViewController: UIViewController, DayViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.addSubview(self.dayView)
-        self.dayView.reloadData()
+        self.view.addSubview(self.diaryPageView)
+        self.diaryPageView.reloadData()
         
         self.updateViewConstraints()
     }
     
     override internal func updateViewConstraints() {
         super.updateViewConstraints()
-        self.dayView.autoPinEdgesToSuperviewEdges()
+        self.diaryPageView.autoPinEdgesToSuperviewEdges()
     }
     
-    // MARK: DayViewDataSource methods
+    // MARK: DiaryPageViewDataSource methods
     
-    internal func dayViewTitleForDay(sender: DayView) -> String {
-        return DayViewController.dateFormatter.stringFromDate(self.date)
+    internal func diaryPageViewTitleForDay(sender: DiaryPageView) -> String {
+        return DiaryPageViewController.dateFormatter.stringFromDate(self.date)
     }
     
-    internal func dayViewNumberOfNutrients(sender: DayView) -> Int {
+    internal func diaryPageViewNumberOfNutrients(sender: DiaryPageView) -> Int {
         guard let count = self.meals.first?.mealItems.first?.food.nutrients.count else {
             return 0
         }
         return count
     }
     
-    internal func dayView(sender: DayView, titleForNutrientAtIndex index: Int) -> String {
+    internal func diaryPageView(sender: DiaryPageView, titleForNutrientAtIndex index: Int) -> String {
         guard let name = self.meals.first?.mealItems.first?.food.sortedNutrients[index].name else {
             return ""
         }
@@ -70,7 +70,7 @@ class DayViewController: UIViewController, DayViewDataSource {
         return name
     }
     
-    internal func dayView(sender: DayView, valueForNutrientAtIndex index: Int) -> Float {
+    internal func diaryPageView(sender: DiaryPageView, valueForNutrientAtIndex index: Int) -> Float {
         return self.meals.reduce(0.0) { (total: Float, meal: Meal) in
             return meal.mealItems.reduce(total) { (itemTotal: Float, item: MealItem) in
                 let measureValue = item.food.measures[item.measureIndex].value
@@ -82,7 +82,7 @@ class DayViewController: UIViewController, DayViewDataSource {
         }
     }
     
-    internal func dayView(sender: DayView, unitForNutrientAtIndex index: Int) -> String {
+    internal func diaryPageView(sender: DiaryPageView, unitForNutrientAtIndex index: Int) -> String {
         guard let unit = self.meals.first?.mealItems.first?.food.sortedNutrients[index].unit else {
             return ""
         }

@@ -23,8 +23,8 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, FoodSear
         return controller
     }()
     
-    lazy private var mealsViewController: MealsViewController = {
-        let controller = MealsViewController()
+    lazy private var diaryViewController: DiaryViewController = {
+        let controller = DiaryViewController()
         controller.tabBarItem = UITabBarItem(title: NSLocalizedString("Diary", comment: ""), image: UIImage(named: "log_book")?.imageWithRenderingMode(.AlwaysTemplate), selectedImage: nil)
         return controller
     }()
@@ -41,7 +41,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, FoodSear
         self.viewControllers = [
             self.navigationControllerWithViewController(self.recipesViewController),
             self.navigationControllerWithViewController(self.searchViewController),
-            self.navigationControllerWithViewController(self.mealsViewController),
+            self.navigationControllerWithViewController(self.diaryViewController),
             self.navigationControllerWithViewController(self.profileViewController)
         ]
         
@@ -58,7 +58,7 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, FoodSear
     //MARK: SearchViewControllerDelegate methods
     
     internal func foodSearchViewController(sender: FoodSearchViewController, didSelectFood food: Food, quantity: Int, measureIndex: Int) {
-        self.mealsViewController.presentMealDetailsWithFood(food, quantity: quantity, measureIndex: measureIndex)
+        self.diaryViewController.presentMealDetailsWithFood(food, quantity: quantity, measureIndex: measureIndex)
         self.selectedIndex = 2
     }
     

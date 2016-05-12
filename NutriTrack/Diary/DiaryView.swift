@@ -1,5 +1,5 @@
 //
-//  MealDetailsView.swift
+//  DiaryView.swift
 //  NutriTrack
 //
 //  Created by Avais on 2016-04-26.
@@ -8,14 +8,14 @@
 
 import UIKit
 
-protocol MealsViewDataSource: class {
-    func mealsViewNumberOfMeals(sender: MealsView) -> Int
-    func mealsView(sender: MealsView, titleForMealAtIndex index: Int) -> String
+protocol DiaryViewDataSource: class {
+    func diaryViewNumberOfMeals(sender: DiaryView) -> Int
+    func diaryView(sender: DiaryView, titleForMealAtIndex index: Int) -> String
 }
 
-class MealsView: UIView, UITableViewDataSource, UITableViewDelegate {
+class DiaryView: UIView, UITableViewDataSource, UITableViewDelegate {
     
-    weak internal var dataSource: MealsViewDataSource?
+    weak internal var dataSource: DiaryViewDataSource?
     
     private lazy var tableView: UITableView = {
         let table: UITableView = UITableView()
@@ -56,12 +56,12 @@ class MealsView: UIView, UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Int.unwrapOrZero(self.dataSource?.mealsViewNumberOfMeals(self))
+        return Int.unwrapOrZero(self.dataSource?.diaryViewNumberOfMeals(self))
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(String.defaultCellReuseIdentifier())
-        cell?.textLabel?.text = self.dataSource!.mealsView(self, titleForMealAtIndex: indexPath.row)
+        cell?.textLabel?.text = self.dataSource!.diaryView(self, titleForMealAtIndex: indexPath.row)
         cell?.textLabel?.font = UIFont.defaultFont()
         return cell!
     }

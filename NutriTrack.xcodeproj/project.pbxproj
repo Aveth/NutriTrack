@@ -9,8 +9,6 @@
 /* Begin PBXBuildFile section */
 		0CA5B2C303B2651CD9D596DB /* Pods_NutriTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C9F68E5ED1D7FD7701B844 /* Pods_NutriTrack.framework */; };
 		87279B4C1CDA82C9000E8D4A /* NSDate+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */; };
-		87279B501CDA86DC000E8D4A /* DayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4F1CDA86DC000E8D4A /* DayViewController.swift */; };
-		87279B521CDA86FD000E8D4A /* DayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B511CDA86FD000E8D4A /* DayView.swift */; };
 		8732B9D31CD980C50031E476 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732B9D21CD980C50031E476 /* BaseViewController.swift */; };
 		874389791CD53927003DFE01 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389781CD53927003DFE01 /* TabBarController.swift */; };
 		8743897D1CD6E9AE003DFE01 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */; };
@@ -31,6 +29,10 @@
 		878366A71CE4D083002AF43A /* LoadingIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366A21CE4D083002AF43A /* LoadingIndicator.swift */; };
 		878366A81CE4D083002AF43A /* LabeledField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366A31CE4D083002AF43A /* LabeledField.swift */; };
 		878366AA1CE4D169002AF43A /* CDContextProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366A91CE4D169002AF43A /* CDContextProvider.swift */; };
+		878366AD1CE4D6BC002AF43A /* DiaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366AC1CE4D6BC002AF43A /* DiaryViewController.swift */; };
+		878366AF1CE4D6F3002AF43A /* DiaryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366AE1CE4D6F3002AF43A /* DiaryView.swift */; };
+		878366B21CE4D7B1002AF43A /* DiaryPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366B01CE4D7B1002AF43A /* DiaryPageView.swift */; };
+		878366B31CE4D7B1002AF43A /* DiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366B11CE4D7B1002AF43A /* DiaryPageViewController.swift */; };
 		878906511CD1ACD30049576C /* MealsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906501CD1ACD30049576C /* MealsProviderProtocol.swift */; };
 		878906551CD1AEE00049576C /* MealsCoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */; };
 		878906571CD1B3460049576C /* MealsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906561CD1B3460049576C /* MealsManager.swift */; };
@@ -59,7 +61,6 @@
 		87C6C9231CD00637008E9980 /* Roboto-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C90D1CCFFD9D008E9980 /* Roboto-ExtraBoldItalic.ttf */; };
 		87C6C9241CD00637008E9980 /* Roboto-SemiBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C9141CCFFD9D008E9980 /* Roboto-SemiBoldItalic.ttf */; };
 		87C6C9251CD00637008E9980 /* Roboto-ExtraLightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 87C6C9171CCFFD9D008E9980 /* Roboto-ExtraLightItalic.ttf */; };
-		87C6C92A1CD0235F008E9980 /* MealsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9291CD0235F008E9980 /* MealsViewController.swift */; };
 		87C6C92E1CD02888008E9980 /* MealDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C92D1CD02888008E9980 /* MealDetailsViewController.swift */; };
 		87C6C93A1CD0298B008E9980 /* FoodDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9371CD0298B008E9980 /* FoodDetailsView.swift */; };
 		87C6C93C1CD0298B008E9980 /* FoodDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9391CD0298B008E9980 /* FoodDetailsViewController.swift */; };
@@ -67,7 +68,6 @@
 		87C6C9421CD02F60008E9980 /* UINavigationController+ModalPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9411CD02F60008E9980 /* UINavigationController+ModalPresentation.swift */; };
 		87C6C9441CD031C1008E9980 /* MealDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9431CD031C1008E9980 /* MealDetailsView.swift */; };
 		87C6C9461CD03286008E9980 /* String+Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9451CD03286008E9980 /* String+Defaults.swift */; };
-		87C6C9481CD039EB008E9980 /* MealsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9471CD039EB008E9980 /* MealsView.swift */; };
 		87C6C97D1CD13086008E9980 /* Various+Unwrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C97C1CD13086008E9980 /* Various+Unwrapping.swift */; };
 		87C6C98F1CD135A7008E9980 /* Meal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C98E1CD135A7008E9980 /* Meal.swift */; };
 		87C6C9911CD135B2008E9980 /* Food.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6C9901CD135B2008E9980 /* Food.swift */; };
@@ -98,8 +98,6 @@
 		5B360B4E2BBC9136E543273A /* Pods-NutriTrack.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutriTrack.debug.xcconfig"; path = "Pods/Target Support Files/Pods-NutriTrack/Pods-NutriTrack.debug.xcconfig"; sourceTree = "<group>"; };
 		8171519F7A85A7E5574D59FE /* Pods-NutriTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutriTrack.release.xcconfig"; path = "Pods/Target Support Files/Pods-NutriTrack/Pods-NutriTrack.release.xcconfig"; sourceTree = "<group>"; };
 		87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Convenience.swift"; sourceTree = "<group>"; };
-		87279B4F1CDA86DC000E8D4A /* DayViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayViewController.swift; sourceTree = "<group>"; };
-		87279B511CDA86FD000E8D4A /* DayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DayView.swift; sourceTree = "<group>"; };
 		8732B9D21CD980C50031E476 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		874389781CD53927003DFE01 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
@@ -120,6 +118,10 @@
 		878366A21CE4D083002AF43A /* LoadingIndicator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingIndicator.swift; sourceTree = "<group>"; };
 		878366A31CE4D083002AF43A /* LabeledField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LabeledField.swift; sourceTree = "<group>"; };
 		878366A91CE4D169002AF43A /* CDContextProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDContextProvider.swift; sourceTree = "<group>"; };
+		878366AC1CE4D6BC002AF43A /* DiaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryViewController.swift; sourceTree = "<group>"; };
+		878366AE1CE4D6F3002AF43A /* DiaryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryView.swift; sourceTree = "<group>"; };
+		878366B01CE4D7B1002AF43A /* DiaryPageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryPageView.swift; sourceTree = "<group>"; };
+		878366B11CE4D7B1002AF43A /* DiaryPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryPageViewController.swift; sourceTree = "<group>"; };
 		878906501CD1ACD30049576C /* MealsProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsProviderProtocol.swift; sourceTree = "<group>"; };
 		878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsCoreDataProvider.swift; sourceTree = "<group>"; };
 		878906561CD1B3460049576C /* MealsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsManager.swift; sourceTree = "<group>"; };
@@ -153,7 +155,6 @@
 		87C6C9151CCFFD9D008E9980 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Regular.ttf"; sourceTree = "<group>"; };
 		87C6C9161CCFFD9D008E9980 /* Roboto-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ExtraLight.ttf"; sourceTree = "<group>"; };
 		87C6C9171CCFFD9D008E9980 /* Roboto-ExtraLightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ExtraLightItalic.ttf"; sourceTree = "<group>"; };
-		87C6C9291CD0235F008E9980 /* MealsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsViewController.swift; sourceTree = "<group>"; };
 		87C6C92D1CD02888008E9980 /* MealDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealDetailsViewController.swift; sourceTree = "<group>"; };
 		87C6C9371CD0298B008E9980 /* FoodDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDetailsView.swift; sourceTree = "<group>"; };
 		87C6C9391CD0298B008E9980 /* FoodDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodDetailsViewController.swift; sourceTree = "<group>"; };
@@ -161,7 +162,6 @@
 		87C6C9411CD02F60008E9980 /* UINavigationController+ModalPresentation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationController+ModalPresentation.swift"; sourceTree = "<group>"; };
 		87C6C9431CD031C1008E9980 /* MealDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealDetailsView.swift; sourceTree = "<group>"; };
 		87C6C9451CD03286008E9980 /* String+Defaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+Defaults.swift"; sourceTree = "<group>"; };
-		87C6C9471CD039EB008E9980 /* MealsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsView.swift; sourceTree = "<group>"; };
 		87C6C97C1CD13086008E9980 /* Various+Unwrapping.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Various+Unwrapping.swift"; sourceTree = "<group>"; };
 		87C6C98E1CD135A7008E9980 /* Meal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Meal.swift; sourceTree = "<group>"; };
 		87C6C9901CD135B2008E9980 /* Food.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Food.swift; sourceTree = "<group>"; };
@@ -279,6 +279,17 @@
 			path = Cells;
 			sourceTree = "<group>";
 		};
+		878366AB1CE4D602002AF43A /* Diary */ = {
+			isa = PBXGroup;
+			children = (
+				878366AE1CE4D6F3002AF43A /* DiaryView.swift */,
+				878366AC1CE4D6BC002AF43A /* DiaryViewController.swift */,
+				878366B01CE4D7B1002AF43A /* DiaryPageView.swift */,
+				878366B11CE4D7B1002AF43A /* DiaryPageViewController.swift */,
+			);
+			path = Diary;
+			sourceTree = "<group>";
+		};
 		879AEC981CC5B8840073BFB8 = {
 			isa = PBXGroup;
 			children = (
@@ -306,6 +317,7 @@
 			children = (
 				879AECD51CC5B98A0073BFB8 /* Application */,
 				878366631CE4CE4F002AF43A /* CoreData */,
+				878366AB1CE4D602002AF43A /* Diary */,
 				87C6C9361CD0298B008E9980 /* Food */,
 				87C6C9281CD02326008E9980 /* Meals */,
 				870AA2931CC6FFC80088E168 /* Models */,
@@ -393,15 +405,11 @@
 			isa = PBXGroup;
 			children = (
 				87C6C93D1CD02BF5008E9980 /* EmptyView.swift */,
-				87C6C9291CD0235F008E9980 /* MealsViewController.swift */,
 				87C6C92D1CD02888008E9980 /* MealDetailsViewController.swift */,
 				87C6C9431CD031C1008E9980 /* MealDetailsView.swift */,
-				87C6C9471CD039EB008E9980 /* MealsView.swift */,
 				878906501CD1ACD30049576C /* MealsProviderProtocol.swift */,
 				878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */,
 				878906561CD1B3460049576C /* MealsManager.swift */,
-				87279B4F1CDA86DC000E8D4A /* DayViewController.swift */,
-				87279B511CDA86FD000E8D4A /* DayView.swift */,
 			);
 			path = Meals;
 			sourceTree = "<group>";
@@ -622,11 +630,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				878366861CE4CF31002AF43A /* CDMealItem+CoreDataProperties.swift in Sources */,
-				87279B521CDA86FD000E8D4A /* DayView.swift in Sources */,
 				8783667A1CE4CE4F002AF43A /* NutriTrack.xcdatamodeld in Sources */,
 				87C6C93F1CD02BF5008E9980 /* EmptyView.swift in Sources */,
 				878366A81CE4D083002AF43A /* LabeledField.swift in Sources */,
 				87A4F22B1CCFEC6B005BA380 /* UIColor+AppStyle.swift in Sources */,
+				878366AD1CE4D6BC002AF43A /* DiaryViewController.swift in Sources */,
 				8783668D1CE4CF31002AF43A /* CDFood.swift in Sources */,
 				8789065E1CD1B7680049576C /* FoodSearchView.swift in Sources */,
 				87C6C9951CD135CA008E9980 /* Measure.swift in Sources */,
@@ -636,6 +644,7 @@
 				878366A71CE4D083002AF43A /* LoadingIndicator.swift in Sources */,
 				8732B9D31CD980C50031E476 /* BaseViewController.swift in Sources */,
 				87C6C98F1CD135A7008E9980 /* Meal.swift in Sources */,
+				878366B21CE4D7B1002AF43A /* DiaryPageView.swift in Sources */,
 				878906571CD1B3460049576C /* MealsManager.swift in Sources */,
 				8783668E1CE4CF31002AF43A /* CDMeal+CoreDataProperties.swift in Sources */,
 				8789065C1CD1B7680049576C /* FoodSearchProvider.swift in Sources */,
@@ -644,6 +653,7 @@
 				87C6C93A1CD0298B008E9980 /* FoodDetailsView.swift in Sources */,
 				87C6C9931CD135BE008E9980 /* Nutrient.swift in Sources */,
 				879AECD71CC5B9BA0073BFB8 /* AppDelegate.swift in Sources */,
+				878366AF1CE4D6F3002AF43A /* DiaryView.swift in Sources */,
 				878366A41CE4D083002AF43A /* ActionCell.swift in Sources */,
 				87C6C93C1CD0298B008E9980 /* FoodDetailsViewController.swift in Sources */,
 				87C6C9911CD135B2008E9980 /* Food.swift in Sources */,
@@ -651,19 +661,17 @@
 				8743897D1CD6E9AE003DFE01 /* RecipesViewController.swift in Sources */,
 				87279B4C1CDA82C9000E8D4A /* NSDate+Convenience.swift in Sources */,
 				87D175CE1CD3E324007EC26F /* MealItem.swift in Sources */,
-				87279B501CDA86DC000E8D4A /* DayViewController.swift in Sources */,
 				878366871CE4CF31002AF43A /* CDMealItem.swift in Sources */,
 				87C6C9461CD03286008E9980 /* String+Defaults.swift in Sources */,
 				878906551CD1AEE00049576C /* MealsCoreDataProvider.swift in Sources */,
 				8783668C1CE4CF31002AF43A /* CDFood+CoreDataProperties.swift in Sources */,
 				87C6C97D1CD13086008E9980 /* Various+Unwrapping.swift in Sources */,
-				87C6C9481CD039EB008E9980 /* MealsView.swift in Sources */,
+				878366B31CE4D7B1002AF43A /* DiaryPageViewController.swift in Sources */,
 				87C6C9421CD02F60008E9980 /* UINavigationController+ModalPresentation.swift in Sources */,
 				87A4F24D1CCFF97A005BA380 /* UIFont+AppStyle.swift in Sources */,
 				8783668F1CE4CF31002AF43A /* CDMeal.swift in Sources */,
 				878906511CD1ACD30049576C /* MealsProviderProtocol.swift in Sources */,
 				8783668A1CE4CF31002AF43A /* CDNutrient+CoreDataProperties.swift in Sources */,
-				87C6C92A1CD0235F008E9980 /* MealsViewController.swift in Sources */,
 				87C6C9441CD031C1008E9980 /* MealDetailsView.swift in Sources */,
 				8789065D1CD1B7680049576C /* FoodSearchService.swift in Sources */,
 				878906611CD1B7A70049576C /* FoodProviderProtocol.swift in Sources */,
