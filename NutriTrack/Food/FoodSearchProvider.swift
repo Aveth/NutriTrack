@@ -114,10 +114,11 @@ class SearchProvider {
         var result = [Measure]()
         for measure: [String: AnyObject] in array {
             if let
+                index = measure["index"] as? Int,
                 name = measure["name"] as? String,
                 value = measure["value"] as? Float
             {
-                let item = Measure(name: name, value: value)
+                let item = Measure(index: index, name: name, value: value)
                 result.append(item)
             }
         }

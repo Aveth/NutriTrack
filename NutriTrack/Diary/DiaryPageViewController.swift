@@ -73,7 +73,7 @@ class DiaryPageViewController: UIViewController, DiaryPageViewDataSource {
     internal func diaryPageView(sender: DiaryPageView, valueForNutrientAtIndex index: Int) -> Float {
         return self.meals.reduce(0.0) { (total: Float, meal: Meal) in
             return meal.mealItems.reduce(total) { (itemTotal: Float, item: MealItem) in
-                let measureValue = item.food.measures[item.measureIndex].value
+                let measureValue = item.food.sortedMeasures[item.measureIndex].value
                 let quantityValue = item.quantity
                 let nutrientValue = item.food.sortedNutrients[index].value
                 let adjustedValue = (nutrientValue / Nutrient.BaseMeasuresGrams) * measureValue * Float(quantityValue)

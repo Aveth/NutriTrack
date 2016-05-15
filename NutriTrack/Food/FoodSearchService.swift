@@ -17,7 +17,7 @@ class SearchService {
         case FoodDetails = "/food/details/"
     }
     
-    static private let APIBaseURL: String = NSBundle.mainBundle().objectForInfoDictionaryKey("APIBaseURL") as! String
+    static private let APIBaseURL: String = NSBundle.mainBundle().objectForInfoDictionaryKey("NTAPIBaseURL") as! String
     
     internal func fetchResults(searchQuery query: String, success: ((results: [String: AnyObject]) -> Void), failure: ((error: ErrorType) -> Void)?) -> Request {
         return self.fetch(.FoodSearch, urlParam: query, success:success, failure: failure)

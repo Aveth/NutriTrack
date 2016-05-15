@@ -10,10 +10,12 @@ import Foundation
 
 class Measure {
 
+    internal var index: Int
     internal var name: String
     internal var value: Float
     
-    internal init(name: String, value: Float) {
+    internal init(index: Int, name: String, value: Float) {
+        self.index = index
         self.name = name
         self.value = value
     }

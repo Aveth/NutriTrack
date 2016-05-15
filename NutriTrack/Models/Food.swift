@@ -19,6 +19,15 @@ class Food {
         })
     }()
     
+    lazy private(set) var sortedMeasures: [Measure] = {
+        return self.measures.sort({ (measure1, measure2) -> Bool in
+            if measure1.index < measure2.index {
+                return true
+            }
+            return false
+        })
+    }()
+    
     internal var id: String
     internal var name: String
     internal var nutrients: [Nutrient]

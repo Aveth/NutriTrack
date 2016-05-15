@@ -804,6 +804,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/NutriTrack/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NT_API_BASE_URL = "http://localhost/NutriTrack-API/public";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aveth.NutriTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -817,6 +818,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/NutriTrack/Resources/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				NT_API_BASE_URL = "http://www.shareyourcharity.com/nutritrack";
 				PRODUCT_BUNDLE_IDENTIFIER = com.aveth.NutriTrack;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

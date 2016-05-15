@@ -64,7 +64,7 @@ class MealsCoreDataProvider: MealsProviderProtocol {
                     coreDataFood.addNutrientsObject(coreDataNutrient)
                 }
                 for measure: Measure in item.food.measures {
-                    let coreDataMeasure = self.insertNewMeasure(measure.name, value: measure.value)
+                    let coreDataMeasure = self.insertNewMeasure(measure.index, name: measure.name, value: measure.value)
                     coreDataFood.addMeasuresObject(coreDataMeasure)
                 }
                 self.managedObjectContext.insertObject(coreDataFood)
@@ -161,10 +161,11 @@ class MealsCoreDataProvider: MealsProviderProtocol {
     
     private func measureFromCoreData(coreDataMeasure: CDMeasure?) -> Measure? {
         if let
+            index = coreDataMeasure?.index?.integerValue,
             name = coreDataMeasure?.name,
             value = coreDataMeasure?.value
         {
-            return Measure(name: name, value: value.floatValue)
+            return Measure(index: index, name: name, value: value.floatValue)
         }
         return nil
     }
@@ -200,8 +201,9 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         return item
     }
     
-    private func insertNewMeasure(name: String, value: Float) -> CDMeasure {
+    private func insertNewMeasure(index: Int, name: String, value: Float) -> CDMeasure {
         let item: CDMeasure = NSEntityDescription.insertNewObjectForEntityForName("CDMeasure", inManagedObjectContext: self.managedObjectContext) as! CDMeasure
+        item.index = index
         item.name = name
         item.value = value
         return item
