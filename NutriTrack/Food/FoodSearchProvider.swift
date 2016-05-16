@@ -76,10 +76,11 @@ class SearchProvider {
                     dict = result["data"] as? [AnyObject],
                     firstResult = dict.first,
                     resultId = firstResult["id"] as? String,
-                    resultName = firstResult["name"] as? String
+                    resultName = firstResult["name"] as? String,
+                    resultCategory = firstResult["category"] as? String
                     where resultId == id
                 {
-                    let food = Food(id: resultId, name: resultName)
+                    let food = Food(id: resultId, name: resultName, category: resultCategory)
                     if let measures = firstResult["measures"] as? [[String: AnyObject]] {
                         food.measures = self.arrayToMeasureItems(measures)
                     }
@@ -101,9 +102,10 @@ class SearchProvider {
         for dict: [String: AnyObject] in array {
             if let
                 id = dict["id"] as? String,
-                name = dict["name"] as? String
+                name = dict["name"] as? String,
+                category = dict["category"] as? String
             {
-                let item = Food(id: id, name: name)
+                let item = Food(id: id, name: name, category: category)
                 result.append(item)
             }
         }

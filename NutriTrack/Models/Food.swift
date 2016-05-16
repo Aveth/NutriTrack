@@ -10,6 +10,12 @@ import Foundation
 
 class Food {
     
+    internal var id: String
+    internal var name: String
+    internal var category: String
+    internal var nutrients: [Nutrient]
+    internal var measures: [Measure]
+    
     lazy private(set) var sortedNutrients: [Nutrient] = {
         return self.nutrients.sort({ (nutrient1, nutrient2) -> Bool in
             if nutrient1.name.compare(nutrient2.name) == .OrderedAscending {
@@ -28,14 +34,10 @@ class Food {
         })
     }()
     
-    internal var id: String
-    internal var name: String
-    internal var nutrients: [Nutrient]
-    internal var measures: [Measure]
-    
-    internal init(id: String, name: String) {
+    internal init(id: String, name: String, category: String) {
         self.id = id
         self.name = name
+        self.category = category
         self.nutrients = [Nutrient]()
         self.measures = [Measure]()
     }

@@ -16,6 +16,7 @@ extension CDFood {
 
     @NSManaged var id: String?
     @NSManaged var name: String?
+    @NSManaged var category: String?
     @NSManaged var measures: NSSet?
     @NSManaged var nutrients: NSSet?
     

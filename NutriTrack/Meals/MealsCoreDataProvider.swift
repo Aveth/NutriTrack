@@ -58,7 +58,7 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         let coreDataMeal = self.insertNewMeal(NSUUID().UUIDString, dateTime: meal.dateTime)
         for item: MealItem in meal.mealItems {
             if self.fetchFoodByID(item.food.id) == nil {
-                let coreDataFood = self.insertNewFood(item.food.id, name: item.food.name)
+                let coreDataFood = self.insertNewFood(item.food.id, name: item.food.name, category: item.food.category)
                 for nutrient: Nutrient in item.food.nutrients {
                     let coreDataNutrient = self.insertNewNutrient(nutrient.id, name: nutrient.name, unit: nutrient.unit, value: nutrient.value)
                     coreDataFood.addNutrientsObject(coreDataNutrient)
@@ -128,10 +128,11 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         if let
             id = coreDataFood?.id,
             name = coreDataFood?.name,
+            category = coreDataFood?.category,
             nutrients = coreDataFood?.nutrients?.allObjects as? [CDNutrient],
             measures = coreDataFood?.measures?.allObjects as? [CDMeasure]
         {
-            let resultFood = Food(id: id, name: name)
+            let resultFood = Food(id: id, name: name, category: category)
             for nutrient: CDNutrient in nutrients {
                 if let result = self.nutrientFromCoreData(nutrient) {
                     resultFood.nutrients.append(result)
@@ -185,10 +186,11 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         return item
     }
     
-    private func insertNewFood(id: String, name: String) -> CDFood {
+    private func insertNewFood(id: String, name: String, category: String) -> CDFood {
         let item: CDFood = NSEntityDescription.insertNewObjectForEntityForName("CDFood", inManagedObjectContext: self.managedObjectContext) as! CDFood
         item.id = id
         item.name = name
+        item.category = category
         return item
     }
     

@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NutriTrack/Food/FoodSearchService.swift"
-            timestampString = "485028876.536347"
+            timestampString = "485032440.180884"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
             landmarkName = "fetch(_:urlParam:success:failure:)"
             landmarkType = "5">
          </BreakpointContent>

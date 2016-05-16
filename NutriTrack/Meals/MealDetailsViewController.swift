@@ -16,7 +16,6 @@ class MealDetailsViewController: BaseViewController, FoodSearchViewControllerDel
     
     weak internal var delegate: MealDetailsViewControllerDelegate?
     
-    private let searchController = UISearchController(searchResultsController: FoodSearchViewController())
     private var meal: Meal
     
     lazy private var mealDetailsView: MealDetailsView = {
@@ -73,7 +72,7 @@ class MealDetailsViewController: BaseViewController, FoodSearchViewControllerDel
     }
     
     internal func addItemButtonDidTap(sender: UIBarButtonItem) {
-        self.presentFoodSearchViewController()
+        self.presentFoodResultsViewController()
     }
     
     override internal func rightBarButtonDidTap(sender: UIBarButtonItem) {
@@ -85,7 +84,7 @@ class MealDetailsViewController: BaseViewController, FoodSearchViewControllerDel
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    private func presentFoodSearchViewController() {
+    private func presentFoodResultsViewController() {
         let controller = FoodSearchViewController()
         controller.delegate = self
         controller.isModal = true

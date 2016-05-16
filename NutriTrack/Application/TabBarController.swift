@@ -18,7 +18,6 @@ class TabBarController: UITabBarController, UITabBarControllerDelegate, FoodSear
     
     lazy private var searchViewController: FoodSearchViewController = {
         let controller = FoodSearchViewController()
-        controller.completeText = NSLocalizedString("Create Meal", comment: "")
         controller.tabBarItem = UITabBarItem(title: NSLocalizedString("Search", comment: ""), image: UIImage(named: "search")?.imageWithRenderingMode(.AlwaysTemplate), selectedImage: nil)
         return controller
     }()
