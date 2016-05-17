@@ -35,7 +35,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     
     private lazy var scopesControl: UISegmentedControl = {
         let control = UISegmentedControl(items: [
-            NSLocalizedString("Recent", comment: ""),
+            NSLocalizedString("History", comment: ""),
             NSLocalizedString("Categories", comment: "")
         ])
         control.addTarget(self, action: #selector(scopesControlDidTap(_:)), forControlEvents: .ValueChanged)
@@ -78,8 +78,19 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
         
         self.setShowsSearchView(false, animated: false)
         self.scopesControl.selectedSegmentIndex = 0
-        
+    
         self.updateViewConstraints()
+        
+        self.searchProvider.fetchCategories(
+            success: { (results) in
+                self.categories = results
+                self.scopedResultsView.reloadData()
+            },
+            failure: { (error) in
+                
+            }
+        )
+        
     }
     
     override internal func updateViewConstraints() {
@@ -134,7 +145,6 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     }
     
     internal func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchBar.endEditing(false)
         searchBar.setShowsCancelButton(false, animated: true)
     }
     
@@ -166,21 +176,42 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     
     // MARK: SearchResultsViewDataSource methods
     
-    internal func searchResultsViewNumberOfFoods(sender: SearchResultsView) -> Int {
+    internal func searchResultsViewNumberOfResults(sender: SearchResultsView) -> Int {
         switch sender.tag {
-            case 1:
-                return Int.unwrapOrZero(self.searchFoods?.count)
-            default:
-                return self.scopesControl.selectedSegmentIndex == 0 ? 3 : 5
+        case 1:
+            return Int.unwrapOrZero(self.searchFoods?.count)
+        default:
+            if self.scopesControl.selectedSegmentIndex == 0 {
+                return 3
+            } else {
+                return Int.unwrapOrZero(self.categories?.count)
+            }
         }
     }
     
     internal func searchResultsView(sender: SearchResultsView, titleForResultAtIndex index: Int) -> String {
         switch sender.tag {
-            case 1:
-                return String.unwrapOrBlank(self.searchFoods?[index].name)
-            default:
-                return self.scopesControl.selectedSegmentIndex == 0 ? "Recent" : "Category"
+        case 1:
+            return String.unwrapOrBlank(self.searchFoods?[index].name)
+        default:
+            if self.scopesControl.selectedSegmentIndex == 0 {
+                return "Recent"
+            } else {
+                return String.unwrapOrBlank(self.categories?[index].name)
+            }
+        }
+    }
+    
+    internal func searchResultsView(sender: SearchResultsView, subtitleForResultAtIndex index: Int) -> String? {
+        switch sender.tag {
+        case 1:
+            return nil
+        default:
+            if self.scopesControl.selectedSegmentIndex == 0 {
+                return "Recent"
+            } else {
+                return nil
+            }
         }
     }
     

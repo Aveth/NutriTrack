@@ -14,8 +14,9 @@ protocol SearchResultsViewDelegate: class {
 }
 
 protocol SearchResultsViewDataSource: class {
+    func searchResultsViewNumberOfResults(sender: SearchResultsView) -> Int
     func searchResultsView(sender: SearchResultsView, titleForResultAtIndex index: Int) -> String
-    func searchResultsViewNumberOfFoods(sender: SearchResultsView) -> Int
+    func searchResultsView(sender: SearchResultsView, subtitleForResultAtIndex index: Int) -> String?
 }
 
 class SearchResultsView: UIView, UITableViewDataSource, UITableViewDelegate {
@@ -29,6 +30,7 @@ class SearchResultsView: UIView, UITableViewDataSource, UITableViewDelegate {
         table.delegate = self
         table.estimatedRowHeight = 30.0
         table.rowHeight = UITableViewAutomaticDimension
+        table.estimatedRowHeight = 100.0
         table.registerClass(SearchResultCell.self, forCellReuseIdentifier: SearchResultCell.reuseIdentifier)
         return table
     }()
@@ -66,13 +68,13 @@ class SearchResultsView: UIView, UITableViewDataSource, UITableViewDelegate {
     // MARK: UITableViewDataSource methods
     
     internal func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return Int.unwrapOrZero(dataSource?.searchResultsViewNumberOfFoods(self))
+        return Int.unwrapOrZero(dataSource?.searchResultsViewNumberOfResults(self))
     }
     
     internal func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(SearchResultCell.reuseIdentifier) as! SearchResultCell
-        cell.textLabel?.text = self.dataSource!.searchResultsView(self, titleForResultAtIndex: indexPath.row)
-        
+        cell.title = self.dataSource!.searchResultsView(self, titleForResultAtIndex: indexPath.row)
+        cell.subtitle = self.dataSource!.searchResultsView(self, subtitleForResultAtIndex: indexPath.row)
         return cell
     }
 

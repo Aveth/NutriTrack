@@ -13,8 +13,9 @@ import Alamofire
 class SearchService {
     
     private enum Endpoints: String {
-        case FoodSearch = "/food/search/"
-        case FoodDetails = "/food/details/"
+        case FoodSearch = "/food/search"
+        case FoodDetails = "/food/details"
+        case Categories = "/food/categories"
     }
     
     static private let APIBaseURL: String = NSBundle.mainBundle().objectForInfoDictionaryKey("NTAPIBaseURL") as! String
@@ -27,10 +28,20 @@ class SearchService {
         return self.fetch(.FoodDetails, urlParam: id, success: success, failure: failure)
     }
     
-    private func fetch(endpoint: SearchService.Endpoints, urlParam: String, success: ((results: [String: AnyObject]) -> Void), failure: ((error: ErrorType) -> Void)?) -> Request {
+    internal func fetchCategories(success success: ((results: [String: AnyObject]) -> Void), failure: ((error: ErrorType) -> Void)?) -> Request {
+        return self.fetch(.Categories, success: success, failure: failure)
+    }
+    
+    private func fetch(endpoint: SearchService.Endpoints, urlParam: String? = nil, success: ((results: [String: AnyObject]) -> Void), failure: ((error: ErrorType) -> Void)?) -> Request {
         
-        let encodedParam = urlParam.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet())!
-        return Alamofire.request(Method.GET, SearchService.APIBaseURL + endpoint.rawValue + encodedParam).responseJSON() { (request: NSURLRequest?, response: NSHTTPURLResponse?, result: Result<AnyObject>) -> Void in
+        var url: String;
+        if let param = urlParam?.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet()) {
+            url = SearchService.APIBaseURL + endpoint.rawValue + "/" + param
+        } else {
+            url = SearchService.APIBaseURL + endpoint.rawValue
+        }
+        
+        return Alamofire.request(Method.GET, url).responseJSON() { (request: NSURLRequest?, response: NSHTTPURLResponse?, result: Result<AnyObject>) -> Void in
                 
             switch result {
                 case .Success(let data):

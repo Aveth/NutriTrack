@@ -33,7 +33,7 @@ class SearchProvider {
     internal func fetchFoods(query: String, success: ((originalQuery: String, results: [Food]) -> Void), failure:((error: ErrorType) -> Void)?) {
         
         self.service.fetchResults(searchQuery: query,
-            success: { (result: [String: AnyObject]) -> Void in
+            success: { (result) -> Void in
                 
                 if let
                     resultsDict = result["data"]?["results"] as? [[String: AnyObject]],
@@ -59,11 +59,7 @@ class SearchProvider {
                 }
                 
             },
-            failure: { (error: ErrorType) -> Void in
-                if let fail = failure {
-                    fail(error: error)
-                }
-            }
+            failure: failure
         )
         
     }
@@ -71,7 +67,7 @@ class SearchProvider {
     internal func fetchFoodDetails(id: String, diet: Nutrient.Diet, success: ((result: Food) -> Void), failure:((error: ErrorType) -> Void)?) {
         
         self.service.fetchDetails(itemId: id,
-            success: { (result: [String: AnyObject]) -> Void in
+            success: { (result) -> Void in
                 if let
                     dict = result["data"] as? [AnyObject],
                     firstResult = dict.first,
@@ -90,16 +86,37 @@ class SearchProvider {
                     success(result: food)
                 }
             },
-            failure: { (error: ErrorType) -> Void in
-                
-            }
+            failure: failure
+        )
+        
+    }
+    
+    internal func fetchCategories(success success: ((results: [Category]) -> Void), failure:((error: ErrorType) -> Void)?) {
+        
+        self.service.fetchCategories(
+            success: { (results) in
+                var result = [Category]()
+                if let array = results["data"] as? [[String: String]] {
+                    for dict in array {
+                        if let
+                            id = dict["id"],
+                            name = dict["name"]
+                        {
+                            let item = Category(id: id, name: name)
+                            result.append(item)
+                        }
+                    }
+                    success(results: result)
+                }
+            },
+            failure: failure
         )
         
     }
     
     private func arrayToFoods(array: [[String: AnyObject]]) -> [Food] {
         var result = [Food]()
-        for dict: [String: AnyObject] in array {
+        for dict in array {
             if let
                 id = dict["id"] as? String,
                 name = dict["name"] as? String,
@@ -114,7 +131,7 @@ class SearchProvider {
     
     private func arrayToMeasureItems(array: [[String: AnyObject]]) -> [Measure] {
         var result = [Measure]()
-        for measure: [String: AnyObject] in array {
+        for measure in array {
             if let
                 index = measure["index"] as? Int,
                 name = measure["name"] as? String,
@@ -129,7 +146,7 @@ class SearchProvider {
     
     private func arrayToNutrientItems(array: [[String: AnyObject]], nutrientCodes: [String]?) -> [Nutrient] {
         var result = [Nutrient]()
-        for nutrient: [String: AnyObject] in array {
+        for nutrient in array {
             if let
                 id = nutrient["id"] as? String,
                 name = nutrient["name"] as? String,

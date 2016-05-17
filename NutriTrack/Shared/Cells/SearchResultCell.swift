@@ -14,10 +14,11 @@ class SearchResultCell: UITableViewCell {
     
     internal var title: String? {
         get {
-           return self.textLabel?.text
+           return self.titleLabel.text
         }
         set {
-            self.textLabel?.text = newValue
+            self.titleLabel.text = newValue
+            self.setNeedsUpdateConstraints()
         }
     }
     
@@ -27,6 +28,7 @@ class SearchResultCell: UITableViewCell {
         }
         set {
             self.subtitleLabel.text = newValue
+            self.setNeedsUpdateConstraints()
         }
     }
     
@@ -34,6 +36,13 @@ class SearchResultCell: UITableViewCell {
         let label = UILabel()
         label.font = UIFont.regularFontOfSize(10.0)
         label.textColor = UIColor.lightGrayColor()
+        return label
+    }()
+    
+    lazy private var titleLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont.defaultFont()
+        label.textColor = UIColor.defaultTextColor()
         return label
     }()
     
@@ -47,12 +56,24 @@ class SearchResultCell: UITableViewCell {
     }
     
     private func buildView() {
-        self.textLabel?.font = UIFont.defaultFont()
-        self.textLabel?.textColor = UIColor.defaultTextColor()
+        self.contentView.addSubview(self.titleLabel)
         self.contentView.addSubview(self.subtitleLabel)
         self.setNeedsUpdateConstraints()
     }
     
+    override internal func prepareForReuse() {
+        super.prepareForReuse()
+        self.title = nil
+        self.subtitle = nil
+    }
     
+    override internal func updateConstraints() {
+        super.updateConstraints()
+        
+        self.titleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Bottom)
+        
+        self.subtitleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Top)
+        self.subtitleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.titleLabel)
+    }
 
 }
