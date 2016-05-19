@@ -10,6 +10,8 @@
 		0CA5B2C303B2651CD9D596DB /* Pods_NutriTrack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 04C9F68E5ED1D7FD7701B844 /* Pods_NutriTrack.framework */; };
 		87279B4C1CDA82C9000E8D4A /* NSDate+Convenience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */; };
 		8732B9D31CD980C50031E476 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8732B9D21CD980C50031E476 /* BaseViewController.swift */; };
+		8739DC8E1CEE49A1005A73F1 /* DiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC8D1CEE49A1005A73F1 /* DiaryPage.swift */; };
+		8739DC901CEE4C5C005A73F1 /* DiaryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC8F1CEE4C5C005A73F1 /* DiaryManager.swift */; };
 		874389791CD53927003DFE01 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389781CD53927003DFE01 /* TabBarController.swift */; };
 		8743897D1CD6E9AE003DFE01 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */; };
 		8743897F1CD6F25A003DFE01 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */; };
@@ -35,7 +37,6 @@
 		878366B31CE4D7B1002AF43A /* DiaryPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878366B11CE4D7B1002AF43A /* DiaryPageViewController.swift */; };
 		878906511CD1ACD30049576C /* MealsProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906501CD1ACD30049576C /* MealsProviderProtocol.swift */; };
 		878906551CD1AEE00049576C /* MealsCoreDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */; };
-		878906571CD1B3460049576C /* MealsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906561CD1B3460049576C /* MealsManager.swift */; };
 		8789065C1CD1B7680049576C /* FoodSearchProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906581CD1B7680049576C /* FoodSearchProvider.swift */; };
 		8789065D1CD1B7680049576C /* FoodSearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906591CD1B7680049576C /* FoodSearchService.swift */; };
 		878906611CD1B7A70049576C /* FoodProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878906601CD1B7A70049576C /* FoodProviderProtocol.swift */; };
@@ -101,6 +102,8 @@
 		8171519F7A85A7E5574D59FE /* Pods-NutriTrack.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NutriTrack.release.xcconfig"; path = "Pods/Target Support Files/Pods-NutriTrack/Pods-NutriTrack.release.xcconfig"; sourceTree = "<group>"; };
 		87279B4B1CDA82C9000E8D4A /* NSDate+Convenience.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSDate+Convenience.swift"; sourceTree = "<group>"; };
 		8732B9D21CD980C50031E476 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		8739DC8D1CEE49A1005A73F1 /* DiaryPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryPage.swift; sourceTree = "<group>"; };
+		8739DC8F1CEE4C5C005A73F1 /* DiaryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryManager.swift; sourceTree = "<group>"; };
 		874389781CD53927003DFE01 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -126,7 +129,6 @@
 		878366B11CE4D7B1002AF43A /* DiaryPageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryPageViewController.swift; sourceTree = "<group>"; };
 		878906501CD1ACD30049576C /* MealsProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsProviderProtocol.swift; sourceTree = "<group>"; };
 		878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsCoreDataProvider.swift; sourceTree = "<group>"; };
-		878906561CD1B3460049576C /* MealsManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MealsManager.swift; sourceTree = "<group>"; };
 		878906581CD1B7680049576C /* FoodSearchProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSearchProvider.swift; sourceTree = "<group>"; };
 		878906591CD1B7680049576C /* FoodSearchService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodSearchService.swift; sourceTree = "<group>"; };
 		878906601CD1B7A70049576C /* FoodProviderProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodProviderProtocol.swift; sourceTree = "<group>"; };
@@ -218,6 +220,7 @@
 				87C6C9941CD135CA008E9980 /* Measure.swift */,
 				87D175CD1CD3E324007EC26F /* MealItem.swift */,
 				87DF03431CEA5B2B0010D237 /* Category.swift */,
+				8739DC8D1CEE49A1005A73F1 /* DiaryPage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -289,6 +292,7 @@
 		878366AB1CE4D602002AF43A /* Diary */ = {
 			isa = PBXGroup;
 			children = (
+				8739DC8F1CEE4C5C005A73F1 /* DiaryManager.swift */,
 				878366AE1CE4D6F3002AF43A /* DiaryView.swift */,
 				878366AC1CE4D6BC002AF43A /* DiaryViewController.swift */,
 				878366B01CE4D7B1002AF43A /* DiaryPageView.swift */,
@@ -416,7 +420,6 @@
 				87C6C9431CD031C1008E9980 /* MealDetailsView.swift */,
 				878906501CD1ACD30049576C /* MealsProviderProtocol.swift */,
 				878906541CD1AEE00049576C /* MealsCoreDataProvider.swift */,
-				878906561CD1B3460049576C /* MealsManager.swift */,
 			);
 			path = Meals;
 			sourceTree = "<group>";
@@ -644,6 +647,7 @@
 				8783668D1CE4CF31002AF43A /* CDFood.swift in Sources */,
 				87C6C9951CD135CA008E9980 /* Measure.swift in Sources */,
 				878366AA1CE4D169002AF43A /* CDContextProvider.swift in Sources */,
+				8739DC901CEE4C5C005A73F1 /* DiaryManager.swift in Sources */,
 				8783668B1CE4CF31002AF43A /* CDNutrient.swift in Sources */,
 				8743897F1CD6F25A003DFE01 /* ProfileViewController.swift in Sources */,
 				87DF03441CEA5B2B0010D237 /* Category.swift in Sources */,
@@ -651,10 +655,10 @@
 				8732B9D31CD980C50031E476 /* BaseViewController.swift in Sources */,
 				87C6C98F1CD135A7008E9980 /* Meal.swift in Sources */,
 				878366B21CE4D7B1002AF43A /* DiaryPageView.swift in Sources */,
-				878906571CD1B3460049576C /* MealsManager.swift in Sources */,
 				8783668E1CE4CF31002AF43A /* CDMeal+CoreDataProperties.swift in Sources */,
 				87DF03401CEA581F0010D237 /* SearchResultsView.swift in Sources */,
 				8789065C1CD1B7680049576C /* FoodSearchProvider.swift in Sources */,
+				8739DC8E1CEE49A1005A73F1 /* DiaryPage.swift in Sources */,
 				878366891CE4CF31002AF43A /* CDMeasure.swift in Sources */,
 				878366A51CE4D083002AF43A /* NutrientCell.swift in Sources */,
 				87C6C93A1CD0298B008E9980 /* FoodDetailsView.swift in Sources */,

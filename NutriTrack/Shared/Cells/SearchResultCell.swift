@@ -34,7 +34,7 @@ class SearchResultCell: UITableViewCell {
     
     lazy private var subtitleLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.regularFontOfSize(10.0)
+        label.font = UIFont.regularFontOfSize(12.0)
         label.textColor = UIColor.lightGrayColor()
         return label
     }()
@@ -73,7 +73,7 @@ class SearchResultCell: UITableViewCell {
         self.titleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Bottom)
         
         self.subtitleLabel.autoPinEdgesToSuperviewMarginsExcludingEdge(.Top)
-        self.subtitleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.titleLabel)
+        self.subtitleLabel.autoPinEdge(.Top, toEdge: .Bottom, ofView: self.titleLabel, withOffset: 3.0)
     }
 
 }

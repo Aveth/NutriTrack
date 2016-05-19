@@ -67,11 +67,16 @@ class BaseViewController: UIViewController {
         }
     }
 
-    override func viewDidLoad() {
+    override internal func viewDidLoad() {
         super.viewDidLoad()
         self.edgesForExtendedLayout = UIRectEdge.None
         self.view.backgroundColor = UIColor.backgroundColor()
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .Plain, target: nil, action: nil)
+    }
+    
+    override internal func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = false
     }
 
     internal func rightBarButtonDidTap(sender: UIBarButtonItem) {}

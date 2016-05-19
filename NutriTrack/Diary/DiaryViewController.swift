@@ -10,13 +10,19 @@ import UIKit
 
 class DiaryViewController: BaseViewController, MealDetailsViewControllerDelegate, UIPageViewControllerDataSource {
     
-    internal var dataManager: MealsManger = MealsManger(provider: MealsCoreDataProvider())
+    internal var dataManager: DiaryManger = DiaryManger(provider: MealsCoreDataProvider())
+    
     lazy private var emptyView: EmptyView = EmptyView()
     
-    lazy private var mealsPageViewController: UIPageViewController = {
+    lazy private var pageViewController: UIPageViewController = {
         let controller = UIPageViewController(transitionStyle: .Scroll, navigationOrientation: .Horizontal, options: nil)
         controller.dataSource = self
         return controller
+    }()
+    
+    lazy private var spinner: LoadingIndicator = {
+        let spinner = LoadingIndicator()
+        return spinner
     }()
 
     override func viewDidLoad() {
@@ -25,32 +31,37 @@ class DiaryViewController: BaseViewController, MealDetailsViewControllerDelegate
         self.navigationTitle = NSLocalizedString("My Food Diary", comment: "")
         self.rightBarButtonImage = UIImage(named: "plus")
         
+        self.view.addSubview(self.pageViewController.view)
         self.view.addSubview(self.emptyView)
-        self.view.addSubview(self.mealsPageViewController.view)
+        self.view.addSubview(self.spinner)
       
         self.updateViewConstraints()
     }
     
     override internal func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        let hasMeals = self.dataManager.meals.count > 0
-        self.emptyView.hidden = hasMeals
-        self.mealsPageViewController.view.hidden = !hasMeals
-    }
+        self.spinner.activate()
+        self.dataManager.refresh(
+            success: { (results) in
+                self.spinner.deactivte()
     
-    override internal func viewDidAppear(animated: Bool) {
-        super.viewDidAppear(animated)
+                guard let page = results?.last else {
+                    self.emptyView.hidden = false
+                    self.pageViewController.view.hidden = true
+                    return
+                }
+                
+                self.emptyView.hidden = true
+                self.pageViewController.view.hidden = false
+                self.pageViewController.setViewControllers([DiaryPageViewController(page: page)], direction: .Forward, animated: false, completion: nil)
+            },
+            failure: { (error) in
+                self.spinner.deactivte()
+                self.emptyView.hidden = false
+                self.pageViewController.view.hidden = true
+            }
+        )
         
-        guard self.dataManager.meals.count > 0 else {
-            return
-        }
-        
-        if let meals = self.dataManager.mealsForToday() {
-             self.mealsPageViewController.setViewControllers([DiaryPageViewController(date: NSDate().dateOnly()!, meals: meals)], direction: .Forward, animated: false, completion: nil)
-        } else if let meals = self.dataManager.mealsForFirstDateBeforeDate(NSDate().dateOnly()!) {
-            self.mealsPageViewController.setViewControllers([DiaryPageViewController(date: (meals.first?.dateTime.dateOnly()!)!, meals: meals)], direction: .Forward, animated: false, completion: nil)
-        }
-       
     }
     
     override internal func rightBarButtonDidTap(sender: UIBarButtonItem) {
@@ -79,7 +90,7 @@ class DiaryViewController: BaseViewController, MealDetailsViewControllerDelegate
     override internal func updateViewConstraints() {
         super.updateViewConstraints()
         self.emptyView.autoPinEdgesToSuperviewEdges()
-        self.mealsPageViewController.view.autoPinEdgesToSuperviewEdges()
+        self.pageViewController.view.autoPinEdgesToSuperviewEdges()
     }
     
     // MARK: MealDetailsViewControllerDelegate methods
@@ -91,31 +102,25 @@ class DiaryViewController: BaseViewController, MealDetailsViewControllerDelegate
     // MARK: UIPageViewControllerDataSource methods
     
     internal func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
-        let date = (viewController as! DiaryPageViewController).date
-        
-        if date.isEqualToDate(NSDate().dateOnly()!) {
-            return nil
-        }
-        
         guard let
-            meals = self.dataManager.mealsForFirstDateAfterDate(date),
-            dayDate = meals.first?.dateTime.dateOnly()
+            page = (viewController as? DiaryPageViewController)?.page,
+            nextPage = self.dataManager.nextPageAfterPage(page)
         else {
             return nil
         }
         
-        return DiaryPageViewController(date: dayDate, meals: meals)
+        return DiaryPageViewController(page: nextPage)
     }
     
     internal func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
-        let date = (viewController as! DiaryPageViewController).date
         guard let
-            meals = self.dataManager.mealsForFirstDateBeforeDate(date),
-            dayDate = meals.first?.dateTime.dateOnly()
+            page = (viewController as? DiaryPageViewController)?.page,
+            prevPage = self.dataManager.nextPageAfterPage(page)
         else {
-           return nil
+            return nil
         }
-        return DiaryPageViewController(date: dayDate, meals: meals)
+        
+        return DiaryPageViewController(page: prevPage)
     }
 
 }

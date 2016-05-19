@@ -12,7 +12,7 @@ protocol FoodSearchViewControllerDelegate: class {
     func foodSearchViewController(sender: FoodSearchViewController, didSelectFood food:Food, quantity: Int, measureIndex: Int)
 }
 
-class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchResultsViewDelegate, SearchResultsViewDataSource {
+class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchResultsViewDelegate, SearchResultsViewDataSource, FoodDetailsViewControllerDelegate {
 
     weak internal var delegate: FoodSearchViewControllerDelegate?
     
@@ -49,7 +49,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     }()
     
     private lazy var scopedResultsView: SearchResultsView = {
-        let view = SearchResultsView()
+        let view = SearchResultsView(frame: CGRectZero)
         view.tag = 0;
         view.delegate = self
         view.dataSource = self
@@ -57,7 +57,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     }()
     
     private lazy var foodResultsView: SearchResultsView = {
-        let view = SearchResultsView()
+        let view = SearchResultsView(frame: CGRectZero, blursWhenEmpty: true)
         view.tag = 1;
         view.delegate = self
         view.dataSource = self
@@ -67,14 +67,12 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     override internal func viewDidLoad() {
         super.viewDidLoad()
         
-        self.navigationController?.navigationBarHidden = true
-        
         self.view.addSubview(self.statusBarBackground)
         self.view.addSubview(self.searchBar)
         self.view.addSubview(self.scopesControl)
         
-        self.view.addSubview(self.foodResultsView)
         self.view.addSubview(self.scopedResultsView)
+        self.view.addSubview(self.foodResultsView)
         
         self.setShowsSearchView(false, animated: false)
         self.scopesControl.selectedSegmentIndex = 0
@@ -91,6 +89,11 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
             }
         )
         
+    }
+    
+    override internal func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = true
     }
     
     override internal func updateViewConstraints() {
@@ -125,30 +128,28 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
         self.scopedResultsView.reloadData()
     }
     
-    internal func setShowsSearchView(showing: Bool, animated: Bool = true) {
+    internal func setShowsSearchView(showing: Bool, animated: Bool) {
         let duration = animated ? 0.25 : 0.0
         UIView.animateWithDuration(duration) {
-            if showing {
-                self.foodResultsView.alpha = 1.0
-                self.scopedResultsView.alpha = 0.0
-            } else {
-                self.foodResultsView.alpha = 0.0
-                self.scopedResultsView.alpha = 1.0
-            }
+            self.foodResultsView.alpha = showing ? 1.0 : 0.0
         }
     }
     
     // MARK: UISearchBarDelegate methods
     
     internal func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        self.setShowsSearchView(true, animated: true)
         searchBar.setShowsCancelButton(true, animated: true)
     }
     
     internal func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        self.searchBar.resignFirstResponder()
+        self.setShowsSearchView(false, animated: true)
         searchBar.setShowsCancelButton(false, animated: true)
     }
     
     internal func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        self.setShowsSearchView(false, animated: true)
         searchBar.setShowsCancelButton(false, animated: true)
     }
     
@@ -205,7 +206,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     internal func searchResultsView(sender: SearchResultsView, subtitleForResultAtIndex index: Int) -> String? {
         switch sender.tag {
         case 1:
-            return nil
+            return String.unwrapOrBlank(self.searchFoods?[index].category)
         default:
             if self.scopesControl.selectedSegmentIndex == 0 {
                 return "Recent"
@@ -216,8 +217,22 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     }
     
     // MARK: SearchResultsViewDelegate methods
+    
     internal func searchResultsView(sender: SearchResultsView, didSelectResultAtIndex index: Int) {
-        
+        if sender.tag == 1 || self.scopesControl.selectedSegmentIndex == 0 {
+            if let foods = (sender.tag == 1 ? self.searchFoods : self.recentFoods) {
+                let controller = FoodDetailsViewController(food: foods[index])
+                controller.delegate = self
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        }
+    }
+    
+    // MARK: FoodDetailsViewDelegate methods
+    
+    internal func foodDetailsViewController(sender: FoodDetailsViewController, didConfirmFood food: Food, quantity: Int, measureIndex: Int) {
+        self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+        self.delegate?.foodSearchViewController(self, didSelectFood: food, quantity: quantity, measureIndex: measureIndex)
     }
     
 

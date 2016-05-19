@@ -24,6 +24,8 @@ class SearchResultsView: UIView, UITableViewDataSource, UITableViewDelegate {
     weak internal var delegate: SearchResultsViewDelegate?
     weak internal var dataSource: SearchResultsViewDataSource?
     
+    internal var blursWhenEmpty: Bool
+    
     private lazy var tableView: UITableView = {
         let table: UITableView = UITableView()
         table.dataSource = self
@@ -35,7 +37,15 @@ class SearchResultsView: UIView, UITableViewDataSource, UITableViewDelegate {
         return table
     }()
     
-    override internal init(frame: CGRect) {
+    private lazy var overlay: UIView = {
+        let view = UIView()
+        view.alpha = 0.7
+        view.backgroundColor = UIColor.blackColor()
+        return view
+    }()
+    
+    internal init(frame: CGRect, blursWhenEmpty blurs: Bool = false) {
+        self.blursWhenEmpty = blurs
         super.init(frame: frame)
         self.buildView()
     }
@@ -45,18 +55,41 @@ class SearchResultsView: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     private func buildView() {
+        if self.blursWhenEmpty {
+            self.addSubview(self.overlay)
+            self.tableView.alpha = 0.0
+        }
         self.addSubview(self.tableView)
+        
         self.setNeedsUpdateConstraints()
     }
     
     override internal func updateConstraints() {
         super.updateConstraints()
         self.layoutMargins = UIEdgeInsetsZero
+        if self.blursWhenEmpty {
+            self.overlay.autoPinEdgesToSuperviewEdges()
+        }
         self.tableView.autoPinEdgesToSuperviewEdges()
     }
     
     internal func reloadData() {
         self.tableView.reloadData()
+        
+        guard self.blursWhenEmpty else {
+            return
+        }
+        
+        UIView.animateWithDuration(0.1) {
+            if let
+                num = self.dataSource?.searchResultsViewNumberOfResults(self)
+                where num > 0
+            {
+                self.tableView.alpha = 1.0
+            } else {
+                self.tableView.alpha = 0.0
+            }
+        }
     }
     
     // MARK: UITableViewDelegate methods

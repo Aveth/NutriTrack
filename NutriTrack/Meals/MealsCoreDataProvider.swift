@@ -11,50 +11,37 @@ import CoreData
 
 class MealsCoreDataProvider: MealsProviderProtocol {
     
-    internal func fetchMeals() -> [Meal] {
-        return self.fetchMealsWithPredicate(nil)
-    }
-    
     lazy private var managedObjectContext: NSManagedObjectContext = {
         return CDContextProvider.sharedProvider.managedObjectContext
     }()
     
-    func fetchMealsForStartDate(startDate: NSDate, endDate: NSDate) -> [Meal] {
-        let predicate = NSPredicate(format: "dateTime >= %@ AND dateTime < %@", startDate, endDate)
-        return self.fetchMealsWithPredicate(predicate)
-    }
-    
-    private func fetchMealsWithPredicate(predicate: NSPredicate?) -> [Meal] {
-        var resultMeals = [Meal]()
+    internal func fetchFirstValidDateForUser(id: String, success: ((result: NSDate?) -> Void), failure: ((error: ErrorType) -> Void)?) {
         do {
             let request = NSFetchRequest(entityName: "CDMeal")
-            request.predicate = predicate
-            request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: true)]
+            request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: false)]
+            request.fetchLimit = 1
             let meals = try self.managedObjectContext.executeFetchRequest(request) as! [CDMeal]
-            for meal: CDMeal in meals {
-                if let
-                    id = meal.id,
-                    dateTime = meal.dateTime,
-                    mealItems = meal.mealItems?.allObjects as? [CDMealItem]
-                {
-                    let resultMeal = Meal(id: id, dateTime: dateTime)
-                    resultMeals.append(resultMeal)
-                    for item: CDMealItem in mealItems {
-                        if let result = self.mealItemFromCoreData(item) {
-                            resultMeal.mealItems.append(result)
-                        }
-                    }
-                }
-                
-            }
+            success(result: meals.first?.dateTime)
         } catch let error {
-            print("\(error)")
+            if let fail = failure {
+                fail(error: error)
+            }
         }
-        
-        return resultMeals
     }
     
-    internal func insertMeal(meal: Meal) {
+    func fetchMealsForUser(id: String, startDate: NSDate, endDate: NSDate, success: ((results: [Meal]?) -> Void), failure: ((error: ErrorType) -> Void)?) {
+        do {
+            let predicate = NSPredicate(format: "dateTime >= %@ AND dateTime < %@", startDate, endDate)
+            let results = try self.fetchMealsWithPredicate(predicate)
+            success(results: results)
+        } catch let error {
+            if let fail = failure {
+                fail(error: error)
+            }
+        }
+    }
+    
+    internal func insertMeal(meal: Meal, forUser id: String, success: (() -> Void)?, failure: ((error: ErrorType) -> Void)?) {
         let coreDataMeal = self.insertNewMeal(NSUUID().UUIDString, dateTime: meal.dateTime)
         for item: MealItem in meal.mealItems {
             if self.fetchFoodByID(item.food.id) == nil {
@@ -79,24 +66,54 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         
     }
     
-    internal func fetchFoodByID(id: String) -> CDFood? {
+    internal func updateMeal(meal: Meal, forUser id: String, success: (() -> Void)?, failure: ((error: ErrorType) -> Void)?) {
+        //code
+    }
+    
+    internal func deleteMeal(meal: Meal, forUser id: String, success: (() -> Void)?, failure: ((error: ErrorType) -> Void)?) {
+        //code
+    }
+    
+    private func fetchFoodByID(id: String) -> CDFood? {
         let predicate = NSPredicate(format: "id = %@", id)
         let request = NSFetchRequest(entityName: "CDFood")
         request.predicate = predicate
         do {
-            let foods =  try self.managedObjectContext.executeFetchRequest(request) as!     [CDFood]
+            let foods =  try self.managedObjectContext.executeFetchRequest(request) as! [CDFood]
             return foods.first
         } catch {
             return nil
         }
     }
     
-    internal func updateMeal(meal: Meal) {
-        //code
-    }
-    
-    internal func deleteMeal(meal: Meal) {
-        //self.managedObjectContext.deleteObject(meal)
+    private func fetchMealsWithPredicate(predicate: NSPredicate?) throws -> [Meal] {
+        var resultMeals = [Meal]()
+        do {
+            let request = NSFetchRequest(entityName: "CDMeal")
+            request.predicate = predicate
+            request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: true)]
+            let meals = try self.managedObjectContext.executeFetchRequest(request) as! [CDMeal]
+            for meal: CDMeal in meals {
+                if let
+                    id = meal.id,
+                    dateTime = meal.dateTime,
+                    mealItems = meal.mealItems?.allObjects as? [CDMealItem]
+                {
+                    let resultMeal = Meal(id: id, dateTime: dateTime)
+                    resultMeals.append(resultMeal)
+                    for item: CDMealItem in mealItems {
+                        if let result = self.mealItemFromCoreData(item) {
+                            resultMeal.mealItems.append(result)
+                        }
+                    }
+                }
+                
+            }
+        } catch let error {
+            throw error
+        }
+        
+        return resultMeals
     }
     
     private func saveContext() {

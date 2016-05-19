@@ -10,8 +10,7 @@ import UIKit
 
 class DiaryPageViewController: UIViewController, DiaryPageViewDataSource {
     
-    internal var date: NSDate
-    internal var meals: [Meal]
+    internal var page: DiaryPage
     
     static private var dateFormatter: NSDateFormatter = {
         let formatter = NSDateFormatter()
@@ -25,9 +24,8 @@ class DiaryPageViewController: UIViewController, DiaryPageViewDataSource {
         return view
     }()
     
-    internal init(date: NSDate, meals: [Meal]) {
-        self.date = date
-        self.meals = meals
+    internal init(page: DiaryPage) {
+        self.page = page
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -52,18 +50,18 @@ class DiaryPageViewController: UIViewController, DiaryPageViewDataSource {
     // MARK: DiaryPageViewDataSource methods
     
     internal func diaryPageViewTitleForDay(sender: DiaryPageView) -> String {
-        return DiaryPageViewController.dateFormatter.stringFromDate(self.date)
+        return DiaryPageViewController.dateFormatter.stringFromDate(self.page.date)
     }
     
     internal func diaryPageViewNumberOfNutrients(sender: DiaryPageView) -> Int {
-        guard let count = self.meals.first?.mealItems.first?.food.nutrients.count else {
+        guard let count = self.page.meals.first?.mealItems.first?.food.nutrients.count else {
             return 0
         }
         return count
     }
     
     internal func diaryPageView(sender: DiaryPageView, titleForNutrientAtIndex index: Int) -> String {
-        guard let name = self.meals.first?.mealItems.first?.food.sortedNutrients[index].name else {
+        guard let name = self.page.meals.first?.mealItems.first?.food.sortedNutrients[index].name else {
             return ""
         }
         
@@ -71,7 +69,7 @@ class DiaryPageViewController: UIViewController, DiaryPageViewDataSource {
     }
     
     internal func diaryPageView(sender: DiaryPageView, valueForNutrientAtIndex index: Int) -> Float {
-        return self.meals.reduce(0.0) { (total: Float, meal: Meal) in
+        return self.page.meals.reduce(0.0) { (total: Float, meal: Meal) in
             return meal.mealItems.reduce(total) { (itemTotal: Float, item: MealItem) in
                 let measureValue = item.food.sortedMeasures[item.measureIndex].value
                 let quantityValue = item.quantity
@@ -83,7 +81,7 @@ class DiaryPageViewController: UIViewController, DiaryPageViewDataSource {
     }
     
     internal func diaryPageView(sender: DiaryPageView, unitForNutrientAtIndex index: Int) -> String {
-        guard let unit = self.meals.first?.mealItems.first?.food.sortedNutrients[index].unit else {
+        guard let unit = self.page.meals.first?.mealItems.first?.food.sortedNutrients[index].unit else {
             return ""
         }
         return unit

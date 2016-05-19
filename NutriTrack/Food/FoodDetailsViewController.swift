@@ -35,27 +35,23 @@ class FoodDetailsViewController: BaseViewController, FoodDetailsViewDelegate, Fo
     private let quantities: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
     private let searchProvider: SearchProvider = SearchProvider(service: SearchService())
     
-    private lazy var foodDetailsView: FoodDetailsView = {
+    lazy private var foodDetailsView: FoodDetailsView = {
         let view: FoodDetailsView = FoodDetailsView()
         view.delegate = self
         view.dataSource = self
         return view
     }()
     
-    private lazy var spinner: LoadingIndicator = {
+    lazy private var spinner: LoadingIndicator = {
         let spinner = LoadingIndicator()
         return spinner
     }()
     
-    internal init(food: Food, quantity: Int, measureIndex: Int) {
+    internal init(food: Food, quantity: Int = 1, measureIndex: Int = 0) {
         self.food = food
         self.quantity = 1
         self.measureIndex = 0
         super.init(nibName: nil, bundle: nil)
-    }
-    
-    internal convenience init(food: Food) {
-        self.init(food: food, quantity: 1, measureIndex: 0)
     }
     
     required internal init?(coder aDecoder: NSCoder) {

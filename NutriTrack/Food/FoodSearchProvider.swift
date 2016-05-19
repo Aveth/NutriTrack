@@ -11,7 +11,7 @@ import CoreData
 
 class SearchProvider {
     
-    private enum Error: Int {
+    internal enum Error: ErrorType {
         case None
         case NoResults
         case ParsingError
@@ -45,15 +45,13 @@ class SearchProvider {
                 } else if let errCode = result["errors"]?["code"] as? String where errCode == "err_no_results" {
                     
                     if let fail = failure {
-                        let error: NSError = NSError(domain: self.errorDomain, code: SearchProvider.Error.NoResults.rawValue, userInfo: nil)
-                        fail(error: error)
+                        fail(error: SearchProvider.Error.NoResults)
                     }
                 
                 } else {
                     
                     if let fail = failure {
-                        let error: NSError = NSError(domain: self.errorDomain, code: SearchProvider.Error.ParsingError.rawValue, userInfo: nil)
-                        fail(error: error)
+                        fail(error: SearchProvider.Error.ParsingError)
                     }
                 
                 }
@@ -148,15 +146,14 @@ class SearchProvider {
         var result = [Nutrient]()
         for nutrient in array {
             if let
-                id = nutrient["id"] as? String,
+                id = nutrient["id"] as? NSNumber,
                 name = nutrient["name"] as? String,
                 unit = nutrient["unit"] as? String,
-                value = nutrient["value"] as? String,
-                floatVal = Float(value)
+                value = nutrient["value"] as? Float
             {
-                let item = Nutrient(id: id, name: name, unit: unit, value: floatVal)
+                let item = Nutrient(id: id.stringValue, name: name, unit: unit, value: value)
                 if let codes = nutrientCodes {
-                    if codes.contains(id) {
+                    if codes.contains(id.stringValue) {
                         result.append(item)
                     }
                 } else {

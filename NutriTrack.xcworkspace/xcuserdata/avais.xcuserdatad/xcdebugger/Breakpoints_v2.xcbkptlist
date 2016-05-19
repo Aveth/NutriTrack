@@ -157,5 +157,69 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NutriTrack/Food/FoodSearchProvider.swift"
+            timestampString = "485204013.432212"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "arrayToNutrientItems(_:nutrientCodes:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NutriTrack.SearchProvider.(arrayToNutrientItems in _A2747E00A1551166514295148FF270A6) (Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;, nutrientCodes : Swift.Optional&lt;Swift.Array&lt;Swift.String&gt;&gt;) -&gt; Swift.Array&lt;NutriTrack.Nutrient&gt;"
+                  moduleName = "NutriTrack"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/avais/Repositories/NutriTrack-iOS/NutriTrack/Food/FoodSearchProvider.swift"
+                  timestampString = "485204013.435344"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "573">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NutriTrack.SearchProvider.(arrayToNutrientItems in _A2747E00A1551166514295148FF270A6) (Swift.Array&lt;Swift.Dictionary&lt;Swift.String, Swift.AnyObject&gt;&gt;, nutrientCodes : Swift.Optional&lt;Swift.Array&lt;Swift.String&gt;&gt;) -&gt; Swift.Array&lt;NutriTrack.Nutrient&gt;"
+                  moduleName = "NutriTrack"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/avais/Repositories/NutriTrack-iOS/NutriTrack/Food/FoodSearchProvider.swift"
+                  timestampString = "485204013.435521"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "151"
+                  endingLineNumber = "151"
+                  offsetFromSymbolStart = "1018">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NutriTrack/Food/FoodSearchProvider.swift"
+            timestampString = "485204066.237932"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "157"
+            endingLineNumber = "157"
+            landmarkName = "arrayToNutrientItems(_:nutrientCodes:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
