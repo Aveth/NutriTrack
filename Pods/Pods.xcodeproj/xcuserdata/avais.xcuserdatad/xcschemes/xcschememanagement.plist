@@ -9,7 +9,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Nimble.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-NutriTrack.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-NutriTrackTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -19,9 +29,19 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Quick.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>40FF1C77152F384080A1A02E90A36DA9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>4B2F30D90D85A544E9EFE2A49D392C25</key>
 		<dict>
 			<key>primary</key>
@@ -32,7 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>A228876B3CFE01F9555E641F0260EB94</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>A3CC75957C60840951A1A56EF70C3AD9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>DF9463B8E487990A35147B0CDCCCC584</key>
 		<dict>
 			<key>primary</key>
 			<true/>

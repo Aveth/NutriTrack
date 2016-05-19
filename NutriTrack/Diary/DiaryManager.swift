@@ -42,24 +42,24 @@ class DiaryManger {
     
     internal func nextPageAfterPage(page: DiaryPage) -> DiaryPage? {
         guard let
-            index = self.pages?.indexOf(page),
-            nextPage = self.pages?[index + 1]
+            pages = self.pages,
+            index = pages.indexOf(page)
+        where index < pages.count - 1
         else {
             return nil
         }
         
-        return nextPage
+        return pages[index + 1]
     }
     
     internal func previousPageBeforePage(page: DiaryPage) -> DiaryPage? {
-        guard let
-            index = self.pages?.indexOf(page),
-            prevPage = self.pages?[index - 1]
+        guard let index = self.pages?.indexOf(page)
+        where index > 0
         else {
-                return nil
+            return nil
         }
         
-        return prevPage
+        return self.pages?[index - 1]
     }
     
     private func pagesFromMeals(meals: [Meal]?) -> [DiaryPage]? {

@@ -115,7 +115,7 @@ class DiaryViewController: BaseViewController, MealDetailsViewControllerDelegate
     internal func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
         guard let
             page = (viewController as? DiaryPageViewController)?.page,
-            prevPage = self.dataManager.nextPageAfterPage(page)
+            prevPage = self.dataManager.previousPageBeforePage(page)
         else {
             return nil
         }

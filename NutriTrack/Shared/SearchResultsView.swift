@@ -81,9 +81,8 @@ class SearchResultsView: UIView, UITableViewDataSource, UITableViewDelegate {
         }
         
         UIView.animateWithDuration(0.1) {
-            if let
-                num = self.dataSource?.searchResultsViewNumberOfResults(self)
-                where num > 0
+            if let num = self.dataSource?.searchResultsViewNumberOfResults(self)
+            where num > 0
             {
                 self.tableView.alpha = 1.0
             } else {

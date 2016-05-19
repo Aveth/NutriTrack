@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FB913646A68D932F4006082C'
+               BlueprintIdentifier = '93875E20E1CB42B506DD2C25'
                BlueprintName = 'Pods-NutriTrack'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_NutriTrack.framework'>

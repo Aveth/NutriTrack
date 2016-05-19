@@ -4,14 +4,13 @@ platform :ios, '8.0'
 use_frameworks!
 
 target 'NutriTrack' do
-    
     pod 'PureLayout'
     pod 'Alamofire', '~> 2.0'
-
 end
 
 target 'NutriTrackTests' do
-
+    pod 'Quick'
+    pod 'Nimble'
 end
 
 target 'NutriTrackUITests' do
