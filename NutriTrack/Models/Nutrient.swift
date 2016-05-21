@@ -28,7 +28,7 @@ class Nutrient {
     internal var unit: String
     internal var value: Float
     
-    internal init(id: String, name: String, unit: String, value: Float) {
+    internal init(id: String, name: String, unit: String, value: Float = 0.0) {
         self.id = id
         self.name = name
         self.unit = unit

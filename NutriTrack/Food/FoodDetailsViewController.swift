@@ -32,8 +32,8 @@ class FoodDetailsViewController: BaseViewController, FoodDetailsViewDelegate, Fo
     internal var measureIndex: Int
     internal var quantity: Int
     
-    private let quantities: [Int] = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-    private let searchProvider: SearchProvider = SearchProvider(service: SearchService())
+    private let quantities = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+    private let dataManager = FoodManager(provider: FoodProvider())
     
     lazy private var foodDetailsView: FoodDetailsView = {
         let view: FoodDetailsView = FoodDetailsView()
@@ -86,7 +86,7 @@ class FoodDetailsViewController: BaseViewController, FoodDetailsViewDelegate, Fo
         if let foodId: String = food.id {
             self.navigationItem.rightBarButtonItem?.enabled = false
             self.spinner.activate()
-            self.searchProvider.fetchFoodDetails(foodId, diet: Nutrient.Diet.Renal,
+            self.dataManager.detailsForFood(foodId, diet: Nutrient.Diet.Renal,
                 success: { (result: Food) -> Void in
                     self.food = result
                     self.foodDetailsView.reloadData()

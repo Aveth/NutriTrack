@@ -21,7 +21,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     private var categories: [Category]?
     private var noSearchResults: Bool = false
     
-    private let searchProvider: SearchProvider = SearchProvider(service: SearchService())
+    private let dataManager: FoodManager = FoodManager(provider: FoodProvider())
     
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -79,7 +79,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     
         self.updateViewConstraints()
         
-        self.searchProvider.fetchCategories(
+        self.dataManager.fetchCategories(
             success: { (results) in
                 self.categories = results
                 self.scopedResultsView.reloadData()
@@ -155,7 +155,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     
     internal func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         if ( searchText.characters.count >= 3 ) {
-            self.searchProvider.fetchFoods(searchText,
+            self.dataManager.search(searchText,
                 success: { (originalQuery: String, results: [Food]) -> Void in
                     if self.searchBar.text == originalQuery {
                         self.noSearchResults = false

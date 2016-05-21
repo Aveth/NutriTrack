@@ -11,9 +11,8 @@ import CoreData
 
 class MealsCoreDataProvider: MealsProviderProtocol {
     
-    lazy private var managedObjectContext: NSManagedObjectContext = {
-        return CDContextProvider.sharedProvider.managedObjectContext
-    }()
+    private var managedObjectContext = CDContextProvider.sharedProvider.managedObjectContext
+    private var modelAdapter = CDModelAdapter.sharedAdapter
     
     internal func fetchFirstValidDateForUser(id: String, success: ((result: NSDate?) -> Void), failure: ((error: ErrorType) -> Void)?) {
         do {
@@ -79,7 +78,7 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         let request = NSFetchRequest(entityName: "CDFood")
         request.predicate = predicate
         do {
-            let foods =  try self.managedObjectContext.executeFetchRequest(request) as! [CDFood]
+            let foods = try self.managedObjectContext.executeFetchRequest(request) as! [CDFood]
             return foods.first
         } catch {
             return nil
@@ -102,7 +101,11 @@ class MealsCoreDataProvider: MealsProviderProtocol {
                     let resultMeal = Meal(id: id, dateTime: dateTime)
                     resultMeals.append(resultMeal)
                     for item: CDMealItem in mealItems {
-                        if let result = self.mealItemFromCoreData(item) {
+                        if let
+                            foodId = item.foodID,
+                            food = self.fetchFoodByID(foodId),
+                            result = self.modelAdapter.mealItemFromCoreData(item, coreDataFood: food)
+                        {
                             resultMeal.mealItems.append(result)
                         }
                     }
@@ -122,70 +125,6 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         } catch let error {
             print("\(error)")
         }
-    }
-    
-    private func mealItemFromCoreData(coreDataMealItem: CDMealItem?) -> MealItem? {
-        if let
-            measureIndex = coreDataMealItem?.measureIndex,
-            quantity = coreDataMealItem?.quantity,
-            foodID = coreDataMealItem?.foodID
-        {
-            if let
-                coreDataFood = self.fetchFoodByID(foodID),
-                resultFood = self.foodFromCoreData(coreDataFood)
-            {
-                let resultMealItem = MealItem(food: resultFood, quantity: quantity.integerValue, measureIndex: measureIndex.integerValue)
-                return resultMealItem
-            }
-        }
-        return nil
-    }
-    
-    private func foodFromCoreData(coreDataFood: CDFood?) -> Food? {
-        if let
-            id = coreDataFood?.id,
-            name = coreDataFood?.name,
-            category = coreDataFood?.category,
-            nutrients = coreDataFood?.nutrients?.allObjects as? [CDNutrient],
-            measures = coreDataFood?.measures?.allObjects as? [CDMeasure]
-        {
-            let resultFood = Food(id: id, name: name, category: category)
-            for nutrient: CDNutrient in nutrients {
-                if let result = self.nutrientFromCoreData(nutrient) {
-                    resultFood.nutrients.append(result)
-                }
-            }
-            for measure: CDMeasure in measures {
-                if let result = self.measureFromCoreData(measure) {
-                    resultFood.measures.append(result)
-                }
-            }
-            return resultFood
-        }
-        return nil
-    }
-    
-    private func nutrientFromCoreData(coreDataNutrient: CDNutrient?) -> Nutrient? {
-        if let
-            id = coreDataNutrient?.id,
-            name = coreDataNutrient?.name,
-            unit = coreDataNutrient?.unit,
-            value = coreDataNutrient?.value
-        {
-            return Nutrient(id: id, name: name, unit: unit, value: value.floatValue)
-        }
-        return nil
-    }
-    
-    private func measureFromCoreData(coreDataMeasure: CDMeasure?) -> Measure? {
-        if let
-            index = coreDataMeasure?.index?.integerValue,
-            name = coreDataMeasure?.name,
-            value = coreDataMeasure?.value
-        {
-            return Measure(index: index, name: name, value: value.floatValue)
-        }
-        return nil
     }
     
     private func insertNewMeal(id: String, dateTime: NSDate) -> CDMeal {
