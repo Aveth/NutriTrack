@@ -10,7 +10,7 @@ import UIKit
 import CoreData
 
 class FoodManager {
-
+    
     internal var categories: [Category]?
     internal var nutrients: [Nutrient]?
     internal var recentFoods: [Food]?
@@ -29,7 +29,20 @@ class FoodManager {
     }
     
     internal func foodsForCategory(id: String, success: ((results: [Food]) -> Void), failure:((error: ErrorType) -> Void)?) {
-        
+        let categories = self.categories?.filter() { $0.id == id }
+        guard let category = categories?.first
+        else {
+            if let fail = failure {
+                fail(error: FoodProvider.Error.NoResults)
+            }
+            return
+        }
+        self.provider.fetchFoodsForCategory(category.name,
+            success: { (originalCategory, results) in
+                success(results: results)
+            },
+            failure: failure
+        )
     }
     
     internal func refresh(success success: (() -> Void), failure:((error: ErrorType) -> Void)?) {
@@ -58,6 +71,7 @@ class FoodManager {
             }
         )
         
+        dispatch_group_notify(refreshGroup, dispatch_get_main_queue(), success)
     }
 
 }

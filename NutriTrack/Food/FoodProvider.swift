@@ -28,9 +28,6 @@ class FoodProvider: FoodProviderProtocol {
         case Nutrients = "/food/nutrients"
     }
     
-    private var managedObjectContext = CDContextProvider.sharedProvider.managedObjectContext
-    private var modelAdapter = CDModelAdapter.sharedAdapter
-    
     static private let APIBaseURL: String = NSBundle.mainBundle().objectForInfoDictionaryKey("NTAPIBaseURL") as! String
     
     private func preparedSearchResults(results: [String: AnyObject], success: ((originalQuery: String, results: [Food]) -> Void), failure: ((error: ErrorType) -> Void)?) {
@@ -155,24 +152,6 @@ class FoodProvider: FoodProviderProtocol {
             },
             failure: failure
         )
-    }
-    
-    internal func fetchRecentFoodsForUser(id: String, success: ((results: [Food]) -> Void), failure: ((error: ErrorType) -> Void)?) {
-        do {
-            let request = NSFetchRequest(entityName: "CDFood")
-            let foods = try self.managedObjectContext.executeFetchRequest(request) as! [CDFood]
-            var results = [Food]()
-            for coreDataFood in foods {
-                if let food = self.modelAdapter.foodFromCoreData(coreDataFood) {
-                    results.append(food)
-                }
-            }
-            success(results: results)
-        } catch let error {
-            if let fail = failure {
-                fail(error: error)
-            }
-        }
     }
     
     private func fetch(endpoint: FoodProvider.Endpoints, urlParam: String? = nil, queryParams: [String: String]? = nil, success: ((results: [String: AnyObject]) -> Void), failure: ((error: ErrorType) -> Void)?) -> Request? {

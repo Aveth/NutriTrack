@@ -15,6 +15,5 @@ protocol FoodProviderProtocol: class {
     func fetchFoodDetailsWithID(id: String, success: ((result: Food) -> Void), failure: ((error: ErrorType) -> Void)?)
     func fetchCategories(success success: ((results: [Category]) -> Void), failure: ((error: ErrorType) -> Void)?)
     func fetchNutrients(success success: ((results: [Nutrient]) -> Void), failure: ((error: ErrorType) -> Void)?)
-    func fetchRecentFoodsForUser(id: String, success: ((results: [Food]) -> Void), failure: ((error: ErrorType) ->Void)?)
-
+    
 }
