@@ -14,6 +14,7 @@
 		8739DC8E1CEE49A1005A73F1 /* DiaryPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC8D1CEE49A1005A73F1 /* DiaryPage.swift */; };
 		8739DC901CEE4C5C005A73F1 /* DiaryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC8F1CEE4C5C005A73F1 /* DiaryManager.swift */; };
 		8739DC921CEFE163005A73F1 /* CDModelAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC911CEFE163005A73F1 /* CDModelAdapter.swift */; };
+		8739DC951CF328B8005A73F1 /* UserProfileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC941CF328B8005A73F1 /* UserProfileProtocol.swift */; };
 		874389791CD53927003DFE01 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389781CD53927003DFE01 /* TabBarController.swift */; };
 		8743897D1CD6E9AE003DFE01 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */; };
 		8743897F1CD6F25A003DFE01 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */; };
@@ -109,6 +110,7 @@
 		8739DC8D1CEE49A1005A73F1 /* DiaryPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryPage.swift; sourceTree = "<group>"; };
 		8739DC8F1CEE4C5C005A73F1 /* DiaryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiaryManager.swift; sourceTree = "<group>"; };
 		8739DC911CEFE163005A73F1 /* CDModelAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDModelAdapter.swift; sourceTree = "<group>"; };
+		8739DC941CF328B8005A73F1 /* UserProfileProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileProtocol.swift; sourceTree = "<group>"; };
 		874389781CD53927003DFE01 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -234,6 +236,14 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		8739DC931CF327EB005A73F1 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				8739DC941CF328B8005A73F1 /* UserProfileProtocol.swift */,
+			);
+			path = User;
+			sourceTree = "<group>";
+		};
 		8743897A1CD6E7EE003DFE01 /* Recipes */ = {
 			isa = PBXGroup;
 			children = (
@@ -346,6 +356,7 @@
 				879AECD81CC5BA1C0073BFB8 /* Resources */,
 				8743897B1CD6E83C003DFE01 /* Profile */,
 				8783669D1CE4D083002AF43A /* Shared */,
+				8739DC931CF327EB005A73F1 /* User */,
 			);
 			path = NutriTrack;
 			sourceTree = "<group>";
@@ -723,6 +734,7 @@
 				87C6C93A1CD0298B008E9980 /* FoodDetailsView.swift in Sources */,
 				87C6C9931CD135BE008E9980 /* Nutrient.swift in Sources */,
 				879AECD71CC5B9BA0073BFB8 /* AppDelegate.swift in Sources */,
+				8739DC951CF328B8005A73F1 /* UserProfileProtocol.swift in Sources */,
 				8739DC921CEFE163005A73F1 /* CDModelAdapter.swift in Sources */,
 				878366AF1CE4D6F3002AF43A /* DiaryView.swift in Sources */,
 				878366A41CE4D083002AF43A /* ActionCell.swift in Sources */,

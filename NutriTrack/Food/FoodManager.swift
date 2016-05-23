@@ -28,7 +28,11 @@ class FoodManager {
         self.provider.fetchFoodDetailsWithID(id, success: success, failure: failure)
     }
     
-    internal func refresh() {
+    internal func foodsForCategory(id: String, success: ((results: [Food]) -> Void), failure:((error: ErrorType) -> Void)?) {
+        
+    }
+    
+    internal func refresh(success success: (() -> Void), failure:((error: ErrorType) -> Void)?) {
         
         let refreshGroup = dispatch_group_create()
         
@@ -55,19 +59,5 @@ class FoodManager {
         )
         
     }
-    
-    internal func fetchCategories(success success: ((results: [Category]) -> Void), failure:((error: ErrorType) -> Void)?) {
-        
-        self.provider.fetchCategories(
-            success: { (results) in
-                
-            },
-            failure: failure
-        )
-        
-    }
-    
-    
-    
 
 }

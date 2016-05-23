@@ -18,6 +18,7 @@ class FoodProvider: FoodProviderProtocol {
         case NoResults
         case ParsingError
         case ServerError
+        case MalformedURL
     }
     
     private enum Endpoints: String {
@@ -32,29 +33,42 @@ class FoodProvider: FoodProviderProtocol {
     
     static private let APIBaseURL: String = NSBundle.mainBundle().objectForInfoDictionaryKey("NTAPIBaseURL") as! String
     
+    private func preparedSearchResults(results: [String: AnyObject], success: ((originalQuery: String, results: [Food]) -> Void), failure: ((error: ErrorType) -> Void)?) {
+        if let errCode = results["errors"]?["code"] as? String
+            where errCode == "err_no_results" {
+            if let fail = failure {
+                fail(error: FoodProvider.Error.NoResults)
+            }
+            return
+        }
+        
+        guard let
+            resultsDict = results["data"]?["results"] as? [[String: AnyObject]],
+            originalQuery = results["data"]?["query"] as? String
+            else {
+                if let fail = failure {
+                    fail(error: FoodProvider.Error.ParsingError)
+                }
+                return
+        }
+        
+        let foods = self.arrayToFoods(resultsDict)
+        success(originalQuery: originalQuery, results: foods)
+    }
+    
     internal func findFoodsForSearchQuery(query: String, success: ((originalQuery: String, results: [Food]) -> Void), failure: ((error: ErrorType) -> Void)?) {
         self.fetch(.FoodSearch, urlParam: query,
             success: { (results) in
-                if let
-                    resultsDict = results["data"]?["results"] as? [[String: AnyObject]],
-                    originalQuery = results["data"]?["query"] as? String
-                {
-                    let foods = self.arrayToFoods(resultsDict)
-                    success(originalQuery: originalQuery, results: foods)
-                    
-                } else if let errCode = results["errors"]?["code"] as? String where errCode == "err_no_results" {
-                    
-                    if let fail = failure {
-                        fail(error: FoodProvider.Error.NoResults)
-                    }
-                    
-                } else {
-                    
-                    if let fail = failure {
-                        fail(error: FoodProvider.Error.ParsingError)
-                    }
-                    
-                }
+                self.preparedSearchResults(results, success: success, failure: failure)
+            },
+            failure: failure
+        )
+    }
+    
+    internal func fetchFoodsForCategory(category: String, success: ((originalCategory: String, results: [Food]) -> Void), failure: ((error: ErrorType) -> Void)?) {
+        self.fetch(.FoodSearch, queryParams: ["category": category],
+            success: { (results) in
+               self.preparedSearchResults(results, success: success, failure: failure)
             },
             failure: failure
         )
@@ -161,7 +175,7 @@ class FoodProvider: FoodProviderProtocol {
         }
     }
     
-    private func fetch(endpoint: FoodProvider.Endpoints, urlParam: String? = nil, success: ((results: [String: AnyObject]) -> Void), failure: ((error: ErrorType) -> Void)?) -> Request {
+    private func fetch(endpoint: FoodProvider.Endpoints, urlParam: String? = nil, queryParams: [String: String]? = nil, success: ((results: [String: AnyObject]) -> Void), failure: ((error: ErrorType) -> Void)?) -> Request? {
         
         var url: String;
         if let param = urlParam?.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLPathAllowedCharacterSet()) {
@@ -170,8 +184,24 @@ class FoodProvider: FoodProviderProtocol {
             url = FoodProvider.APIBaseURL + endpoint.rawValue
         }
         
-        return Alamofire.request(Method.GET, url).responseJSON() { (request: NSURLRequest?, response: NSHTTPURLResponse?, result: Result<AnyObject>) -> Void in
-                
+        guard let
+            components = NSURLComponents(string: url)
+        else {
+            if let fail = failure {
+                fail(error: FoodProvider.Error.MalformedURL)
+            }
+            return nil
+        }
+        
+        if let params = queryParams {
+            var queryItems = [NSURLQueryItem]()
+            for (key, value) in params {
+                queryItems.append(NSURLQueryItem(name: key, value: value))
+            }
+            components.queryItems = queryItems
+        }
+        
+        return Alamofire.request(Method.GET, components.URLString).responseJSON() { (request, response, result) in
             switch result {
                 case .Success(let data):
                     if let dataDict = data as? [String: AnyObject] {

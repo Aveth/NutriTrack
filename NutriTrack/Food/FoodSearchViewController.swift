@@ -17,11 +17,9 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     weak internal var delegate: FoodSearchViewControllerDelegate?
     
     private var searchFoods: [Food]?
-    private var recentFoods: [Food]?
-    private var categories: [Category]?
     private var noSearchResults: Bool = false
     
-    private let dataManager: FoodManager = FoodManager(provider: FoodProvider())
+    private let dataManager = FoodManager(provider: FoodProvider())
     
     private lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -79,9 +77,8 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     
         self.updateViewConstraints()
         
-        self.dataManager.fetchCategories(
-            success: { (results) in
-                self.categories = results
+        self.dataManager.refresh(
+            success: {
                 self.scopedResultsView.reloadData()
             },
             failure: { (error) in
@@ -185,7 +182,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
             if self.scopesControl.selectedSegmentIndex == 0 {
                 return 3
             } else {
-                return Int.unwrapOrZero(self.categories?.count)
+                return Int.unwrapOrZero(self.dataManager.categories?.count)
             }
         }
     }
@@ -198,7 +195,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
             if self.scopesControl.selectedSegmentIndex == 0 {
                 return "Recent"
             } else {
-                return String.unwrapOrBlank(self.categories?[index].name)
+                return String.unwrapOrBlank(self.dataManager.categories?[index].name)
             }
         }
     }
@@ -220,7 +217,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     
     internal func searchResultsView(sender: SearchResultsView, didSelectResultAtIndex index: Int) {
         if sender.tag == 1 || self.scopesControl.selectedSegmentIndex == 0 {
-            if let foods = (sender.tag == 1 ? self.searchFoods : self.recentFoods) {
+            if let foods = (sender.tag == 1 ? self.searchFoods : self.dataManager.recentFoods) {
                 let controller = FoodDetailsViewController(food: foods[index])
                 controller.delegate = self
                 self.navigationController?.pushViewController(controller, animated: true)
