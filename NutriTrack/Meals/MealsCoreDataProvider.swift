@@ -28,7 +28,7 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         }
     }
     
-    func fetchMealsForUser(id: String, startDate: NSDate, endDate: NSDate, success: ((results: [Meal]?) -> Void), failure: ((error: ErrorType) -> Void)?) {
+    internal func fetchMealsForUser(id: String, startDate: NSDate, endDate: NSDate, success: ((results: [Meal]?) -> Void), failure: ((error: ErrorType) -> Void)?) {
         do {
             let predicate = NSPredicate(format: "dateTime >= %@ AND dateTime < %@", startDate, endDate)
             let results = try self.fetchMealsWithPredicate(predicate)
@@ -90,7 +90,6 @@ class MealsCoreDataProvider: MealsProviderProtocol {
         do {
             let request = NSFetchRequest(entityName: "CDMeal")
             request.predicate = predicate
-            request.sortDescriptors = [NSSortDescriptor(key: "dateTime", ascending: true)]
             let meals = try self.managedObjectContext.executeFetchRequest(request) as! [CDMeal]
             for meal: CDMeal in meals {
                 if let

@@ -10,6 +10,10 @@ import Foundation
 
 protocol UserProfileProtocol {
     
+    var id: String? { get }
+    var recentFoods: [Food]? { get }
+    var selectedNutrients: [Nutrient]? { get }
     
+    func refresh(success success: (() -> Void), failure: ((error: ErrorType) -> Void)?)
     
 }

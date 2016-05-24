@@ -16,6 +16,7 @@
 		8739DC921CEFE163005A73F1 /* CDModelAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC911CEFE163005A73F1 /* CDModelAdapter.swift */; };
 		8739DC951CF328B8005A73F1 /* UserProfileProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC941CF328B8005A73F1 /* UserProfileProtocol.swift */; };
 		8739DC971CF33AD5005A73F1 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC961CF33AD5005A73F1 /* UserProfile.swift */; };
+		8739DC991CF343D9005A73F1 /* CategoryResultsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8739DC981CF343D9005A73F1 /* CategoryResultsViewController.swift */; };
 		874389791CD53927003DFE01 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 874389781CD53927003DFE01 /* TabBarController.swift */; };
 		8743897D1CD6E9AE003DFE01 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */; };
 		8743897F1CD6F25A003DFE01 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */; };
@@ -113,6 +114,7 @@
 		8739DC911CEFE163005A73F1 /* CDModelAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CDModelAdapter.swift; sourceTree = "<group>"; };
 		8739DC941CF328B8005A73F1 /* UserProfileProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileProtocol.swift; sourceTree = "<group>"; };
 		8739DC961CF33AD5005A73F1 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		8739DC981CF343D9005A73F1 /* CategoryResultsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryResultsViewController.swift; sourceTree = "<group>"; };
 		874389781CD53927003DFE01 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		8743897C1CD6E9AE003DFE01 /* RecipesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		8743897E1CD6F25A003DFE01 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -457,6 +459,7 @@
 				878906581CD1B7680049576C /* FoodManager.swift */,
 				878906591CD1B7680049576C /* FoodProvider.swift */,
 				878906601CD1B7A70049576C /* FoodProviderProtocol.swift */,
+				8739DC981CF343D9005A73F1 /* CategoryResultsViewController.swift */,
 			);
 			path = Food;
 			sourceTree = "<group>";
@@ -764,6 +767,7 @@
 				8789065D1CD1B7680049576C /* FoodProvider.swift in Sources */,
 				878906611CD1B7A70049576C /* FoodProviderProtocol.swift in Sources */,
 				87C6C92E1CD02888008E9980 /* MealDetailsViewController.swift in Sources */,
+				8739DC991CF343D9005A73F1 /* CategoryResultsViewController.swift in Sources */,
 				878366881CE4CF31002AF43A /* CDMeasure+CoreDataProperties.swift in Sources */,
 				874389791CD53927003DFE01 /* TabBarController.swift in Sources */,
 			);

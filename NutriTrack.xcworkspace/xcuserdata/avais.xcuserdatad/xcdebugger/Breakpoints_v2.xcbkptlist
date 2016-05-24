@@ -157,5 +157,53 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "NutriTrack/Meals/MealsCoreDataProvider.swift"
+            timestampString = "485808210.89526"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
+            landmarkName = "fetchMealsWithPredicate(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NutriTrack.MealsCoreDataProvider.(fetchMealsWithPredicate in _B5157D6B9F4FB2C155D99F8C1A327422) (Swift.Optional&lt;__ObjC.NSPredicate&gt;) throws -&gt; Swift.Array&lt;NutriTrack.Meal&gt;"
+                  moduleName = "NutriTrack"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/avais/Repositories/NutriTrack-iOS/NutriTrack/Meals/MealsCoreDataProvider.swift"
+                  timestampString = "485807925.54345"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "1276">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "NutriTrack.MealsCoreDataProvider.(fetchMealsWithPredicate in _B5157D6B9F4FB2C155D99F8C1A327422) (Swift.Optional&lt;__ObjC.NSPredicate&gt;) throws -&gt; Swift.Array&lt;NutriTrack.Meal&gt;"
+                  moduleName = "NutriTrack"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/avais/Repositories/NutriTrack-iOS/NutriTrack/Meals/MealsCoreDataProvider.swift"
+                  timestampString = "485807925.543646"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "97"
+                  endingLineNumber = "97"
+                  offsetFromSymbolStart = "1507">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

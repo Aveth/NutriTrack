@@ -23,10 +23,14 @@ class FoodProvider: FoodProviderProtocol {
     
     private enum Endpoints: String {
         case FoodSearch = "/food/search"
+        case CategoryResults = "/food/category"
         case FoodDetails = "/food/details"
         case Categories = "/food/categories"
         case Nutrients = "/food/nutrients"
     }
+    
+    private var managedObjectContext = CDContextProvider.sharedProvider.managedObjectContext
+    private var modelAdapter = CDModelAdapter.sharedAdapter
     
     static private let APIBaseURL: String = NSBundle.mainBundle().objectForInfoDictionaryKey("NTAPIBaseURL") as! String
     
@@ -63,7 +67,7 @@ class FoodProvider: FoodProviderProtocol {
     }
     
     internal func fetchFoodsForCategory(category: String, success: ((originalCategory: String, results: [Food]) -> Void), failure: ((error: ErrorType) -> Void)?) {
-        self.fetch(.FoodSearch, queryParams: ["category": category],
+        self.fetch(.CategoryResults, urlParam: category,
             success: { (results) in
                self.preparedSearchResults(results, success: success, failure: failure)
             },
@@ -72,6 +76,15 @@ class FoodProvider: FoodProviderProtocol {
     }
     
     internal func fetchFoodDetailsWithID(id: String, success: ((result: Food) -> Void), failure: ((error: ErrorType) -> Void)?) {
+        
+        if let
+            coreDataFood = self.fetchFoodByID(id),
+            food = self.modelAdapter.foodFromCoreData(coreDataFood)
+        {
+            success(result: food)
+            return
+        }
+        
         self.fetch(.FoodDetails, urlParam: id,
             success: { (results) in
                 if let
@@ -196,6 +209,18 @@ class FoodProvider: FoodProviderProtocol {
             
         }
     
+    }
+    
+    private func fetchFoodByID(id: String) -> CDFood? {
+        let predicate = NSPredicate(format: "id = %@", id)
+        let request = NSFetchRequest(entityName: "CDFood")
+        request.predicate = predicate
+        do {
+            let foods = try self.managedObjectContext.executeFetchRequest(request) as! [CDFood]
+            return foods.first
+        } catch {
+            return nil
+        }
     }
     
     private func arrayToFoods(array: [[String: AnyObject]]) -> [Food] {

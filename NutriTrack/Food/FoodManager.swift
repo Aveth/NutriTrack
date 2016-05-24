@@ -13,8 +13,11 @@ class FoodManager {
     
     internal var categories: [Category]?
     internal var nutrients: [Nutrient]?
-    internal var recentFoods: [Food]?
     internal var provider: FoodProviderProtocol
+    
+    lazy private(set) var sortedCategories: [Category]? = {
+        return self.categories?.sort() { $0.name.compare($1.name) == .OrderedAscending }
+    }()
     
     init(provider: FoodProviderProtocol) {
         self.provider = provider
@@ -29,8 +32,7 @@ class FoodManager {
     }
     
     internal func foodsForCategory(id: String, success: ((results: [Food]) -> Void), failure:((error: ErrorType) -> Void)?) {
-        let categories = self.categories?.filter() { $0.id == id }
-        guard let category = categories?.first
+        guard let category = self.categories?.filter({ $0.id == id }).first
         else {
             if let fail = failure {
                 fail(error: FoodProvider.Error.NoResults)

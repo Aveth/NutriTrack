@@ -14,6 +14,10 @@ class DiaryManger {
     internal var pages: [DiaryPage]?
     internal var provider: MealsProviderProtocol
     
+    lazy private(set) var sortedPages: [DiaryPage]? = {
+        return self.pages?.sort() { $0.date.compare($1.date) == .OrderedAscending }
+    }()
+    
     internal init(provider: MealsProviderProtocol) {
         self.provider = provider
     }
@@ -26,11 +30,11 @@ class DiaryManger {
         }
     }
     
-    internal func refresh(success success: ((results: [DiaryPage]?) -> Void), failure: ((error: ErrorType) -> Void)?) {
+    internal func refresh(success success: (() -> Void), failure: ((error: ErrorType) -> Void)?) {
         self.provider.fetchMealsForUser("", startDate: NSDate.distantPast(), endDate: NSDate().dateOnly()!.dateByAddingTimeInterval(60 * 60 * 24),
             success: { (results) in
                 self.pages = self.pagesFromMeals(results)
-                success(results: self.pages)
+                success()
             },
             failure: failure
         )
@@ -42,7 +46,7 @@ class DiaryManger {
     
     internal func nextPageAfterPage(page: DiaryPage) -> DiaryPage? {
         guard let
-            pages = self.pages,
+            pages = self.sortedPages,
             index = pages.indexOf(page)
         where index < pages.count - 1
         else {
@@ -53,13 +57,13 @@ class DiaryManger {
     }
     
     internal func previousPageBeforePage(page: DiaryPage) -> DiaryPage? {
-        guard let index = self.pages?.indexOf(page)
+        guard let index = self.sortedPages?.indexOf(page)
         where index > 0
         else {
             return nil
         }
         
-        return self.pages?[index - 1]
+        return self.sortedPages?[index - 1]
     }
     
     private func pagesFromMeals(meals: [Meal]?) -> [DiaryPage]? {

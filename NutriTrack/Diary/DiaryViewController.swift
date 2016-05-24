@@ -42,10 +42,10 @@ class DiaryViewController: BaseViewController, MealDetailsViewControllerDelegate
         super.viewWillAppear(animated)
         self.spinner.activate()
         self.dataManager.refresh(
-            success: { (results) in
+            success: {
                 self.spinner.deactivte()
     
-                guard let page = results?.last else {
+                guard let page = self.dataManager.sortedPages?.last else {
                     self.emptyView.hidden = false
                     self.pageViewController.view.hidden = true
                     return
@@ -90,6 +90,7 @@ class DiaryViewController: BaseViewController, MealDetailsViewControllerDelegate
     override internal func updateViewConstraints() {
         super.updateViewConstraints()
         self.emptyView.autoPinEdgesToSuperviewEdges()
+        self.spinner.autoPinEdgesToSuperviewEdges()
         self.pageViewController.view.autoPinEdgesToSuperviewEdges()
     }
     

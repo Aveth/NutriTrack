@@ -19,6 +19,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     private var searchFoods: [Food]?
     private var noSearchResults: Bool = false
     
+    private let userProfile = UserProfile()
     private let dataManager = FoodManager(provider: FoodProvider())
     
     private lazy var searchBar: UISearchBar = {
@@ -68,7 +69,6 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
         self.view.addSubview(self.statusBarBackground)
         self.view.addSubview(self.searchBar)
         self.view.addSubview(self.scopesControl)
-        
         self.view.addSubview(self.scopedResultsView)
         self.view.addSubview(self.foodResultsView)
         
@@ -78,6 +78,15 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
         self.updateViewConstraints()
         
         self.dataManager.refresh(
+            success: {
+                self.scopedResultsView.reloadData()
+            },
+            failure: { (error) in
+                
+            }
+        )
+        
+        self.userProfile.refresh(
             success: {
                 self.scopedResultsView.reloadData()
             },
@@ -180,9 +189,9 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
             return Int.unwrapOrZero(self.searchFoods?.count)
         default:
             if self.scopesControl.selectedSegmentIndex == 0 {
-                return 3
+                return Int.unwrapOrZero(self.userProfile.recentFoods?.count)
             } else {
-                return Int.unwrapOrZero(self.dataManager.categories?.count)
+                return Int.unwrapOrZero(self.dataManager.sortedCategories?.count)
             }
         }
     }
@@ -193,9 +202,9 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
             return String.unwrapOrBlank(self.searchFoods?[index].name)
         default:
             if self.scopesControl.selectedSegmentIndex == 0 {
-                return "Recent"
+                return String.unwrapOrBlank(self.userProfile.recentFoods?[index].name)
             } else {
-                return String.unwrapOrBlank(self.dataManager.categories?[index].name)
+                return String.unwrapOrBlank(self.dataManager.sortedCategories?[index].name)
             }
         }
     }
@@ -206,7 +215,7 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
             return String.unwrapOrBlank(self.searchFoods?[index].category)
         default:
             if self.scopesControl.selectedSegmentIndex == 0 {
-                return "Recent"
+                return String.unwrapOrBlank(self.userProfile.recentFoods?[index].category)
             } else {
                 return nil
             }
@@ -217,15 +226,20 @@ class FoodSearchViewController: BaseViewController, UISearchBarDelegate, SearchR
     
     internal func searchResultsView(sender: SearchResultsView, didSelectResultAtIndex index: Int) {
         if sender.tag == 1 || self.scopesControl.selectedSegmentIndex == 0 {
-            if let foods = (sender.tag == 1 ? self.searchFoods : self.dataManager.recentFoods) {
+            if let foods = (sender.tag == 1 ? self.searchFoods : self.userProfile.recentFoods) {
                 let controller = FoodDetailsViewController(food: foods[index])
                 controller.delegate = self
+                self.navigationController?.pushViewController(controller, animated: true)
+            }
+        } else {
+            if let categories = self.dataManager.sortedCategories {
+                let controller = CategoryResultsViewController(category: categories[index], dataManager: self.dataManager)
                 self.navigationController?.pushViewController(controller, animated: true)
             }
         }
     }
     
-    // MARK: FoodDetailsViewDelegate methods
+    // MARK: FoodDetailsViewControllerDelegate methods
     
     internal func foodDetailsViewController(sender: FoodDetailsViewController, didConfirmFood food: Food, quantity: Int, measureIndex: Int) {
         self.navigationController?.dismissViewControllerAnimated(true, completion: nil)
